@@ -173,6 +173,14 @@ paths:
           description: Returns a resource
           content:
             application/json: {}
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: query
+      name: apikey
+security:
+  - ApiKeyAuth: []
 externalDocs:
   description: OAS 3 Swagger Documentation
   url: https://api-doc.library.ethz.ch/discovery/v1
