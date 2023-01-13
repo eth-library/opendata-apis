@@ -1,0 +1,278 @@
+openapi: 3.0.0
+info:
+  title: ETHorama API
+  description: |-
+    ETHorama offers georeferenced access to digitised documents from platforms such as E-Pics, E-Rara, E-Periodica, E-manuscripta and Research Collection. Selected content is linked to georeferenced locations on a map. Content items, places and areas are continuously added.
+    
+    &#x279C; [OAS 3 Swagger Documentation](https://apidocs.library.ethz.ch/ethorama/v1/)
+  version: '1.0'
+  termsOfService: https://developer.library.ethz.ch/terms
+  contact:
+    name: API Management ETH Library
+    email: api@library.ethz.ch
+    url: https://library.ethz.ch
+  license:
+    url: https://developer.library.ethz.ch/terms
+    name: Bibliographic metadata that are not specifically marked are free for general use (Public Domain).
+servers:
+  - url: https://api.library.ethz.ch/ethorama/v1/
+    description: Production
+paths:
+  /content-items/{id}:
+    get:
+      operationId: ContentItemController.getOne
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json: {}
+          description: ''
+      summary: Get content-item by id
+      tags:
+        - Content Item
+  /content-items/:
+    get:
+      operationId: ContentItemController.getAll
+      parameters:
+        - in: query
+          name: pageSize
+          required: false
+          schema:
+            type: number
+        - in: query
+          name: pageNr
+          required: false
+          schema:
+            type: number
+        - in: query
+          name: search
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: sort
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: type
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: details
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          content:
+            application/json: {}
+          description: ''
+      summary: Get excerpt of all content-items
+      tags:
+        - Content Item
+  /dossiers/{id}:
+    get:
+      operationId: DossierController.getOne
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json: {}
+          description: ''
+      summary: Get dossier by id
+      tags:
+        - Dossier
+  /dossiers/:
+    get:
+      operationId: DossierController.getAll
+      parameters:
+        - in: query
+          name: pageSize
+          required: false
+          schema:
+            type: number
+        - in: query
+          name: pageNr
+          required: false
+          schema:
+            type: number
+        - in: query
+          name: search
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: sort
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: details
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          content:
+            application/json: {}
+          description: ''
+      summary: Get excerpt of all dossier
+      tags:
+        - Dossier
+  /pois/{id}:
+    get:
+      operationId: PoiController.getOne
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json: {}
+          description: ''
+      summary: Get poi by id
+      tags:
+        - Poi
+  /pois/:
+    get:
+      operationId: PoiController.getAll
+      parameters:
+        - in: query
+          name: pageSize
+          required: false
+          schema:
+            type: number
+        - in: query
+          name: pageNr
+          required: false
+          schema:
+            type: number
+        - in: query
+          name: search
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: sort
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: qId
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: docId
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: details
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: overview
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          content:
+            application/json: {}
+          description: ''
+      summary: Get excerpt of all poi
+      tags:
+        - Poi
+  /routes/{id}:
+    get:
+      operationId: RouteController.getOne
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json: {}
+          description: ''
+      summary: Get route by id
+      tags:
+        - Route
+  /routes/:
+    get:
+      operationId: RouteController.getAll
+      parameters:
+        - in: query
+          name: pageSize
+          required: false
+          schema:
+            type: number
+        - in: query
+          name: pageNr
+          required: false
+          schema:
+            type: number
+        - in: query
+          name: search
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: sort
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: details
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          content:
+            application/json: {}
+          description: ''
+      summary: Get excerpt of all routes
+      tags:
+        - Route
+  /util/counters:
+    get:
+      operationId: UtilController.getCounters
+      responses:
+        '200':
+          content:
+            application/json: {}
+          description: Successful response
+      summary: Get documents count
+      tags:
+        - Util
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: query
+      name: apikey
+security:
+  - ApiKeyAuth: []
+externalDocs:
+  description: OAS 3 Swagger Documentation
+  url: https://apidocs.library.ethz.ch/ethorama/v1/
