@@ -35,7 +35,7 @@ paths:
       summary: Get content-item by id
       tags:
         - Content Item
-  /content-items/:
+  /content-items:
     get:
       operationId: ContentItemController.getAll
       parameters:
@@ -94,7 +94,7 @@ paths:
       summary: Get dossier by id
       tags:
         - Dossier
-  /dossiers/:
+  /dossiers:
     get:
       operationId: DossierController.getAll
       parameters:
@@ -148,7 +148,7 @@ paths:
       summary: Get poi by id
       tags:
         - Poi
-  /pois/:
+  /pois:
     get:
       operationId: PoiController.getAll
       parameters:
@@ -217,7 +217,7 @@ paths:
       summary: Get route by id
       tags:
         - Route
-  /routes/:
+  /routes:
     get:
       operationId: RouteController.getAll
       parameters:
