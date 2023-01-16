@@ -184,4 +184,4 @@ security:
   - ApiKeyAuth: []
 externalDocs:
   description: OAS 3 Swagger Documentation
-  url: https://api-doc.library.ethz.ch/discovery/v1
+  url: https://apidocs.library.ethz.ch/discovery/v1/
