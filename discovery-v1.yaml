@@ -3,7 +3,8 @@ info:
   title: ETH Library Discovery API
   description: |-
     Over 30 million books, images, series, journals and other materials from the ETH Library discovery portal. 
-    &#x279C; [OAS 3 Swagger Documentation](https://apiplatform-apidoc.web.app/v1/discovery/)
+    
+    &#x279C; [OAS 3 Swagger Documentation](https://apidocs.library.ethz.ch/discovery/v1/)
   version: '1.0'
   termsOfService: https://developer.library.ethz.ch/terms
   contact:
