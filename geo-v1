@@ -1,7 +1,12 @@
 openapi: 3.0.2
 info:
-  title: ETH Library Places API
-  description: 'Data Services of ETH Library: Places'
+  title: ETH Library Geo API
+  description: |-
+    Places API provides access to places (points of interests) and dossiers  from the ETHorama database.
+    
+    &#x279C; [OAS 3 Swagger Documentation](https://apidocs.library.ethz.ch/geo/v1/)
+    
+    [Information about ETHorama Data](http://ethorama.library.ethz.ch/de/about)
   version: '1.0'
   termsOfService: https://developer.library.ethz.ch/terms
   contact:
@@ -13,45 +18,14 @@ info:
     name: Bibliographic metadata that are not specifically marked are free for general use (Public Domain).
 servers:
   - url: https://api.library.ethz.ch/geo/v1/
-    description: Production server
+    description: Production
 paths:
-  /dossiers:
-    get:
-      tags:
-        - Dossiers
-      description: |-
-        Returns dossiers defined in the ETHorama database.
-
-         [Informations about ETHorama Data](http://ethorama.library.ethz.ch/de/about)
-      parameters:
-        - name: apikey
-          schema:
-            type: string
-          in: query
-          required: true
-          description: API KEY from Developer Portal
-      responses:
-        '200':
-          description: Returns Dossiers as JSON
-          content:
-            application/json: {}
-        '500':
-          description: server error
   /places:
     get:
       tags:
         - Places
       description: |-
         Returns all places defined in the ETHorama database.
-
-         [Informations about ETHorama Data](http://ethorama.library.ethz.ch/de/about)
-      parameters:
-        - name: apikey
-          schema:
-            type: string
-          in: query
-          required: true
-          description: API KEY from Developer Portal
       responses:
         '200':
           description: Returns Places as JSON
@@ -65,8 +39,6 @@ paths:
         - Places
       description: |-
         Returns all or filtered places defined in the ETHorama database as geoJSON.
-
-         [Informations about ETHorama Data](http://ethorama.library.ethz.ch/de/about)
       parameters:
         - name: nearto
           schema:
@@ -77,12 +49,6 @@ paths:
             Places nearto a point, which is defined by the comma separated value: lat, lng, distance in meter (default: 1000). 
 
              Example: nearto=47.383046,8.536655,2000
-        - name: apikey
-          schema:
-            type: string
-          in: query
-          required: true
-          description: API KEY from Developer Portal
       responses:
         '200':
           description: Returns a geoJSON FeatureCollection
@@ -102,12 +68,6 @@ paths:
           in: path
           required: true
           description: ID from ETHorama (2o6hEWTkOGDL35HANR5c) or Wikidata QID (Q64093)
-        - name: apikey
-          schema:
-            type: string
-          in: query
-          required: true
-          description: API KEY from Developer Portal
       responses:
         '200':
           description: Returns a place as geoJSON Feature
@@ -117,4 +77,27 @@ paths:
           description: there is no place available with this id
           content:
             text/html: {}
-
+  /dossiers:
+    get:
+      tags:
+        - Dossiers
+      description: |-
+        Returns dossiers defined in the ETHorama database.
+      responses:
+        '200':
+          description: Returns Dossiers as JSON
+          content:
+            application/json: {}
+        '500':
+          description: server error
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: query
+      name: apikey
+security:
+  - ApiKeyAuth: []
+externalDocs:
+  description: OAS 3 Swagger Documentation
+  url: https://apisdocs.library.ethz.ch/geo/v1/
