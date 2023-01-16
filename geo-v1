@@ -1,1 +1,120 @@
-..
+openapi: 3.0.2
+info:
+  title: ETH Library Places API
+  description: 'Data Services of ETH Library: Places'
+  version: '1.0'
+  termsOfService: https://developer.library.ethz.ch/terms
+  contact:
+    name: API Management ETH Library
+    email: api@library.ethz.ch
+    url: https://library.ethz.ch
+  license:
+    url: https://developer.library.ethz.ch/terms
+    name: Bibliographic metadata that are not specifically marked are free for general use (Public Domain).
+servers:
+  - url: https://api.library.ethz.ch/geo/v1/
+    description: Production server
+paths:
+  /dossiers:
+    get:
+      tags:
+        - Dossiers
+      description: |-
+        Returns dossiers defined in the ETHorama database.
+
+         [Informations about ETHorama Data](http://ethorama.library.ethz.ch/de/about)
+      parameters:
+        - name: apikey
+          schema:
+            type: string
+          in: query
+          required: true
+          description: API KEY from Developer Portal
+      responses:
+        '200':
+          description: Returns Dossiers as JSON
+          content:
+            application/json: {}
+        '500':
+          description: server error
+  /places:
+    get:
+      tags:
+        - Places
+      description: |-
+        Returns all places defined in the ETHorama database.
+
+         [Informations about ETHorama Data](http://ethorama.library.ethz.ch/de/about)
+      parameters:
+        - name: apikey
+          schema:
+            type: string
+          in: query
+          required: true
+          description: API KEY from Developer Portal
+      responses:
+        '200':
+          description: Returns Places as JSON
+          content:
+            application/json: {}
+        '500':
+          description: server error
+  /places/geojson:
+    get:
+      tags:
+        - Places
+      description: |-
+        Returns all or filtered places defined in the ETHorama database as geoJSON.
+
+         [Informations about ETHorama Data](http://ethorama.library.ethz.ch/de/about)
+      parameters:
+        - name: nearto
+          schema:
+            type: string
+          in: query
+          required: false
+          description: |-
+            Places nearto a point, which is defined by the comma separated value: lat, lng, distance in meter (default: 1000). 
+
+             Example: nearto=47.383046,8.536655,2000
+        - name: apikey
+          schema:
+            type: string
+          in: query
+          required: true
+          description: API KEY from Developer Portal
+      responses:
+        '200':
+          description: Returns a geoJSON FeatureCollection
+          content:
+            application/json: {}
+        '500':
+          description: server error
+  /places/geojson/{id}:
+    get:
+      tags:
+        - Places
+      description: Returns place (by POI ID or Wikidata QID) as geoJSON
+      parameters:
+        - name: id
+          schema:
+            type: string
+          in: path
+          required: true
+          description: ID from ETHorama (2o6hEWTkOGDL35HANR5c) or Wikidata QID (Q64093)
+        - name: apikey
+          schema:
+            type: string
+          in: query
+          required: true
+          description: API KEY from Developer Portal
+      responses:
+        '200':
+          description: Returns a place as geoJSON Feature
+          content:
+            application/json: {}
+        '404':
+          description: there is no place available with this id
+          content:
+            text/html: {}
+
