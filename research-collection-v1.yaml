@@ -62,17 +62,6 @@ paths:
       responses:
         200:
           description: successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Bitstream'
-            application/xml:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Bitstream'
   /bitstreams/{bitstream_id}:
     get:
       tags:
@@ -111,13 +100,6 @@ paths:
       responses:
         200:
           description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Bitstream'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Bitstream'
   /bitstreams/{bitstream_id}/policy:
     get:
       tags:
@@ -136,17 +118,6 @@ paths:
       responses:
         200:
           description: successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/ResourcePolicy'
-            application/xml:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/ResourcePolicy'
   /bitstreams/{bitstream_id}/retrieve:
     get:
       tags:
@@ -227,17 +198,6 @@ paths:
       responses:
         200:
           description: successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Collection'
-            application/xml:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Collection'
   /collections/{collection_id}:
     get:
       tags:
@@ -296,13 +256,6 @@ paths:
       responses:
         200:
           description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Collection'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Collection'
   /collections/{collection_id}/items:
     get:
       tags:
@@ -361,17 +314,6 @@ paths:
       responses:
         200:
           description: successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Item'
-            application/xml:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Item'
   /communities:
     get:
       tags:
@@ -422,17 +364,6 @@ paths:
       responses:
         200:
           description: successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Community'
-            application/xml:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Community'
   /communities/top-communities:
     get:
       tags:
@@ -483,17 +414,6 @@ paths:
       responses:
         200:
           description: successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Community'
-            application/xml:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Community'
   /communities/{community_id}:
     get:
       tags:
@@ -540,13 +460,6 @@ paths:
       responses:
         200:
           description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Community'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Community'
   /communities/{community_id}/collections:
     get:
       tags:
@@ -605,17 +518,6 @@ paths:
       responses:
         200:
           description: successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Collection'
-            application/xml:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Collection'
   /communities/{community_id}/communities:
     get:
       tags:
@@ -674,17 +576,6 @@ paths:
       responses:
         200:
           description: successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Community'
-            application/xml:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Community'
   /handle/{prefix}/{suffix}:
     get:
       tags:
@@ -716,13 +607,6 @@ paths:
       responses:
         200:
           description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DSpaceObject'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/DSpaceObject'
   /items:
     get:
       tags:
@@ -773,17 +657,6 @@ paths:
       responses:
         200:
           description: successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Item'
-            application/xml:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Item'
   /items/{item_id}:
     get:
       tags:
@@ -829,13 +702,6 @@ paths:
       responses:
         200:
           description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Item'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Item'
   /items/{item_id}/bitstreams:
     get:
       tags:
@@ -878,17 +744,6 @@ paths:
       responses:
         200:
           description: successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Bitstream'
-            application/xml:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Bitstream'
   /items/{item_id}/metadata:
     get:
       tags:
@@ -919,44 +774,6 @@ paths:
       responses:
         200:
           description: successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/MetadataEntry'
-            application/xml:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/MetadataEntry'
-  /login:
-    post:
-      summary: login into the REST API
-      operationId: login
-      requestBody:
-        description: The user to login
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/User'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/User'
-        required: false
-      responses:
-        default:
-          description: successful operation
-          content: {}
-      x-codegen-request-body-name: body
-  /logout:
-    post:
-      summary: logout from the REST API
-      operationId: logout
-      responses:
-        default:
-          description: successful operation
-          content: {}
   /search:
     get:
       tags:
@@ -973,13 +790,6 @@ paths:
           type: array
           items:
             type: string
-          enum:
-          - all
-          - metadata
-          - parentCollection
-          - parentCollectionList
-          - parentCommunityList
-          - bitstreams
       - name: limit
         in: query
         description: The maximum amount of items shown.
@@ -1027,23 +837,12 @@ paths:
       responses:
         200:
           description: successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Item'
-            application/xml:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Item'
   /search/authors/{query}:
     get:
       tags:
       - search
       summary: Retrieve a a list of authors that match the search query.
-      operationId: getItem
+      operationId: getAuthors
       parameters:
       - name: query
         in: path
@@ -1079,330 +878,7 @@ paths:
                 items:
                   type: object
                   properties: {}
-  /status:
-    get:
-      summary: Check the current status of the service and logged in user
-      operationId: status
-      responses:
-        200:
-          description: successful operation
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/Status'
-  /test:
-    get:
-      summary: Test if the REST API is running.
-      operationId: test
-      responses:
-        200:
-          description: successful operation
-          content:
-            '*/*':
-              schema:
-                type: string
 components:
-  schemas:
-    Bitstream:
-      required:
-      - expand
-      - link
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-        handle:
-          type: string
-        type:
-          type: string
-        link:
-          type: string
-        expand:
-          type: array
-          items:
-            type: string
-        bundleName:
-          type: string
-        description:
-          type: string
-        format:
-          type: string
-        mimeType:
-          type: string
-        sizeBytes:
-          type: integer
-          format: int64
-        parentObject:
-          $ref: '#/components/schemas/DSpaceObject'
-        retrieveLink:
-          type: string
-        checkSum:
-          $ref: '#/components/schemas/CheckSum'
-        sequenceId:
-          type: integer
-          format: int32
-        policies:
-          type: array
-          items:
-            $ref: '#/components/schemas/ResourcePolicy'
-      xml:
-        name: bitstream
-    CheckSum:
-      type: object
-      properties:
-        value:
-          type: string
-        checkSumAlgorith:
-          type: string
-          xml:
-            name: checkSumAlgorithm
-    Collection:
-      required:
-      - expand
-      - link
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-        handle:
-          type: string
-        type:
-          type: string
-        link:
-          type: string
-        expand:
-          type: array
-          items:
-            type: string
-        logo:
-          $ref: '#/components/schemas/Bitstream'
-        parentCommunity:
-          $ref: '#/components/schemas/Community'
-        parentCommunityList:
-          type: array
-          items:
-            $ref: '#/components/schemas/Community'
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Item'
-        license:
-          type: string
-        copyrightText:
-          type: string
-        introductoryText:
-          type: string
-        shortDescription:
-          type: string
-        sidebarText:
-          type: string
-        numberItems:
-          type: integer
-          format: int32
-      xml:
-        name: collection
-    Community:
-      required:
-      - expand
-      - link
-      - subcommunities
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-        handle:
-          type: string
-        type:
-          type: string
-        link:
-          type: string
-        expand:
-          type: array
-          items:
-            type: string
-        logo:
-          $ref: '#/components/schemas/Bitstream'
-        copyrightText:
-          type: string
-        introductoryText:
-          type: string
-        shortDescription:
-          type: string
-        sidebarText:
-          type: string
-        countItems:
-          type: integer
-          format: int32
-        subcommunities:
-          $ref: '#/components/schemas/List'
-        collections:
-          type: array
-          items:
-            $ref: '#/components/schemas/Collection'
-      xml:
-        name: community
-    DSpaceObject:
-      required:
-      - expand
-      - link
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-        handle:
-          type: string
-        type:
-          type: string
-        link:
-          type: string
-        expand:
-          type: array
-          items:
-            type: string
-      xml:
-        name: dspaceobject
-    Item:
-      required:
-      - expand
-      - link
-      - metadata
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-        handle:
-          type: string
-        type:
-          type: string
-        link:
-          type: string
-        expand:
-          type: array
-          items:
-            type: string
-        lastModified:
-          type: string
-        parentCollectionList:
-          $ref: '#/components/schemas/List'
-        parentCommunityList:
-          $ref: '#/components/schemas/List'
-        metadata:
-          type: array
-          items:
-            $ref: '#/components/schemas/MetadataEntry'
-        bitstreams:
-          type: array
-          items:
-            $ref: '#/components/schemas/Bitstream'
-        archived:
-          type: string
-        withdrawn:
-          type: string
-      xml:
-        name: item
-    List:
-      type: object
-      properties:
-        empty:
-          type: boolean
-          default: false
-    MetadataEntry:
-      type: object
-      properties:
-        key:
-          type: string
-        value:
-          type: string
-        language:
-          type: string
-      xml:
-        name: metadataentry
-    ResourcePolicy:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        action:
-          type: string
-          enum:
-          - READ
-          - WRITE
-          - DELETE
-        epersonId:
-          type: integer
-          format: int32
-        groupId:
-          type: integer
-          format: int32
-        resourceId:
-          type: integer
-          format: int32
-        resourceType:
-          type: string
-        rpDescription:
-          type: string
-        rpName:
-          type: string
-        rpType:
-          type: string
-        startDate:
-          type: string
-          format: date-time
-        endDate:
-          type: string
-          format: date-time
-        actionInt:
-          type: integer
-          format: int32
-      xml:
-        name: resourcepolicy
-    Status:
-      type: object
-      properties:
-        okay:
-          type: boolean
-          default: false
-        authenticated:
-          type: boolean
-          default: false
-        email:
-          type: string
-        fullname:
-          type: string
-        token:
-          type: string
-      xml:
-        name: status
-    User:
-      required:
-      - email
-      - password
-      type: object
-      properties:
-        email:
-          type: string
-          description: The email address of the user logging in
-        password:
-          type: string
-          description: The password of the user logging in
-      xml:
-        name: user
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
