@@ -1,1547 +1,1415 @@
-{
-  "swagger" : "2.0",
-  "info" : {
-    "description" : "REST API for members of ETH Zurich. Terms of use: https://www.research-collection.ethz.ch/terms-of-use",
-    "version" : "v1",
-    "title" : "ETH Research Collection REST API",
-    "license" : {
-      "name" : "Apache 2.0",
-      "url" : "http://www.apache.org/licenses/LICENSE-2.0.html"
-    }
-  },
-  "basePath" : "/rest/api",
-  "tags" : [ {
-    "name" : "items"
-  }, {
-    "name" : "communities"
-  }, {
-    "name" : "bitstreams"
-  }, {
-    "name" : "collections"
-  }, {
-    "name" : "search"
-  }, {
-    "name" : "handle"
-  } ],
-  "schemes" : [ "https" ],
-  "paths" : {
-    "/bitstreams" : {
-      "get" : {
-        "tags" : [ "bitstreams" ],
-        "summary" : "Retrieve a list of bitstreams.",
-        "description" : "",
-        "operationId" : "getBitstreams",
-        "produces" : [ "application/json", "application/xml" ],
-        "parameters" : [ {
-          "name" : "expand",
-          "in" : "query",
-          "description" : "Show additional data for the bitstream.",
-          "required" : false,
-          "type" : "string",
-          "enum" : [ "all", "parent" ]
-        }, {
-          "name" : "limit",
-          "in" : "query",
-          "description" : "The maximum amount of bitstreams shown.",
-          "required" : false,
-          "type" : "integer",
-          "format" : "int32"
-        }, {
-          "name" : "offset",
-          "in" : "query",
-          "description" : "The amount of bitstreams to skip.",
-          "required" : false,
-          "type" : "integer",
-          "format" : "int32"
-        }, {
-          "name" : "userIP",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        }, {
-          "name" : "userAgent",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        }, {
-          "name" : "xforwardedfor",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "type" : "array",
-              "items" : {
-                "$ref" : "#/definitions/Bitstream"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/bitstreams/{bitstream_id}" : {
-      "get" : {
-        "tags" : [ "bitstreams" ],
-        "summary" : "Retrieve a single bitstream by using the internal DSpace bitstream identifier.",
-        "description" : "",
-        "operationId" : "getBitstream",
-        "produces" : [ "application/json", "application/xml" ],
-        "parameters" : [ {
-          "name" : "bitstream_id",
-          "in" : "path",
-          "description" : "The identifier of the bitstream.",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int32"
-        }, {
-          "name" : "expand",
-          "in" : "query",
-          "description" : "Show additional data for the bitstream.",
-          "required" : false,
-          "type" : "string",
-          "enum" : [ "all", "parent" ]
-        }, {
-          "name" : "userIP",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        }, {
-          "name" : "userAgent",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        }, {
-          "name" : "xforwardedfor",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/Bitstream"
-            }
-          }
-        }
-      }
-    },
-    "/bitstreams/{bitstream_id}/policy" : {
-      "get" : {
-        "tags" : [ "bitstreams" ],
-        "summary" : "Retrieve all policies for all bundles in which the bitstream is present, by using the internal DSpace bitstream identifier.",
-        "description" : "",
-        "operationId" : "getBitstreamPolicies",
-        "produces" : [ "application/json", "application/xml" ],
-        "parameters" : [ {
-          "name" : "bitstream_id",
-          "in" : "path",
-          "description" : "The identifier of the bitstream.",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int32"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "type" : "array",
-              "items" : {
-                "$ref" : "#/definitions/ResourcePolicy"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/bitstreams/{bitstream_id}/retrieve" : {
-      "get" : {
-        "tags" : [ "bitstreams" ],
-        "summary" : "Retrieve a file by using the corresponding DSpace bitstream identifier.",
-        "description" : "",
-        "operationId" : "getBitstreamData",
-        "parameters" : [ {
-          "name" : "bitstream_id",
-          "in" : "path",
-          "description" : "The identifier of the bitstream.",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int32"
-        }, {
-          "name" : "userIP",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        }, {
-          "name" : "userAgent",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        }, {
-          "name" : "xforwardedfor",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "default" : {
-            "description" : "successful operation"
-          }
-        }
-      }
-    },
-    "/collections" : {
-      "get" : {
-        "tags" : [ "collections" ],
-        "summary" : "Retrieve a list of collections.",
-        "description" : "",
-        "operationId" : "getCollections",
-        "produces" : [ "application/json", "application/xml" ],
-        "parameters" : [ {
-          "name" : "expand",
-          "in" : "query",
-          "description" : "Show additional data for the collection.",
-          "required" : false,
-          "type" : "array",
-          "items" : {
-            "type" : "string"
-          },
-          "collectionFormat" : "multi",
-          "enum" : [ "all", "items", "parentCommunity", "parentCommunityList", "license", "logo" ]
-        }, {
-          "name" : "limit",
-          "in" : "query",
-          "description" : "The maximum amount of collections shown.",
-          "required" : false,
-          "type" : "integer",
-          "format" : "int32"
-        }, {
-          "name" : "offset",
-          "in" : "query",
-          "description" : "The amount of collections to skip.",
-          "required" : false,
-          "type" : "integer",
-          "format" : "int32"
-        }, {
-          "name" : "userIP",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        }, {
-          "name" : "userAgent",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        }, {
-          "name" : "xforwardedfor",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "type" : "array",
-              "items" : {
-                "$ref" : "#/definitions/Collection"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/collections/{collection_id}" : {
-      "get" : {
-        "tags" : [ "collections" ],
-        "summary" : "Retrieve a single collection by using the internal DSpace collection identifier.",
-        "description" : "",
-        "operationId" : "getCollection",
-        "produces" : [ "application/json", "application/xml" ],
-        "parameters" : [ {
-          "name" : "collection_id",
-          "in" : "path",
-          "description" : "The identifier of the collection.",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int32"
-        }, {
-          "name" : "expand",
-          "in" : "query",
-          "description" : "Show additional data for the collection.",
-          "required" : false,
-          "type" : "array",
-          "items" : {
-            "type" : "string"
-          },
-          "collectionFormat" : "multi",
-          "enum" : [ "all", "items", "parentCommunity", "parentCommunityList", "license", "logo" ]
-        }, {
-          "name" : "limit",
-          "in" : "query",
-          "description" : "The maximum amount of collections shown.",
-          "required" : false,
-          "type" : "integer",
-          "format" : "int32"
-        }, {
-          "name" : "offset",
-          "in" : "query",
-          "description" : "The amount of collections to skip.",
-          "required" : false,
-          "type" : "integer",
-          "format" : "int32"
-        }, {
-          "name" : "userIP",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        }, {
-          "name" : "userAgent",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        }, {
-          "name" : "xforwardedfor",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/Collection"
-            }
-          }
-        }
-      }
-    },
-    "/collections/{collection_id}/items" : {
-      "get" : {
-        "tags" : [ "collections" ],
-        "summary" : "Retrieve a list of items in a collection by using the internal DSpace collection identifier.",
-        "description" : "",
-        "operationId" : "getCollectionItems",
-        "produces" : [ "application/json", "application/xml" ],
-        "parameters" : [ {
-          "name" : "collection_id",
-          "in" : "path",
-          "description" : "The identifier of the collection.",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int32"
-        }, {
-          "name" : "expand",
-          "in" : "query",
-          "description" : "Show additional data for the items.",
-          "required" : false,
-          "type" : "array",
-          "items" : {
-            "type" : "string"
-          },
-          "collectionFormat" : "multi",
-          "enum" : [ "all", "metadata", "parentCollection", "parentCollectionList", "parentCommunityList", "bitstreams" ]
-        }, {
-          "name" : "limit",
-          "in" : "query",
-          "description" : "The maximum amount of items shown.",
-          "required" : false,
-          "type" : "integer",
-          "format" : "int32"
-        }, {
-          "name" : "offset",
-          "in" : "query",
-          "description" : "The amount of items to skip.",
-          "required" : false,
-          "type" : "integer",
-          "format" : "int32"
-        }, {
-          "name" : "userIP",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        }, {
-          "name" : "userAgent",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        }, {
-          "name" : "xforwardedfor",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "type" : "array",
-              "items" : {
-                "$ref" : "#/definitions/Item"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/communities" : {
-      "get" : {
-        "tags" : [ "communities" ],
-        "summary" : "Retrieve a list of communities.",
-        "description" : "",
-        "operationId" : "getCommunities",
-        "produces" : [ "application/json", "application/xml" ],
-        "parameters" : [ {
-          "name" : "expand",
-          "in" : "query",
-          "description" : "Show additional data for the community.",
-          "required" : false,
-          "type" : "array",
-          "items" : {
-            "type" : "string"
-          },
-          "collectionFormat" : "multi",
-          "enum" : [ "all", "collections", "parentCommunity", "parentCommunityList", "subCommunities", "logo" ]
-        }, {
-          "name" : "limit",
-          "in" : "query",
-          "description" : "The maximum amount of communities shown.",
-          "required" : false,
-          "type" : "integer",
-          "format" : "int32"
-        }, {
-          "name" : "offset",
-          "in" : "query",
-          "description" : "The amount of communities to skip.",
-          "required" : false,
-          "type" : "integer",
-          "format" : "int32"
-        }, {
-          "name" : "userIP",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        }, {
-          "name" : "userAgent",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        }, {
-          "name" : "xforwardedfor",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "type" : "array",
-              "items" : {
-                "$ref" : "#/definitions/Community"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/communities/top-communities" : {
-      "get" : {
-        "tags" : [ "communities" ],
-        "summary" : "Retrieve a list of top communities.",
-        "description" : "",
-        "operationId" : "getTopCommunities",
-        "produces" : [ "application/json", "application/xml" ],
-        "parameters" : [ {
-          "name" : "expand",
-          "in" : "query",
-          "description" : "Show additional data for the community.",
-          "required" : false,
-          "type" : "array",
-          "items" : {
-            "type" : "string"
-          },
-          "collectionFormat" : "multi",
-          "enum" : [ "all", "collections", "parentCommunity", "parentCommunityList", "subCommunities", "logo" ]
-        }, {
-          "name" : "limit",
-          "in" : "query",
-          "description" : "The maximum amount of communities shown.",
-          "required" : false,
-          "type" : "integer",
-          "format" : "int32"
-        }, {
-          "name" : "offset",
-          "in" : "query",
-          "description" : "The amount of communities to skip.",
-          "required" : false,
-          "type" : "integer",
-          "format" : "int32"
-        }, {
-          "name" : "userIP",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        }, {
-          "name" : "userAgent",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        }, {
-          "name" : "xforwardedfor",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "type" : "array",
-              "items" : {
-                "$ref" : "#/definitions/Community"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/communities/{community_id}" : {
-      "get" : {
-        "tags" : [ "communities" ],
-        "summary" : "Retrieve a single community by using the internal DSpace community identifier.",
-        "description" : "",
-        "operationId" : "getCommunity",
-        "produces" : [ "application/json", "application/xml" ],
-        "parameters" : [ {
-          "name" : "community_id",
-          "in" : "path",
-          "description" : "The identifier of the community.",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int32"
-        }, {
-          "name" : "expand",
-          "in" : "query",
-          "description" : "Show additional data for the community.",
-          "required" : false,
-          "type" : "array",
-          "items" : {
-            "type" : "string"
-          },
-          "collectionFormat" : "multi",
-          "enum" : [ "all", "collections", "parentCommunity", "parentCommunityList", "subCommunities", "logo" ]
-        }, {
-          "name" : "userIP",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        }, {
-          "name" : "userAgent",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        }, {
-          "name" : "xforwardedfor",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/Community"
-            }
-          }
-        }
-      }
-    },
-    "/communities/{community_id}/collections" : {
-      "get" : {
-        "tags" : [ "communities" ],
-        "summary" : "Retrieve a list of collections in a community by using the internal DSpace community identifier.",
-        "description" : "",
-        "operationId" : "getCommunityCollections",
-        "produces" : [ "application/json", "application/xml" ],
-        "parameters" : [ {
-          "name" : "community_id",
-          "in" : "path",
-          "description" : "The identifier of the community.",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int32"
-        }, {
-          "name" : "expand",
-          "in" : "query",
-          "description" : "Show additional data for the collection.",
-          "required" : false,
-          "type" : "array",
-          "items" : {
-            "type" : "string"
-          },
-          "collectionFormat" : "multi",
-          "enum" : [ "all", "items", "parentCommunity", "parentCommunityList", "license", "logo" ]
-        }, {
-          "name" : "limit",
-          "in" : "query",
-          "description" : "The maximum amount of collections shown.",
-          "required" : false,
-          "type" : "integer",
-          "format" : "int32"
-        }, {
-          "name" : "offset",
-          "in" : "query",
-          "description" : "The amount of collections to skip.",
-          "required" : false,
-          "type" : "integer",
-          "format" : "int32"
-        }, {
-          "name" : "userIP",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        }, {
-          "name" : "userAgent",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        }, {
-          "name" : "xforwardedfor",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "type" : "array",
-              "items" : {
-                "$ref" : "#/definitions/Collection"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/communities/{community_id}/communities" : {
-      "get" : {
-        "tags" : [ "communities" ],
-        "summary" : "Retrieve a list of subcommunities in a community by using the internal DSpace community identifier.",
-        "description" : "",
-        "operationId" : "getCommunityCommunities",
-        "produces" : [ "application/json", "application/xml" ],
-        "parameters" : [ {
-          "name" : "community_id",
-          "in" : "path",
-          "description" : "The identifier of the community.",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int32"
-        }, {
-          "name" : "expand",
-          "in" : "query",
-          "description" : "Show additional data for the community.",
-          "required" : false,
-          "type" : "array",
-          "items" : {
-            "type" : "string"
-          },
-          "collectionFormat" : "multi",
-          "enum" : [ "all", "collections", "parentCommunity", "parentCommunityList", "subCommunities", "logo" ]
-        }, {
-          "name" : "limit",
-          "in" : "query",
-          "description" : "The maximum amount of communities shown.",
-          "required" : false,
-          "type" : "integer",
-          "format" : "int32"
-        }, {
-          "name" : "offset",
-          "in" : "query",
-          "description" : "The amount of communities to skip.",
-          "required" : false,
-          "type" : "integer",
-          "format" : "int32"
-        }, {
-          "name" : "userIP",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        }, {
-          "name" : "userAgent",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        }, {
-          "name" : "xforwardedfor",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "type" : "array",
-              "items" : {
-                "$ref" : "#/definitions/Community"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/handle/{prefix}/{suffix}" : {
-      "get" : {
-        "tags" : [ "handle" ],
-        "summary" : "Retrieve a single object by using object pre- and suffix.",
-        "description" : "",
-        "operationId" : "getObject",
-        "produces" : [ "application/json", "application/xml" ],
-        "parameters" : [ {
-          "name" : "prefix",
-          "in" : "path",
-          "description" : "The object prefix.",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "name" : "suffix",
-          "in" : "path",
-          "description" : "The object suffix.",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "name" : "expand",
-          "in" : "query",
-          "description" : "Show additional data for the object.",
-          "required" : false,
-          "type" : "array",
-          "items" : {
-            "type" : "string"
-          },
-          "collectionFormat" : "multi"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/DSpaceObject"
-            }
-          }
-        }
-      }
-    },
-    "/items" : {
-      "get" : {
-        "tags" : [ "items" ],
-        "summary" : "Retrieve all items from the repository.",
-        "description" : "",
-        "operationId" : "getItems",
-        "produces" : [ "application/json", "application/xml" ],
-        "parameters" : [ {
-          "name" : "expand",
-          "in" : "query",
-          "description" : "Show additional data for the item.",
-          "required" : false,
-          "type" : "array",
-          "items" : {
-            "type" : "string"
-          },
-          "collectionFormat" : "multi",
-          "enum" : [ "all", "metadata", "parentCollection", "parentCollectionList", "parentCommunityList", "bitstreams" ]
-        }, {
-          "name" : "limit",
-          "in" : "query",
-          "description" : "The maximum amount of items shown.",
-          "required" : false,
-          "type" : "integer",
-          "format" : "int32"
-        }, {
-          "name" : "offset",
-          "in" : "query",
-          "description" : "The amount of items to skip.",
-          "required" : false,
-          "type" : "integer",
-          "format" : "int32"
-        }, {
-          "name" : "userIP",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        }, {
-          "name" : "userAgent",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        }, {
-          "name" : "xforwardedfor",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "type" : "array",
-              "items" : {
-                "$ref" : "#/definitions/Item"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/items/{item_id}" : {
-      "get" : {
-        "tags" : [ "items" ],
-        "summary" : "Retrieve a single item by using the internal DSpace item identifier.",
-        "description" : "",
-        "operationId" : "getItem",
-        "produces" : [ "application/json", "application/xml" ],
-        "parameters" : [ {
-          "name" : "item_id",
-          "in" : "path",
-          "description" : "The identifier of the item.",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int32"
-        }, {
-          "name" : "expand",
-          "in" : "query",
-          "description" : "Show additional data for the item.",
-          "required" : false,
-          "type" : "array",
-          "items" : {
-            "type" : "string"
-          },
-          "collectionFormat" : "multi",
-          "enum" : [ "all", "metadata", "parentCollection", "parentCollectionList", "parentCommunityList", "bitstreams" ]
-        }, {
-          "name" : "userIP",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        }, {
-          "name" : "userAgent",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        }, {
-          "name" : "xforwardedfor",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/Item"
-            }
-          }
-        }
-      }
-    },
-    "/items/{item_id}/bitstreams" : {
-      "get" : {
-        "tags" : [ "items" ],
-        "summary" : "Retrieve a list of bitstreams for an item by using the internal DSpace item identifier.",
-        "description" : "",
-        "operationId" : "getItemBitstreams",
-        "produces" : [ "application/json", "application/xml" ],
-        "parameters" : [ {
-          "name" : "item_id",
-          "in" : "path",
-          "description" : "The identifier of the item.",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int32"
-        }, {
-          "name" : "limit",
-          "in" : "query",
-          "description" : "The maximum amount of bitstreams shown.",
-          "required" : false,
-          "type" : "integer",
-          "format" : "int32"
-        }, {
-          "name" : "offset",
-          "in" : "query",
-          "description" : "The amount of bitstreams to skip.",
-          "required" : false,
-          "type" : "integer",
-          "format" : "int32"
-        }, {
-          "name" : "userIP",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        }, {
-          "name" : "userAgent",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        }, {
-          "name" : "xforwardedfor",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "type" : "array",
-              "items" : {
-                "$ref" : "#/definitions/Bitstream"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/items/{item_id}/metadata" : {
-      "get" : {
-        "tags" : [ "items" ],
-        "summary" : "Retrieve a list of metadata for an item by using the internal DSpace item identifier.",
-        "description" : "",
-        "operationId" : "getItemMetadata",
-        "produces" : [ "application/json", "application/xml" ],
-        "parameters" : [ {
-          "name" : "item_id",
-          "in" : "path",
-          "description" : "The identifier of the item.",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int32"
-        }, {
-          "name" : "userIP",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        }, {
-          "name" : "userAgent",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        }, {
-          "name" : "xforwardedfor",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "type" : "array",
-              "items" : {
-                "$ref" : "#/definitions/MetadataEntry"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/login" : {
-      "post" : {
-        "summary" : "login into the REST API",
-        "description" : "",
-        "operationId" : "login",
-        "consumes" : [ "application/json", "application/xml" ],
-        "parameters" : [ {
-          "in" : "body",
-          "name" : "body",
-          "description" : "The user to login",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/User"
-          }
-        } ],
-        "responses" : {
-          "default" : {
-            "description" : "successful operation"
-          }
-        }
-      }
-    },
-    "/logout" : {
-      "post" : {
-        "summary" : "logout from the REST API",
-        "description" : "",
-        "operationId" : "logout",
-        "consumes" : [ "application/json", "application/xml" ],
-        "responses" : {
-          "default" : {
-            "description" : "successful operation"
-          }
-        }
-      }
-    },
-    "/search" : {
-      "get" : {
-        "tags" : [ "search" ],
-        "summary" : "Search items.",
-        "description" : "",
-        "operationId" : "searchItems",
-        "produces" : [ "application/json", "application/xml" ],
-        "parameters" : [ {
-          "name" : "expand",
-          "in" : "query",
-          "description" : "Show additional data for the item.",
-          "required" : false,
-          "type" : "array",
-          "items" : {
-            "type" : "string"
-          },
-          "collectionFormat" : "multi",
-          "enum" : [ "all", "metadata", "parentCollection", "parentCollectionList", "parentCommunityList", "bitstreams" ]
-        }, {
-          "name" : "limit",
-          "in" : "query",
-          "description" : "The maximum amount of items shown.",
-          "required" : false,
-          "type" : "integer",
-          "format" : "int32"
-        }, {
-          "name" : "offset",
-          "in" : "query",
-          "description" : "The amount of items to skip.",
-          "required" : false,
-          "type" : "integer",
-          "format" : "int32"
-        }, {
-          "name" : "query",
-          "in" : "query",
-          "description" : "The search query.",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "name" : "fq",
-          "in" : "query",
-          "description" : "Filter queries.",
-          "required" : false,
-          "type" : "array",
-          "collectionFormat" : "multi"
-        }, {
-          "name" : "sort",
-          "in" : "query",
-          "description" : "Sort the item results by fieldname|desc; ie: author|desc.",
-          "required" : false,
-          "type" : "array",
-          "collectionFormat" : "multi"
-        }, {
-          "name" : "userIP",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        }, {
-          "name" : "userAgent",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        }, {
-          "name" : "xforwardedfor",
-          "in" : "query",
-          "required" : false,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "type" : "array",
-              "items" : {
-                "$ref" : "#/definitions/Item"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/search/authors/{query}" : {
-      "get" : {
-        "tags" : [ "search" ],
-        "summary" : "Retrieve a a list of authors that match the search query.",
-        "description" : "",
-        "operationId" : "getItem",
-        "produces" : [ "application/json", "application/xml" ],
-        "parameters" : [ {
-          "name" : "query",
-          "in" : "path",
-          "description" : "The query string of the author",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "name" : "offset",
-          "in" : "query",
-          "description" : "The offset of the authors shown.",
-          "required" : false,
-          "type" : "integer",
-          "format" : "int32"
-        }, {
-          "name" : "limit",
-          "in" : "query",
-          "description" : "The maximum amount of authors shown.",
-          "required" : false,
-          "type" : "integer",
-          "format" : "int32"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "type" : "array",
-              "items" : {
-                "type" : "object"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/status" : {
-      "get" : {
-        "summary" : "Check the current status of the service and logged in user",
-        "description" : "",
-        "operationId" : "status",
-        "consumes" : [ "application/json", "application/xml" ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/Status"
-            }
-          }
-        }
-      }
-    },
-    "/test" : {
-      "get" : {
-        "summary" : "Test if the REST API is running.",
-        "description" : "",
-        "operationId" : "test",
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "type" : "string"
-            }
-          }
-        }
-      }
-    }
-  },
-  "definitions" : {
-    "Bitstream" : {
-      "required" : [ "expand", "link" ],
-      "properties" : {
-        "id" : {
-          "type" : "integer",
-          "format" : "int32"
-        },
-        "name" : {
-          "type" : "string"
-        },
-        "handle" : {
-          "type" : "string"
-        },
-        "type" : {
-          "type" : "string"
-        },
-        "link" : {
-          "type" : "string"
-        },
-        "expand" : {
-          "type" : "array",
-          "items" : {
-            "type" : "string"
-          }
-        },
-        "bundleName" : {
-          "type" : "string"
-        },
-        "description" : {
-          "type" : "string"
-        },
-        "format" : {
-          "type" : "string"
-        },
-        "mimeType" : {
-          "type" : "string"
-        },
-        "sizeBytes" : {
-          "type" : "integer",
-          "format" : "int64"
-        },
-        "parentObject" : {
-          "$ref" : "#/definitions/DSpaceObject"
-        },
-        "retrieveLink" : {
-          "type" : "string"
-        },
-        "checkSum" : {
-          "$ref" : "#/definitions/CheckSum"
-        },
-        "sequenceId" : {
-          "type" : "integer",
-          "format" : "int32"
-        },
-        "policies" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/ResourcePolicy"
-          }
-        }
-      },
-      "xml" : {
-        "name" : "bitstream"
-      }
-    },
-    "CheckSum" : {
-      "properties" : {
-        "value" : {
-          "type" : "string"
-        },
-        "checkSumAlgorith" : {
-          "type" : "string",
-          "xml" : {
-            "name" : "checkSumAlgorithm"
-          }
-        }
-      }
-    },
-    "Collection" : {
-      "required" : [ "expand", "link" ],
-      "properties" : {
-        "id" : {
-          "type" : "integer",
-          "format" : "int32"
-        },
-        "name" : {
-          "type" : "string"
-        },
-        "handle" : {
-          "type" : "string"
-        },
-        "type" : {
-          "type" : "string"
-        },
-        "link" : {
-          "type" : "string"
-        },
-        "expand" : {
-          "type" : "array",
-          "items" : {
-            "type" : "string"
-          }
-        },
-        "logo" : {
-          "$ref" : "#/definitions/Bitstream"
-        },
-        "parentCommunity" : {
-          "$ref" : "#/definitions/Community"
-        },
-        "parentCommunityList" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/Community"
-          }
-        },
-        "items" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/Item"
-          }
-        },
-        "license" : {
-          "type" : "string"
-        },
-        "copyrightText" : {
-          "type" : "string"
-        },
-        "introductoryText" : {
-          "type" : "string"
-        },
-        "shortDescription" : {
-          "type" : "string"
-        },
-        "sidebarText" : {
-          "type" : "string"
-        },
-        "numberItems" : {
-          "type" : "integer",
-          "format" : "int32"
-        }
-      },
-      "xml" : {
-        "name" : "collection"
-      }
-    },
-    "Community" : {
-      "required" : [ "expand", "link", "subcommunities" ],
-      "properties" : {
-        "id" : {
-          "type" : "integer",
-          "format" : "int32"
-        },
-        "name" : {
-          "type" : "string"
-        },
-        "handle" : {
-          "type" : "string"
-        },
-        "type" : {
-          "type" : "string"
-        },
-        "link" : {
-          "type" : "string"
-        },
-        "expand" : {
-          "type" : "array",
-          "items" : {
-            "type" : "string"
-          }
-        },
-        "logo" : {
-          "$ref" : "#/definitions/Bitstream"
-        },
-        "copyrightText" : {
-          "type" : "string"
-        },
-        "introductoryText" : {
-          "type" : "string"
-        },
-        "shortDescription" : {
-          "type" : "string"
-        },
-        "sidebarText" : {
-          "type" : "string"
-        },
-        "countItems" : {
-          "type" : "integer",
-          "format" : "int32"
-        },
-        "subcommunities" : {
-          "$ref" : "#/definitions/List"
-        },
-        "collections" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/Collection"
-          }
-        }
-      },
-      "xml" : {
-        "name" : "community"
-      }
-    },
-    "DSpaceObject" : {
-      "required" : [ "expand", "link" ],
-      "properties" : {
-        "id" : {
-          "type" : "integer",
-          "format" : "int32"
-        },
-        "name" : {
-          "type" : "string"
-        },
-        "handle" : {
-          "type" : "string"
-        },
-        "type" : {
-          "type" : "string"
-        },
-        "link" : {
-          "type" : "string"
-        },
-        "expand" : {
-          "type" : "array",
-          "items" : {
-            "type" : "string"
-          }
-        }
-      },
-      "xml" : {
-        "name" : "dspaceobject"
-      }
-    },
-    "Item" : {
-      "required" : [ "expand", "link", "metadata" ],
-      "properties" : {
-        "id" : {
-          "type" : "integer",
-          "format" : "int32"
-        },
-        "name" : {
-          "type" : "string"
-        },
-        "handle" : {
-          "type" : "string"
-        },
-        "type" : {
-          "type" : "string"
-        },
-        "link" : {
-          "type" : "string"
-        },
-        "expand" : {
-          "type" : "array",
-          "items" : {
-            "type" : "string"
-          }
-        },
-        "lastModified" : {
-          "type" : "string"
-        },
-        "parentCollectionList" : {
-          "$ref" : "#/definitions/List"
-        },
-        "parentCommunityList" : {
-          "$ref" : "#/definitions/List"
-        },
-        "metadata" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/MetadataEntry"
-          }
-        },
-        "bitstreams" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/Bitstream"
-          }
-        },
-        "archived" : {
-          "type" : "string"
-        },
-        "withdrawn" : {
-          "type" : "string"
-        }
-      },
-      "xml" : {
-        "name" : "item"
-      }
-    },
-    "List" : {
-      "properties" : {
-        "empty" : {
-          "type" : "boolean",
-          "default" : false
-        }
-      }
-    },
-    "MetadataEntry" : {
-      "properties" : {
-        "key" : {
-          "type" : "string"
-        },
-        "value" : {
-          "type" : "string"
-        },
-        "language" : {
-          "type" : "string"
-        }
-      },
-      "xml" : {
-        "name" : "metadataentry"
-      }
-    },
-    "ResourcePolicy" : {
-      "properties" : {
-        "id" : {
-          "type" : "integer",
-          "format" : "int32"
-        },
-        "action" : {
-          "type" : "string",
-          "enum" : [ "READ", "WRITE", "DELETE" ]
-        },
-        "epersonId" : {
-          "type" : "integer",
-          "format" : "int32"
-        },
-        "groupId" : {
-          "type" : "integer",
-          "format" : "int32"
-        },
-        "resourceId" : {
-          "type" : "integer",
-          "format" : "int32"
-        },
-        "resourceType" : {
-          "type" : "string"
-        },
-        "rpDescription" : {
-          "type" : "string"
-        },
-        "rpName" : {
-          "type" : "string"
-        },
-        "rpType" : {
-          "type" : "string"
-        },
-        "startDate" : {
-          "type" : "string",
-          "format" : "date-time"
-        },
-        "endDate" : {
-          "type" : "string",
-          "format" : "date-time"
-        },
-        "actionInt" : {
-          "type" : "integer",
-          "format" : "int32"
-        }
-      },
-      "xml" : {
-        "name" : "resourcepolicy"
-      }
-    },
-    "Status" : {
-      "properties" : {
-        "okay" : {
-          "type" : "boolean",
-          "default" : false
-        },
-        "authenticated" : {
-          "type" : "boolean",
-          "default" : false
-        },
-        "email" : {
-          "type" : "string"
-        },
-        "fullname" : {
-          "type" : "string"
-        },
-        "token" : {
-          "type" : "string"
-        }
-      },
-      "xml" : {
-        "name" : "status"
-      }
-    },
-    "User" : {
-      "required" : [ "email", "password" ],
-      "properties" : {
-        "email" : {
-          "type" : "string",
-          "description" : "The email address of the user logging in"
-        },
-        "password" : {
-          "type" : "string",
-          "description" : "The password of the user logging in"
-        }
-      },
-      "xml" : {
-        "name" : "user"
-      }
-    }
-  }
-}
+openapi: 3.0.1
+info:
+  title: Research Collection API
+  description: |-
+    This API provides access to bibliographic metadata of ETH Zurich’s Research Collection for scientific publications and research data.
+    
+    &#x279C; [Research Collection Application](https://www.research-collection.ethz.ch/)
+  license:
+    url: https://developer.library.ethz.ch/terms
+    name: Bibliographic metadata from this API that are not specifically marked are available for reuse under a Public Domain Dedication (CC0) and may be used, modified and redistributed without prior consent.
+  version: '1.0'
+servers:
+  - url: https://api.library.ethz.ch/research-collection/v1/
+    description: Production
+tags:
+  - items
+  - communities
+  - bitstreams
+  - collections
+  - search
+  - handle
+paths:
+  /bitstreams:
+    get:
+      tags:
+      - bitstreams
+      summary: Retrieve a list of bitstreams.
+      operationId: getBitstreams
+      parameters:
+      - name: expand
+        in: query
+        description: Show additional data for the bitstream.
+        schema:
+          type: string
+          enum:
+          - all
+          - parent
+      - name: limit
+        in: query
+        description: The maximum amount of bitstreams shown.
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: The amount of bitstreams to skip.
+        schema:
+          type: integer
+          format: int32
+      - name: userIP
+        in: query
+        schema:
+          type: string
+      - name: userAgent
+        in: query
+        schema:
+          type: string
+      - name: xforwardedfor
+        in: query
+        schema:
+          type: string
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Bitstream'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Bitstream'
+  /bitstreams/{bitstream_id}:
+    get:
+      tags:
+      - bitstreams
+      summary: Retrieve a single bitstream by using the internal DSpace bitstream
+        identifier.
+      operationId: getBitstream
+      parameters:
+      - name: bitstream_id
+        in: path
+        description: The identifier of the bitstream.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: expand
+        in: query
+        description: Show additional data for the bitstream.
+        schema:
+          type: string
+          enum:
+          - all
+          - parent
+      - name: userIP
+        in: query
+        schema:
+          type: string
+      - name: userAgent
+        in: query
+        schema:
+          type: string
+      - name: xforwardedfor
+        in: query
+        schema:
+          type: string
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Bitstream'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Bitstream'
+  /bitstreams/{bitstream_id}/policy:
+    get:
+      tags:
+      - bitstreams
+      summary: Retrieve all policies for all bundles in which the bitstream is present,
+        by using the internal DSpace bitstream identifier.
+      operationId: getBitstreamPolicies
+      parameters:
+      - name: bitstream_id
+        in: path
+        description: The identifier of the bitstream.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResourcePolicy'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResourcePolicy'
+  /bitstreams/{bitstream_id}/retrieve:
+    get:
+      tags:
+      - bitstreams
+      summary: Retrieve a file by using the corresponding DSpace bitstream identifier.
+      operationId: getBitstreamData
+      parameters:
+      - name: bitstream_id
+        in: path
+        description: The identifier of the bitstream.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: userIP
+        in: query
+        schema:
+          type: string
+      - name: userAgent
+        in: query
+        schema:
+          type: string
+      - name: xforwardedfor
+        in: query
+        schema:
+          type: string
+      responses:
+        default:
+          description: successful operation
+          content: {}
+  /collections:
+    get:
+      tags:
+      - collections
+      summary: Retrieve a list of collections.
+      operationId: getCollections
+      parameters:
+      - name: expand
+        in: query
+        description: Show additional data for the collection.
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+          enum:
+          - all
+          - items
+          - parentCommunity
+          - parentCommunityList
+          - license
+          - logo
+      - name: limit
+        in: query
+        description: The maximum amount of collections shown.
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: The amount of collections to skip.
+        schema:
+          type: integer
+          format: int32
+      - name: userIP
+        in: query
+        schema:
+          type: string
+      - name: userAgent
+        in: query
+        schema:
+          type: string
+      - name: xforwardedfor
+        in: query
+        schema:
+          type: string
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Collection'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Collection'
+  /collections/{collection_id}:
+    get:
+      tags:
+      - collections
+      summary: Retrieve a single collection by using the internal DSpace collection
+        identifier.
+      operationId: getCollection
+      parameters:
+      - name: collection_id
+        in: path
+        description: The identifier of the collection.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: expand
+        in: query
+        description: Show additional data for the collection.
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+          enum:
+          - all
+          - items
+          - parentCommunity
+          - parentCommunityList
+          - license
+          - logo
+      - name: limit
+        in: query
+        description: The maximum amount of collections shown.
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: The amount of collections to skip.
+        schema:
+          type: integer
+          format: int32
+      - name: userIP
+        in: query
+        schema:
+          type: string
+      - name: userAgent
+        in: query
+        schema:
+          type: string
+      - name: xforwardedfor
+        in: query
+        schema:
+          type: string
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collection'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Collection'
+  /collections/{collection_id}/items:
+    get:
+      tags:
+      - collections
+      summary: Retrieve a list of items in a collection by using the internal DSpace
+        collection identifier.
+      operationId: getCollectionItems
+      parameters:
+      - name: collection_id
+        in: path
+        description: The identifier of the collection.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: expand
+        in: query
+        description: Show additional data for the items.
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+          enum:
+          - all
+          - metadata
+          - parentCollection
+          - parentCollectionList
+          - parentCommunityList
+          - bitstreams
+      - name: limit
+        in: query
+        description: The maximum amount of items shown.
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: The amount of items to skip.
+        schema:
+          type: integer
+          format: int32
+      - name: userIP
+        in: query
+        schema:
+          type: string
+      - name: userAgent
+        in: query
+        schema:
+          type: string
+      - name: xforwardedfor
+        in: query
+        schema:
+          type: string
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Item'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Item'
+  /communities:
+    get:
+      tags:
+      - communities
+      summary: Retrieve a list of communities.
+      operationId: getCommunities
+      parameters:
+      - name: expand
+        in: query
+        description: Show additional data for the community.
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+          enum:
+          - all
+          - collections
+          - parentCommunity
+          - parentCommunityList
+          - subCommunities
+          - logo
+      - name: limit
+        in: query
+        description: The maximum amount of communities shown.
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: The amount of communities to skip.
+        schema:
+          type: integer
+          format: int32
+      - name: userIP
+        in: query
+        schema:
+          type: string
+      - name: userAgent
+        in: query
+        schema:
+          type: string
+      - name: xforwardedfor
+        in: query
+        schema:
+          type: string
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Community'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Community'
+  /communities/top-communities:
+    get:
+      tags:
+      - communities
+      summary: Retrieve a list of top communities.
+      operationId: getTopCommunities
+      parameters:
+      - name: expand
+        in: query
+        description: Show additional data for the community.
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+          enum:
+          - all
+          - collections
+          - parentCommunity
+          - parentCommunityList
+          - subCommunities
+          - logo
+      - name: limit
+        in: query
+        description: The maximum amount of communities shown.
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: The amount of communities to skip.
+        schema:
+          type: integer
+          format: int32
+      - name: userIP
+        in: query
+        schema:
+          type: string
+      - name: userAgent
+        in: query
+        schema:
+          type: string
+      - name: xforwardedfor
+        in: query
+        schema:
+          type: string
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Community'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Community'
+  /communities/{community_id}:
+    get:
+      tags:
+      - communities
+      summary: Retrieve a single community by using the internal DSpace community
+        identifier.
+      operationId: getCommunity
+      parameters:
+      - name: community_id
+        in: path
+        description: The identifier of the community.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: expand
+        in: query
+        description: Show additional data for the community.
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+          enum:
+          - all
+          - collections
+          - parentCommunity
+          - parentCommunityList
+          - subCommunities
+          - logo
+      - name: userIP
+        in: query
+        schema:
+          type: string
+      - name: userAgent
+        in: query
+        schema:
+          type: string
+      - name: xforwardedfor
+        in: query
+        schema:
+          type: string
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Community'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Community'
+  /communities/{community_id}/collections:
+    get:
+      tags:
+      - communities
+      summary: Retrieve a list of collections in a community by using the internal
+        DSpace community identifier.
+      operationId: getCommunityCollections
+      parameters:
+      - name: community_id
+        in: path
+        description: The identifier of the community.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: expand
+        in: query
+        description: Show additional data for the collection.
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+          enum:
+          - all
+          - items
+          - parentCommunity
+          - parentCommunityList
+          - license
+          - logo
+      - name: limit
+        in: query
+        description: The maximum amount of collections shown.
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: The amount of collections to skip.
+        schema:
+          type: integer
+          format: int32
+      - name: userIP
+        in: query
+        schema:
+          type: string
+      - name: userAgent
+        in: query
+        schema:
+          type: string
+      - name: xforwardedfor
+        in: query
+        schema:
+          type: string
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Collection'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Collection'
+  /communities/{community_id}/communities:
+    get:
+      tags:
+      - communities
+      summary: Retrieve a list of subcommunities in a community by using the internal
+        DSpace community identifier.
+      operationId: getCommunityCommunities
+      parameters:
+      - name: community_id
+        in: path
+        description: The identifier of the community.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: expand
+        in: query
+        description: Show additional data for the community.
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+          enum:
+          - all
+          - collections
+          - parentCommunity
+          - parentCommunityList
+          - subCommunities
+          - logo
+      - name: limit
+        in: query
+        description: The maximum amount of communities shown.
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: The amount of communities to skip.
+        schema:
+          type: integer
+          format: int32
+      - name: userIP
+        in: query
+        schema:
+          type: string
+      - name: userAgent
+        in: query
+        schema:
+          type: string
+      - name: xforwardedfor
+        in: query
+        schema:
+          type: string
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Community'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Community'
+  /handle/{prefix}/{suffix}:
+    get:
+      tags:
+      - handle
+      summary: Retrieve a single object by using object pre- and suffix.
+      operationId: getObject
+      parameters:
+      - name: prefix
+        in: path
+        description: The object prefix.
+        required: true
+        schema:
+          type: string
+      - name: suffix
+        in: path
+        description: The object suffix.
+        required: true
+        schema:
+          type: string
+      - name: expand
+        in: query
+        description: Show additional data for the object.
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DSpaceObject'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/DSpaceObject'
+  /items:
+    get:
+      tags:
+      - items
+      summary: Retrieve all items from the repository.
+      operationId: getItems
+      parameters:
+      - name: expand
+        in: query
+        description: Show additional data for the item.
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+          enum:
+          - all
+          - metadata
+          - parentCollection
+          - parentCollectionList
+          - parentCommunityList
+          - bitstreams
+      - name: limit
+        in: query
+        description: The maximum amount of items shown.
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: The amount of items to skip.
+        schema:
+          type: integer
+          format: int32
+      - name: userIP
+        in: query
+        schema:
+          type: string
+      - name: userAgent
+        in: query
+        schema:
+          type: string
+      - name: xforwardedfor
+        in: query
+        schema:
+          type: string
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Item'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Item'
+  /items/{item_id}:
+    get:
+      tags:
+      - items
+      summary: Retrieve a single item by using the internal DSpace item identifier.
+      operationId: getItem
+      parameters:
+      - name: item_id
+        in: path
+        description: The identifier of the item.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: expand
+        in: query
+        description: Show additional data for the item.
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+          enum:
+          - all
+          - metadata
+          - parentCollection
+          - parentCollectionList
+          - parentCommunityList
+          - bitstreams
+      - name: userIP
+        in: query
+        schema:
+          type: string
+      - name: userAgent
+        in: query
+        schema:
+          type: string
+      - name: xforwardedfor
+        in: query
+        schema:
+          type: string
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Item'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Item'
+  /items/{item_id}/bitstreams:
+    get:
+      tags:
+      - items
+      summary: Retrieve a list of bitstreams for an item by using the internal DSpace
+        item identifier.
+      operationId: getItemBitstreams
+      parameters:
+      - name: item_id
+        in: path
+        description: The identifier of the item.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: limit
+        in: query
+        description: The maximum amount of bitstreams shown.
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: The amount of bitstreams to skip.
+        schema:
+          type: integer
+          format: int32
+      - name: userIP
+        in: query
+        schema:
+          type: string
+      - name: userAgent
+        in: query
+        schema:
+          type: string
+      - name: xforwardedfor
+        in: query
+        schema:
+          type: string
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Bitstream'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Bitstream'
+  /items/{item_id}/metadata:
+    get:
+      tags:
+      - items
+      summary: Retrieve a list of metadata for an item by using the internal DSpace
+        item identifier.
+      operationId: getItemMetadata
+      parameters:
+      - name: item_id
+        in: path
+        description: The identifier of the item.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: userIP
+        in: query
+        schema:
+          type: string
+      - name: userAgent
+        in: query
+        schema:
+          type: string
+      - name: xforwardedfor
+        in: query
+        schema:
+          type: string
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MetadataEntry'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MetadataEntry'
+  /login:
+    post:
+      summary: login into the REST API
+      operationId: login
+      requestBody:
+        description: The user to login
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: false
+      responses:
+        default:
+          description: successful operation
+          content: {}
+      x-codegen-request-body-name: body
+  /logout:
+    post:
+      summary: logout from the REST API
+      operationId: logout
+      responses:
+        default:
+          description: successful operation
+          content: {}
+  /search:
+    get:
+      tags:
+      - search
+      summary: Search items.
+      operationId: searchItems
+      parameters:
+      - name: expand
+        in: query
+        description: Show additional data for the item.
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+          enum:
+          - all
+          - metadata
+          - parentCollection
+          - parentCollectionList
+          - parentCommunityList
+          - bitstreams
+      - name: limit
+        in: query
+        description: The maximum amount of items shown.
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: The amount of items to skip.
+        schema:
+          type: integer
+          format: int32
+      - name: query
+        in: query
+        description: The search query.
+        required: true
+        schema:
+          type: string
+      - name: fq
+        in: query
+        description: Filter queries.
+        style: form
+        explode: true
+        schema:
+          type: array
+      - name: sort
+        in: query
+        description: 'Sort the item results by fieldname|desc; ie: author|desc.'
+        style: form
+        explode: true
+        schema:
+          type: array
+      - name: userIP
+        in: query
+        schema:
+          type: string
+      - name: userAgent
+        in: query
+        schema:
+          type: string
+      - name: xforwardedfor
+        in: query
+        schema:
+          type: string
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Item'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Item'
+  /search/authors/{query}:
+    get:
+      tags:
+      - search
+      summary: Retrieve a a list of authors that match the search query.
+      operationId: getItem
+      parameters:
+      - name: query
+        in: path
+        description: The query string of the author
+        required: true
+        schema:
+          type: string
+      - name: offset
+        in: query
+        description: The offset of the authors shown.
+        schema:
+          type: integer
+          format: int32
+      - name: limit
+        in: query
+        description: The maximum amount of authors shown.
+        schema:
+          type: integer
+          format: int32
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties: {}
+            application/xml:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties: {}
+  /status:
+    get:
+      summary: Check the current status of the service and logged in user
+      operationId: status
+      responses:
+        200:
+          description: successful operation
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Status'
+  /test:
+    get:
+      summary: Test if the REST API is running.
+      operationId: test
+      responses:
+        200:
+          description: successful operation
+          content:
+            '*/*':
+              schema:
+                type: string
+components:
+  schemas:
+    Bitstream:
+      required:
+      - expand
+      - link
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        handle:
+          type: string
+        type:
+          type: string
+        link:
+          type: string
+        expand:
+          type: array
+          items:
+            type: string
+        bundleName:
+          type: string
+        description:
+          type: string
+        format:
+          type: string
+        mimeType:
+          type: string
+        sizeBytes:
+          type: integer
+          format: int64
+        parentObject:
+          $ref: '#/components/schemas/DSpaceObject'
+        retrieveLink:
+          type: string
+        checkSum:
+          $ref: '#/components/schemas/CheckSum'
+        sequenceId:
+          type: integer
+          format: int32
+        policies:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourcePolicy'
+      xml:
+        name: bitstream
+    CheckSum:
+      type: object
+      properties:
+        value:
+          type: string
+        checkSumAlgorith:
+          type: string
+          xml:
+            name: checkSumAlgorithm
+    Collection:
+      required:
+      - expand
+      - link
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        handle:
+          type: string
+        type:
+          type: string
+        link:
+          type: string
+        expand:
+          type: array
+          items:
+            type: string
+        logo:
+          $ref: '#/components/schemas/Bitstream'
+        parentCommunity:
+          $ref: '#/components/schemas/Community'
+        parentCommunityList:
+          type: array
+          items:
+            $ref: '#/components/schemas/Community'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Item'
+        license:
+          type: string
+        copyrightText:
+          type: string
+        introductoryText:
+          type: string
+        shortDescription:
+          type: string
+        sidebarText:
+          type: string
+        numberItems:
+          type: integer
+          format: int32
+      xml:
+        name: collection
+    Community:
+      required:
+      - expand
+      - link
+      - subcommunities
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        handle:
+          type: string
+        type:
+          type: string
+        link:
+          type: string
+        expand:
+          type: array
+          items:
+            type: string
+        logo:
+          $ref: '#/components/schemas/Bitstream'
+        copyrightText:
+          type: string
+        introductoryText:
+          type: string
+        shortDescription:
+          type: string
+        sidebarText:
+          type: string
+        countItems:
+          type: integer
+          format: int32
+        subcommunities:
+          $ref: '#/components/schemas/List'
+        collections:
+          type: array
+          items:
+            $ref: '#/components/schemas/Collection'
+      xml:
+        name: community
+    DSpaceObject:
+      required:
+      - expand
+      - link
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        handle:
+          type: string
+        type:
+          type: string
+        link:
+          type: string
+        expand:
+          type: array
+          items:
+            type: string
+      xml:
+        name: dspaceobject
+    Item:
+      required:
+      - expand
+      - link
+      - metadata
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        handle:
+          type: string
+        type:
+          type: string
+        link:
+          type: string
+        expand:
+          type: array
+          items:
+            type: string
+        lastModified:
+          type: string
+        parentCollectionList:
+          $ref: '#/components/schemas/List'
+        parentCommunityList:
+          $ref: '#/components/schemas/List'
+        metadata:
+          type: array
+          items:
+            $ref: '#/components/schemas/MetadataEntry'
+        bitstreams:
+          type: array
+          items:
+            $ref: '#/components/schemas/Bitstream'
+        archived:
+          type: string
+        withdrawn:
+          type: string
+      xml:
+        name: item
+    List:
+      type: object
+      properties:
+        empty:
+          type: boolean
+          default: false
+    MetadataEntry:
+      type: object
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+        language:
+          type: string
+      xml:
+        name: metadataentry
+    ResourcePolicy:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        action:
+          type: string
+          enum:
+          - READ
+          - WRITE
+          - DELETE
+        epersonId:
+          type: integer
+          format: int32
+        groupId:
+          type: integer
+          format: int32
+        resourceId:
+          type: integer
+          format: int32
+        resourceType:
+          type: string
+        rpDescription:
+          type: string
+        rpName:
+          type: string
+        rpType:
+          type: string
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        actionInt:
+          type: integer
+          format: int32
+      xml:
+        name: resourcepolicy
+    Status:
+      type: object
+      properties:
+        okay:
+          type: boolean
+          default: false
+        authenticated:
+          type: boolean
+          default: false
+        email:
+          type: string
+        fullname:
+          type: string
+        token:
+          type: string
+      xml:
+        name: status
+    User:
+      required:
+      - email
+      - password
+      type: object
+      properties:
+        email:
+          type: string
+          description: The email address of the user logging in
+        password:
+          type: string
+          description: The password of the user logging in
+      xml:
+        name: user
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: query
+      name: apikey
+security:
+  - ApiKeyAuth: []
+externalDocs:
+  description: OAS 3 Swagger Documentation
+  url: https://apidocs.library.ethz.ch/research-collection/v1/
