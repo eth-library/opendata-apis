@@ -161,7 +161,7 @@ paths:
         style: form
         explode: true
         schema:
-          type: array
+          type: string
           items:
             type: string
           enum:
@@ -219,7 +219,7 @@ paths:
         style: form
         explode: true
         schema:
-          type: array
+          type: string
           items:
             type: string
           enum:
@@ -277,7 +277,7 @@ paths:
         style: form
         explode: true
         schema:
-          type: array
+          type: string
           items:
             type: string
           enum:
@@ -327,7 +327,7 @@ paths:
         style: form
         explode: true
         schema:
-          type: array
+          type: string
           items:
             type: string
           enum:
@@ -435,7 +435,7 @@ paths:
         style: form
         explode: true
         schema:
-          type: array
+          type: string
           items:
             type: string
           enum:
@@ -481,7 +481,7 @@ paths:
         style: form
         explode: true
         schema:
-          type: array
+          type: string
           items:
             type: string
           enum:
@@ -539,7 +539,7 @@ paths:
         style: form
         explode: true
         schema:
-          type: array
+          type: string
           items:
             type: string
           enum:
@@ -620,7 +620,7 @@ paths:
         style: form
         explode: true
         schema:
-          type: array
+          type: string
           items:
             type: string
           enum:
@@ -677,7 +677,7 @@ paths:
         style: form
         explode: true
         schema:
-          type: array
+          type: string
           items:
             type: string
           enum:
@@ -687,18 +687,6 @@ paths:
           - parentCollectionList
           - parentCommunityList
           - bitstreams
-      - name: userIP
-        in: query
-        schema:
-          type: string
-      - name: userAgent
-        in: query
-        schema:
-          type: string
-      - name: xforwardedfor
-        in: query
-        schema:
-          type: string
       responses:
         200:
           description: successful operation
@@ -815,6 +803,8 @@ paths:
         explode: true
         schema:
           type: array
+          items:
+            type: string
       - name: sort
         in: query
         description: 'Sort the item results by fieldname|desc; ie: author|desc.'
@@ -822,18 +812,8 @@ paths:
         explode: true
         schema:
           type: array
-      - name: userIP
-        in: query
-        schema:
-          type: string
-      - name: userAgent
-        in: query
-        schema:
-          type: string
-      - name: xforwardedfor
-        in: query
-        schema:
-          type: string
+          items:
+            type: string
       responses:
         200:
           description: successful operation
