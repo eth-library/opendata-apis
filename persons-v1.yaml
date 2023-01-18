@@ -55,9 +55,8 @@ paths:
       tags:
         - Information about a person
       description: |-
-        Returns enriched information about a person (from wikidata, Metagrid, DNB Entytyfacts, beacon.findbuch) by wikidata QID or GND ID
+        Returns enriched information about a person (from wikidata, Metagrid, DNB Entytyfacts, beacon.findbuch) by wikidata QID or GND ID.
 
-         [Escher von der Linth](https://api.library.ethz.ch/persons/v1/enrichment?qid=Q115835)
       parameters:
         - name: qid
           schema:
