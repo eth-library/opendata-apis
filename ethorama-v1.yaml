@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: ETHorama API
   description: |-
-    ETHorama offers georeferenced access to digitised documents from platforms such as E-Pics, E-Rara, E-Periodica, E-manuscripta and Research Collection. Selected content is linked to georeferenced locations on a map. Content items, places and areas are continuously added.
+    ETHorama provides georeferenced access to digitised documents from platforms such as E-Pics, E-Rara, E-Periodica, E-manuscripta and Research Collection. Selected content is linked to georeferenced locations on a map. Content items, places and areas are continuously added.
 
     &#x279C; [ETHorama Application](https://ethorama.library.ethz.ch/)
     
