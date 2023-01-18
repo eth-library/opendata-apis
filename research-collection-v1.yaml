@@ -13,12 +13,12 @@ servers:
   - url: https://api.library.ethz.ch/research-collection/v1/
     description: Production
 tags:
-  - items
-  - communities
-  - bitstreams
-  - collections
-  - search
-  - handle
+- name: items
+- name: communities
+- name: bitstreams
+- name: collections
+- name: search
+- name: handle
 paths:
   /bitstreams:
     get:
