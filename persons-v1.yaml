@@ -1,1 +1,95 @@
+openapi: 3.0.2
+info:
+  title: ETH Library Persons API
+  description: |-
+    Persons API provides information about a person (from wikidata, Metagrid, DNB Entytyfacts, beacon.findbuch). The API also provides lists of persons from specific data resources with links to correspondig person pages.
+    
+    &#x279C; [OAS 3 Swagger Documentation](https://apidocs.library.ethz.ch/persons/v1/)
+    
+  version: '1.0'
+  termsOfService: https://developer.library.ethz.ch/terms
+  contact:
+    name: API Management ETH Library
+    email: api@library.ethz.ch
+    url: https://library.ethz.ch
+  license:
+    url: https://developer.library.ethz.ch/terms
+    name: Bibliographic metadata that are not specifically marked are free for general use (Public Domain).
+servers:
+  - url: https://api.library.ethz.ch/persons/v1/
+    description: Production
+paths:
+  /{code}:
+    get:
+      tags:
+        - List of persons
+      description: |- 
+        Provides lists of persons from a specific data resource pool with links to correspondig person pages.
+        
+        Data resource pools and their codes:
+        
+        | Data resource pool                            | Code        |
+        | --------------------------------------------- | ------------|
+        | Max Frisch Archiv, E-Pics and Hochschularchiv | sar         |
+        | Hochschularchiv                               | hsa         |        
 
+      parameters:
+        - name: code
+          schema:
+            type: string
+          in: path
+          required: true
+          description: Code of data resource pool
+          examples:
+            Max Frisch Archiv, E-Pics and Hochschularchiv:
+              value: sar
+            Hochschularchiv:
+              value: hsa
+      responses:
+        '200':
+          description: Returns a list of persons
+          content:
+            application/json: {}
+  /enrichment:
+    get:
+      tags:
+        - Information about a person
+      description: |-
+        Returns enriched information about a person (from wikidata, Metagrid, DNB Entytyfacts, beacon.findbuch) by wikidata QID or GND ID
+
+         [Escher von der Linth](https://api.library.ethz.ch/persons/v1/enrichment?qid=Q115835)
+      parameters:
+        - name: qid
+          schema:
+            type: string
+          in: query
+          required: false
+          description: Wikidata QID
+          example: Q115835
+        - name: gnd
+          schema:
+            type: string
+          in: query
+          required: false
+          description: GND ID
+          example: 120179881
+      responses:
+        '200':
+          description: Returns a person
+          content:
+            application/json: {}
+        '404':
+          description: there is no person for this QID
+          content:
+            text/html: {}
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: query
+      name: apikey
+security:
+  - ApiKeyAuth: []
+externalDocs:
+  description: OAS 3 Swagger Documentation
+  url: https://apisdocs.library.ethz.ch/persons/v1/
