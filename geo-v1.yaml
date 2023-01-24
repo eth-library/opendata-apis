@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  title: ETH Library Geo API
+  title: Geo API
   description: |-
     Geo API provides information about places (points of interests) and dossiers  from the ETHorama database.
     
