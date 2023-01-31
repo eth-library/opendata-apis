@@ -25,6 +25,7 @@ paths:
       tags:
       - bitstreams
       summary: Retrieve a list of bitstreams.
+      description: Retrieve a list of bitstreams.
       operationId: getBitstreams
       parameters:
       - name: expand
@@ -66,8 +67,8 @@ paths:
     get:
       tags:
       - bitstreams
-      summary: Retrieve a single bitstream by using the internal DSpace bitstream
-        identifier.
+      summary: Retrieve a single bitstream by using the internal DSpace bitstream identifier.
+      description: Retrieve a single bitstream by using the internal DSpace bitstream identifier.
       operationId: getBitstream
       parameters:
       - name: bitstream_id
@@ -104,8 +105,8 @@ paths:
     get:
       tags:
       - bitstreams
-      summary: Retrieve all policies for all bundles in which the bitstream is present,
-        by using the internal DSpace bitstream identifier.
+      summary: Retrieve all policies for all bundles in which the bitstream is present, by using the internal DSpace bitstream identifier.
+      description: Retrieve all policies for all bundles in which the bitstream is present, by using the internal DSpace bitstream identifier.
       operationId: getBitstreamPolicies
       parameters:
       - name: bitstream_id
@@ -123,6 +124,7 @@ paths:
       tags:
       - bitstreams
       summary: Retrieve a file by using the corresponding DSpace bitstream identifier.
+      description: Retrieve a file by using the corresponding DSpace bitstream identifier.
       operationId: getBitstreamData
       parameters:
       - name: bitstream_id
@@ -153,6 +155,7 @@ paths:
       tags:
       - collections
       summary: Retrieve a list of collections.
+      description: Retrieve a list of collections.
       operationId: getCollections
       parameters:
       - name: expand
@@ -202,8 +205,8 @@ paths:
     get:
       tags:
       - collections
-      summary: Retrieve a single collection by using the internal DSpace collection
-        identifier.
+      summary: Retrieve a single collection by using the internal DSpace collection identifier.
+      description: Retrieve a single collection by using the internal DSpace collection identifier.
       operationId: getCollection
       parameters:
       - name: collection_id
@@ -260,8 +263,8 @@ paths:
     get:
       tags:
       - collections
-      summary: Retrieve a list of items in a collection by using the internal DSpace
-        collection identifier.
+      summary: Retrieve a list of items in a collection by using the internal DSpace collection identifier.
+      description: Retrieve a list of items in a collection by using the internal DSpace collection identifier.
       operationId: getCollectionItems
       parameters:
       - name: collection_id
@@ -319,6 +322,7 @@ paths:
       tags:
       - communities
       summary: Retrieve a list of communities.
+      description: Retrieve a list of communities.
       operationId: getCommunities
       parameters:
       - name: expand
@@ -369,6 +373,7 @@ paths:
       tags:
       - communities
       summary: Retrieve a list of top communities.
+      description: Retrieve a list of top communities.
       operationId: getTopCommunities
       parameters:
       - name: expand
@@ -418,8 +423,8 @@ paths:
     get:
       tags:
       - communities
-      summary: Retrieve a single community by using the internal DSpace community
-        identifier.
+      summary: Retrieve a single community by using the internal DSpace community identifier.
+      description: Retrieve a single community by using the internal DSpace community identifier.
       operationId: getCommunity
       parameters:
       - name: community_id
@@ -464,8 +469,8 @@ paths:
     get:
       tags:
       - communities
-      summary: Retrieve a list of collections in a community by using the internal
-        DSpace community identifier.
+      summary: Retrieve a list of collections in a community by using the internal DSpace community identifier.
+      description: Retrieve a list of collections in a community by using the internal DSpace community identifier.
       operationId: getCommunityCollections
       parameters:
       - name: community_id
@@ -522,8 +527,8 @@ paths:
     get:
       tags:
       - communities
-      summary: Retrieve a list of subcommunities in a community by using the internal
-        DSpace community identifier.
+      summary: Retrieve a list of subcommunities in a community by using the internal DSpace community identifier.
+      description: Retrieve a list of subcommunities in a community by using the internal DSpace community identifier.
       operationId: getCommunityCommunities
       parameters:
       - name: community_id
@@ -581,6 +586,7 @@ paths:
       tags:
       - handle
       summary: Retrieve a single object by using object pre- and suffix.
+      description: Retrieve a single object by using object pre- and suffix.
       operationId: getObject
       parameters:
       - name: prefix
@@ -612,6 +618,7 @@ paths:
       tags:
       - items
       summary: Retrieve all items from the repository.
+      description: Retrieve all items from the repository.
       operationId: getItems
       parameters:
       - name: expand
@@ -662,6 +669,7 @@ paths:
       tags:
       - items
       summary: Retrieve a single item by using the internal DSpace item identifier.
+      description: Retrieve a single item by using the internal DSpace item identifier.
       operationId: getItem
       parameters:
       - name: item_id
@@ -694,8 +702,8 @@ paths:
     get:
       tags:
       - items
-      summary: Retrieve a list of bitstreams for an item by using the internal DSpace
-        item identifier.
+      summary: Retrieve a list of bitstreams for an item by using the internal DSpace item identifier.
+      description: Retrieve a list of bitstreams for an item by using the internal DSpace item identifier.
       operationId: getItemBitstreams
       parameters:
       - name: item_id
@@ -736,8 +744,8 @@ paths:
     get:
       tags:
       - items
-      summary: Retrieve a list of metadata for an item by using the internal DSpace
-        item identifier.
+      summary: Retrieve a list of metadata for an item by using the internal DSpace item identifier.
+      description: Retrieve a list of metadata for an item by using the internal DSpace item identifier.
       operationId: getItemMetadata
       parameters:
       - name: item_id
@@ -767,6 +775,7 @@ paths:
       tags:
       - search
       summary: Search items.
+      description: Search items.
       operationId: searchItems
       parameters:
       - name: expand
@@ -822,6 +831,7 @@ paths:
       tags:
       - search
       summary: Retrieve a a list of authors that match the search query.
+      description: Retrieve a a list of authors that match the search query.
       operationId: getAuthors
       parameters:
       - name: query
