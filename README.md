@@ -14,6 +14,7 @@ OpenAPI specifications for Open Data APIs of ETH Library. See [https://developer
 
 n/a
 
+
 ***
 **Disclaimer**
 ETH Zurich’s [Disclaimer](https://library.ethz.ch/en/footer/disclaimer.html) and the ETH Library’s [privacy policy](https://library.ethz.ch/en/footer/data-protection.html) are in effect.
