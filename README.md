@@ -16,4 +16,4 @@ n/a
 
 ***
 **Disclaimer**
-ETH Zurich’s [Disclaimer](https://library.ethz.ch/en/footer/disclaimer.html) and the ETH Library’s [privacy policy](https://library.ethz.ch/en/footer/data-protection.html) are in effect.
+ETH Library’s [Disclaimer](https://library.ethz.ch/en/footer/disclaimer-copyright.html) and the ETH Library’s [privacy policy](https://library.ethz.ch/en/footer/data-protection.html) are in effect. In addition, please also refer to the [terms of use](https://developer.library.ethz.ch/terms) of the ETH Library APIs.
