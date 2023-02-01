@@ -51,7 +51,7 @@ paths:
           content:
             application/json: {}
         '401':
-          $ref: "#/components/responses/UnauthorizedError"
+          description: Missing or invalid API key
   /enrichment:
     get:
       tags:
