@@ -50,6 +50,8 @@ paths:
           description: Returns a list of persons
           content:
             application/json: {}
+        '401':
+          $ref: "#/components/responses/UnauthorizedError"
   /enrichment:
     get:
       tags:
@@ -81,12 +83,21 @@ paths:
           description: there is no person for this QID
           content:
             text/html: {}
+        '401':
+          $ref: "#/components/responses/UnauthorizedError"
 components:
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
       in: query
       name: apikey
+  responses:
+    UnauthorizedError:
+      description: API key is missing or invalid
+      headers:
+        WWW_Authenticate:
+          schema:
+            type: string
 security:
   - ApiKeyAuth: []
 externalDocs:
