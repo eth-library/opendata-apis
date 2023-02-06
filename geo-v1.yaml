@@ -2,11 +2,11 @@ openapi: 3.0.2
 info:
   title: Geo API
   description: |-
-    Geo API provides information about places (points of interests) and dossiers  from the ETHorama database.
-    
+    The Geo Information REST API provides information about points of interest (places) and dossiers from the ETHorama database. Place data is available as GeoJSON.
+        
     &#x279C; [OAS 3 Swagger Documentation](https://apidocs.library.ethz.ch/geo/v1/)
-    
-    [Information about ETHorama Data](http://ethorama.library.ethz.ch/de/about)
+
+    [Information about ETHorama data](http://ethorama.library.ethz.ch/de/about)
   version: '1.0'
   termsOfService: https://developer.library.ethz.ch/terms
   contact:
