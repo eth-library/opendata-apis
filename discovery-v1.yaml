@@ -2,8 +2,9 @@ openapi: 3.0.2
 info:
   title: Discovery API
   description: |-
-    Over 30 million books, images, series, journals and other materials from the ETH Library discovery portal. 
+    The Discovery REST API provides access to over 30 million books, images, series, journals, and other materials from the ETH Library's Discovery Portal. 
     
+    &#x279C; [ETH Library @ swisscovery Application](https://eth.swisscovery.slsp.ch/)
     &#x279C; [OAS 3 Swagger Documentation](https://apidocs.library.ethz.ch/discovery/v1/)
   version: '1.0'
   termsOfService: https://developer.library.ethz.ch/terms
