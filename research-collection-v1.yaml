@@ -2,9 +2,10 @@ openapi: 3.0.1
 info:
   title: Research Collection API
   description: |-
-    This API provides access to bibliographic metadata of ETH Zurich’s Research Collection for scientific publications and research data.
+    The Research Collection REST API provides access to the bibliographic metadata of the ETH Zurich Research Collection for scientific publications and research data.
     
     &#x279C; [Research Collection Application](https://www.research-collection.ethz.ch/)
+    
     &#x279C; [Research Collection Terms of use](https://www.research-collection.ethz.ch/terms-of-use/)
   license:
     url: https://developer.library.ethz.ch/terms
