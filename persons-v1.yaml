@@ -2,7 +2,7 @@ openapi: 3.0.2
 info:
   title: Persons API
   description: |-
-    Persons API provides enriched information about a person (from wikidata, Metagrid, DNB Entytyfacts, beacon.findbuch). The API also provides lists of persons from specific data resources with links to correspondig person pages.
+    The Persons REST API provides enriched information about persons (from Wikidata, Metagrid, DNB Entityfacts, beacon.findbuch). The API also provides lists of people from specific data sources with links to the corresponding person pages.
     
     &#x279C; [OAS 3 Swagger Documentation](https://apidocs.library.ethz.ch/persons/v1/)
     
