@@ -4,9 +4,9 @@ info:
   description: |-
     The ETHorama REST API provides georeferenced access to digitized documents from platforms such as E-Pics, E-Rara, E-Periodica, E-manuscripta and Research Collection. Selected content is linked to georeferenced locations on a map.
 
-    &#x279C; [ETHorama Application](https://ethorama.library.ethz.ch/)
-    
     &#x279C; [OAS 3 Swagger Documentation](https://apidocs.library.ethz.ch/ethorama/v1/)
+
+    &#x279C; [ETHorama Application](https://ethorama.library.ethz.ch/)
   version: '1.0'
   termsOfService: https://developer.library.ethz.ch/terms
   contact:
