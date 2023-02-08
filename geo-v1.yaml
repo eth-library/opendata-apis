@@ -6,7 +6,7 @@ info:
         
     &#x279C; [OAS 3 Swagger Documentation](https://apidocs.library.ethz.ch/geo/v1/)
 
-    [Information about ETHorama data](http://ethorama.library.ethz.ch/de/about)
+    &#x279C; [ETHorama Application](https://ethorama.library.ethz.ch/)
   version: '1.0'
   termsOfService: https://developer.library.ethz.ch/terms
   contact:
