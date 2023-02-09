@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  title: Geo API
+  title: Geo Information API
   description: |-
     The Geo Information REST API provides information about points of interest (places) and dossiers from the ETHorama database. Place data is available as GeoJSON.
         
