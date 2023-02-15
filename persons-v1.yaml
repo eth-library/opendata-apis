@@ -4,9 +4,9 @@ info:
   description: |-
     The Persons REST API provides enriched information about persons (from Wikidata, Metagrid, DNB Entityfacts, beacon.findbuch). The API also provides lists of people from specific data sources with links to the corresponding person pages.
     
-    &#x279C; [OAS 3 Swagger Documentation](https://apidocs.library.ethz.ch/persons/v1/)
+    &#x279C; [OAS 3 Swagger Documentation](https://eth-library.github.io/apiplatform-swagger/persons/v1/)
     
-  version: '1.0'
+  version: '1.0.1'
   termsOfService: https://developer.library.ethz.ch/terms
   contact:
     name: API Management ETH Library
