@@ -3,11 +3,11 @@ info:
   title: Discovery API
   description: |-
     The Discovery REST API provides access to over 30 million books, images, series, journals, and other materials from the ETH Library's Discovery Portal. 
-    
-    &#x279C; [ETH Library @ swisscovery Application](https://eth.swisscovery.slsp.ch/)
-    
+
     &#x279C; [OAS 3 Swagger Documentation](https://eth-library.github.io/apiplatform-swagger/discovery/v1/)
-  version: '1.0.1'
+
+    &#x279C; [ETH Library @ swisscovery Application](https://eth.swisscovery.slsp.ch/)
+  version: '1.0.2'
   termsOfService: https://developer.library.ethz.ch/terms
   contact:
     name: API Management ETH Library
