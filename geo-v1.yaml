@@ -4,10 +4,10 @@ info:
   description: |-
     The Geo Information REST API provides information about points of interest (places) and dossiers from the ETHorama database. Place data is available as GeoJSON.
         
-    &#x279C; [OAS 3 Swagger Documentation](https://apidocs.library.ethz.ch/geo/v1/)
+    &#x279C; [OAS 3 Swagger Documentation](https://eth-library.github.io/apiplatform-swagger/geo/v1/)
 
     &#x279C; [ETHorama Application](https://ethorama.library.ethz.ch/)
-  version: '1.0'
+  version: '1.0.1'
   termsOfService: https://developer.library.ethz.ch/terms
   contact:
     name: API Management ETH Library
