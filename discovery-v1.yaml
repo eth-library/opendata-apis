@@ -6,8 +6,8 @@ info:
     
     &#x279C; [ETH Library @ swisscovery Application](https://eth.swisscovery.slsp.ch/)
     
-    &#x279C; [OAS 3 Swagger Documentation](https://apidocs.library.ethz.ch/discovery/v1/)
-  version: '1.0'
+    &#x279C; [OAS 3 Swagger Documentation](https://eth-library.github.io/apiplatform-swagger/discovery/v1/)
+  version: '1.0.1'
   termsOfService: https://developer.library.ethz.ch/terms
   contact:
     name: API Management ETH Library
