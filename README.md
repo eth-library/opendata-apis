@@ -2,7 +2,7 @@
 
 OpenAPI specifications for Open Data APIs of ETH Library. See [https://developer.library.ethz.ch](https://developer.library.ethz.ch) for more informatione about APIs and how to access.
 
-Accessible also via GitHub Pages: [https://eth-library.github.io/snippets/](https://eth-library.github.io/opendata-apis/)
+Accessible also via GitHub Pages: [https://eth-library.github.io/opendata-apis/](https://eth-library.github.io/opendata-apis/)
 
 ## OpenAPI specifications - latest versions
 
