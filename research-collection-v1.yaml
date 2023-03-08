@@ -785,25 +785,13 @@ paths:
       - name: expand
         in: query
         description: Show additional data for the item.
-        examples:
-        All:
-          value: all
-        Metadata:
-          value: metadata
-        Partent Collection:
-          value: parentCollection
-        Parent Collection List:
-          value: parentCollectionList
-        Parent Community List:
-          value: parentCommunityList
-        Bitstreams:
-          value: bitstreams 
         style: form
         explode: true
         schema:
-          type: string
+          type: array
           items:
             type: string
+          example: [all,metadata,parentCollection,parentCollectionList,parentCommunityList,bitstreams]
       - name: limit
         in: query
         description: The maximum amount of items shown.
