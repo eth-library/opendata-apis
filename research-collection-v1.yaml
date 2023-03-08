@@ -784,7 +784,7 @@ paths:
       parameters:
       - name: expand
         in: query
-        description: Show additional data for the item. Possible values are: all, metadata, parentCollection, parentCollectionList, parentCommunityList, bitstreams.
+        description: Show additional data for the item. Possible values are all, metadata, parentCollection, parentCollectionList, parentCommunityList, bitstreams.
         style: form
         explode: true
         schema:
