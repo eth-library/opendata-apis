@@ -784,14 +784,14 @@ paths:
       parameters:
       - name: expand
         in: query
-        description: Show additional data for the item.
+        description: Show additional data for the item. Possible values are: all, metadata, parentCollection, parentCollectionList, parentCommunityList, bitstreams.
         style: form
         explode: true
         schema:
           type: array
           items:
             type: string
-          example: [all,metadata,parentCollection,parentCollectionList,parentCommunityList,bitstreams]
+          example: metadata
       - name: limit
         in: query
         description: The maximum amount of items shown.
@@ -810,6 +810,11 @@ paths:
         required: true
         schema:
           type: string
+        examples:
+          Search items which have a specific value in two or more fields:
+            value: dc.identifier.doi:"10.3929/ethz-a-005692772" OR dc.identifier.uri:"http://hdl.handle.net/20.500.11850/154656"       
+          Search item with specific language in dc.language.iso (Because 'it' is a stopword, the query is performed using a mapped search index key):
+            value: iso_keyword=it
       - name: fq
         in: query
         description: Filter queries.
