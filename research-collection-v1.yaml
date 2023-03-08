@@ -801,7 +801,7 @@ paths:
         style: form
         explode: true
         schema:
-          type: array
+          type: string
           items:
             type: string
       - name: limit
