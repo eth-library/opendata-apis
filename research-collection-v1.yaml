@@ -12,7 +12,7 @@ info:
   license:
     url: https://developer.library.ethz.ch/terms
     name: Bibliographic metadata from this API that are not specifically marked are available for reuse under a Public Domain Dedication (CC0) and may be used, modified and redistributed without prior consent. Documents, images or other digital objects linked in metadata may be subject to other copyright restrictions. Whenever possible, the licence of the referenced digital objects is indicated in the metadata. In case of doubt, the licence can be inquired at api@library.ethz.ch.
-  version: '1.0.1'
+  version: '1.0.2'
 servers:
   - url: https://api.library.ethz.ch/research-collection/v1/
     description: Production
@@ -785,6 +785,19 @@ paths:
       - name: expand
         in: query
         description: Show additional data for the item.
+        examples:
+        All:
+          value: all
+        Metadata:
+          value: metadata
+        Partent Collection:
+          value: parentCollection
+        Parent Collection List:
+          value: parentCollectionList
+        Parent Community List:
+          value: parentCommunityList
+        Bitstreams:
+          value: bitstreams 
         style: form
         explode: true
         schema:
