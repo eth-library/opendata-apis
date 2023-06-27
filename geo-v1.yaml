@@ -22,6 +22,8 @@ servers:
 paths:
   /places:
     get:
+      tags:
+        - Places
       description: |-
         Returns all places defined in the ETHorama database.
       responses:
@@ -75,6 +77,8 @@ paths:
           description: there is no place available with this id
   /resources:
     get:
+      tags:
+        - Resources
       description: |-
         Returns geodata: pois (from ETHorama), e-rara maps, e-maps, places (Marc 651 from e-rara and e-maps).
       parameters:
@@ -126,6 +130,8 @@ paths:
 
   /pois:
       get:
+      tags:
+        - Pois
         description: |-
           Returns pois and related resources defined in the ETHorama database.
         parameters:
@@ -178,6 +184,8 @@ paths:
 
   /pois/{id}:
     get:
+      tags:
+        - Pois
       description: Returns a poi and related resources defined in the ETHorama database.
       parameters:
         - name: id
@@ -199,6 +207,8 @@ paths:
 
   /e-rara-maps:
     get:
+      tags:
+        - e-rara
       description: |-
         Returns maps from e-rara (ETH).
       parameters:
@@ -241,6 +251,8 @@ paths:
 
   /e-rara-maps/{id}:
     get:
+      tags:
+        - e-rara
       description: Returns an e-rara map and related resources.
       parameters:
         - name: id
@@ -261,6 +273,8 @@ paths:
 
   /e-maps:
     get:
+      tags:
+        - e-maps
       description: |-
         Returns maps from e-maps.
       parameters:
@@ -303,6 +317,8 @@ paths:
 
   /e-maps/{id}:
     get:
+      tags:
+        - e-maps    
       description: Returns an e-map and related resources.
       parameters:
         - name: id
@@ -323,6 +339,8 @@ paths:
 
   /dossiers:
     get:
+      tags:
+        - Dossiers    
       description: |-
         Returns the dossiers and related resources defined in the ETHorama database.
       parameters:
@@ -345,6 +363,8 @@ paths:
 
   /dossiers/{id}:
     get:
+      tags:
+        - Dossiers    
       description: Returns a dossier and related resources defined in the ETHorama database.
       parameters:
         - name: id
@@ -365,6 +385,8 @@ paths:
 
   /routes:
     get:
+      tags:
+        - Routes    
       description: |-
         Returns routes and related resources defined in the ETHorama database.
       parameters:
@@ -387,6 +409,8 @@ paths:
 
   /routes/{id}:
     get:
+      tags:
+        - Routes       
       description: Returns a route and related resources defined in the ETHorama database.
       parameters:
         - name: id
@@ -407,6 +431,8 @@ paths:
 
   /contributors:
     get:
+      tags:
+        - Contributors    
       description: |-
         Returns contributors (from e-rara and e-maps) and related resources.
       parameters:
@@ -429,6 +455,8 @@ paths:
 
   /topics:
     get:
+      tags:
+        - Topics     
       description: |-
         Returns topics (from e-rara and e-maps) and related resources.
       parameters:
@@ -451,6 +479,8 @@ paths:
 
   /geo-topics:
     get:
+      tags:
+        - subject added entry-geographic names       
       description: |-
         Returns places (subject added entry-geographic names from marc 651 of e-rara and e-maps) and related resources.
       parameters:
