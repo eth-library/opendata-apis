@@ -310,6 +310,123 @@ paths:
         '500':
           description: server error
 
+  /routes:
+    get:
+      description: |-
+        Returns routes defined in the ETHorama database.
+      parameters:
+        - name: q
+          schema:
+            type: string
+          in: query
+          required: false
+          description: |-
+            Returns routes for the search term (q).
+
+            Example: q=berg
+      responses:
+        '200':
+          description: Returns routes as JSON
+          content:
+            application/json: {}
+        '500':
+          description: server error
+
+  /routes/{id}:
+    get:
+      description: Returns a route 
+      parameters:
+        - name: id
+          schema:
+            type: string
+          in: path
+          required: true
+          description: route ID 
+      responses:
+        '200':
+          description: Returns route as JSON
+          content:
+            application/json: {}
+        '400':
+          description: bad request
+        '500':
+          description: server error
+
+  /contributors:
+    get:
+      description: |-
+        Returns contributors and related maps.
+      parameters:
+        - name: q
+          schema:
+            type: string
+          in: query
+          required: false
+          description: |-
+            Returns contributors and related maps for the search term (q).
+
+            Example: q=berg
+      responses:
+        '200':
+          description: Returns contributors as JSON
+          content:
+            application/json: {}
+        '500':
+          description: server error
+
+  /topics:
+    get:
+      description: |-
+        Returns topics and related maps.
+      parameters:
+        - name: q
+          schema:
+            type: string
+          in: query
+          required: false
+          description: |-
+            Returns topics and related maps for the search term (q).
+
+            Example: q=eisenbahn
+      responses:
+        '200':
+          description: Returns topics as JSON
+          content:
+            application/json: {}
+        '500':
+          description: server error
+
+  /geo-topics:
+    get:
+      description: |-
+        Returns geo topics (from marc 651) and related maps.
+      parameters:
+        - name: lat, lon
+          schema:
+            type: string
+          in: query
+          required: false
+          description: |-
+              Returns the geo topics and related maps near a point defined by lat (latitude) and lon (longitude) and optionally dist (distance) in metres (default: 1000).
+
+              Example: lat=47.349952&lon=8.490838&distance=1000
+        - name: q
+          schema:
+            type: string
+          in: query
+          required: false
+          description: |-
+            Returns geo topics and related maps for the search term (q).
+
+            Example: q=bern
+      responses:
+        '200':
+          description: Returns topics as JSON
+          content:
+            application/json: {}
+        '500':
+          description: server error
+
 components:
   securitySchemes:
     ApiKeyAuth:
