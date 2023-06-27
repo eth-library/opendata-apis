@@ -111,7 +111,7 @@ paths:
           in: query
           required: false
           description: |-
-            Returns the data for the search term (q).
+            Returns the data for the search term (q).The parameter "q" is alternative to "lat"/"lon".
 
             Example: q=kyburg
       responses:
@@ -163,7 +163,7 @@ paths:
             in: query
             required: false
             description: |-
-              Returns the data for the search term (q).
+              Returns the data for the search term (q).The parameter "q" is alternative to "lat"/"lon".
 
               Example: q=kyburg
         responses:
@@ -226,7 +226,7 @@ paths:
           in: query
           required: false
           description: |-
-            Returns maps for the search term (q).
+            Returns maps for the search term (q).The parameter "q" is alternative to "lat"/"lon".
 
             Example: q=kyburg
       responses:
@@ -288,7 +288,7 @@ paths:
           in: query
           required: false
           description: |-
-            Returns maps for the search term (q).
+            Returns maps for the search term (q).The parameter "q" is alternative to "lat"/"lon".
 
             Example: q=kyburg
       responses:
@@ -408,7 +408,7 @@ paths:
   /contributors:
     get:
       description: |-
-        Returns contributors and related maps.
+        Returns contributors and related resources.
       parameters:
         - name: q
           schema:
@@ -416,12 +416,12 @@ paths:
           in: query
           required: false
           description: |-
-            Returns contributors and related maps for the search term (q).
+            Returns contributors and related resources for the search term (q).
 
-            Example: q=berg
+            Example: q=Heim, Albert
       responses:
         '200':
-          description: Returns contributors as JSON
+          description: Returns contributors and related resources as JSON
           content:
             application/json: {}
         '500':
@@ -430,7 +430,7 @@ paths:
   /topics:
     get:
       description: |-
-        Returns topics and related maps.
+        Returns topics and related resources.
       parameters:
         - name: q
           schema:
@@ -438,7 +438,7 @@ paths:
           in: query
           required: false
           description: |-
-            Returns topics and related maps for the search term (q).
+            Returns topics and related resources for the search term (q).
 
             Example: q=eisenbahn
       responses:
@@ -452,7 +452,7 @@ paths:
   /geo-topics:
     get:
       description: |-
-        Returns geo topics (from marc 651) and related maps.
+        Returns geo topics (from marc 651) and related resources.
       parameters:
         - name: lat
           schema:
@@ -460,25 +460,25 @@ paths:
           in: query
           required: false
           description: |-
-            Returns the geo topics and related maps near a point defined by lat (latitude) and lon (longitude) and optionally dist (distance) in metres (default: 1000).
+            Returns the geo topics and related resources near a point defined by lat (latitude) and lon (longitude) and optionally dist (distance) in metres (default: 1000).
 
-            Example: lat=47.349952
+            Example: lat=47.378169444
         - name: lon
           schema:
             type: string
           in: query
           required: false
           description: |-
-            Returns the geo topics and related maps near a point defined by lat (latitude) and lon (longitude) and optionally dist (distance) in metres (default: 1000).
+            Returns the geo topics and related resources near a point defined by lat (latitude) and lon (longitude) and optionally dist (distance) in metres (default: 1000).
 
-            Example: lon=8.490838
+            Example: lon=8.540177777
         - name: dist
           schema:
             type: string
           in: query
           required: false
           description: |-
-            Returns the geo topics and related maps near a point defined by lat (latitude) and lon (longitude) and optionally dist (distance) in metres (default: 1000).
+            Returns the geo topics and related resources near a point defined by lat (latitude) and lon (longitude) and optionally dist (distance) in metres (default: 1000).
 
             Example: distance=1000
         - name: q
@@ -487,12 +487,12 @@ paths:
           in: query
           required: false
           description: |-
-            Returns geo topics and related maps for the search term (q).
+            Returns geo topics and related resources for the search term (q).The parameter "q" is alternative to "lat"/"lon".
 
             Example: q=bern
       responses:
         '200':
-          description: Returns topics as JSON
+          description: Returns topics as GeoJSON
           content:
             application/json: {}
         '500':
