@@ -75,8 +75,6 @@ paths:
             application/json: {}
         '404':
           description: there is no place available with this id
-          content:
-            text/html: {}
   /resources:
     get:
       description: |-
@@ -88,7 +86,7 @@ paths:
           in: query
           required: false
           description: |-
-            Returns the data near a point defined by lat (latitude) and lon (longitude) and optionally dist (distance) in metres (default: 1000).
+            Returns the pois or places (marc 651 - geo topics) that are near a point defined by lat (latitude) and long (longitude) and optionally dist (distance) in metres (default: 1000).And returns the maps from e-rara and e-maps on which the defined point is located.
 
             Example: lat=47.349952&lon=8.490838&distance=1000
         - name: q
@@ -99,7 +97,167 @@ paths:
           description: |-
             Returns the data for the search term (q).
 
+            Example: q=kyburg
+      responses:
+        '200':
+          description: Returns geodata as JSON
+          content:
+            application/json: {}
+        '400':
+          description: bad request
+        '500':
+          description: server error
+
+  /pois:
+      get:
+        description: |-
+          Returns pois from ETHorama database.
+        parameters:
+          - name: lat, lon, dist
+            schema:
+              type: string
+            in: query
+            required: false
+            description: |-
+              Returns the pois near a point defined by lat (latitude) and lon (longitude) and optionally dist (distance) in metres (default: 1000).
+
+              Example: lat=47.349952&lon=8.490838&distance=1000
+          - name: q
+            schema:
+              type: string
+            in: query
+            required: false
+            description: |-
+              Returns the data for the search term (q).
+
+              Example: q=kyburg
+        responses:
+          '200':
+            description: Returns geodata as JSON
+            content:
+              application/json: {}
+          '400':
+            description: bad request
+          '500':
+            description: server error
+
+  /pois/{id}:
+    get:
+      description: Returns a poi 
+      parameters:
+        - name: id
+          schema:
+            type: string
+          in: path
+          required: true
+          description: poi ID 
+      responses:
+        '200':
+          description: Returns geodata as JSON
+          content:
+            application/json: {}
+        '400':
+          description: bad request
+        '500':
+          description: server error
+
+
+  /e-rara-maps:
+    get:
+      description: |-
+        Returns maps from e-rara (ETH).
+      parameters:
+        - name: lat, lon
+          schema:
+            type: string
+          in: query
+          required: false
+          description: |-
+            Returns maps in which the point defined by lat (latitude) and lon (longitude) is located.
+
             Example: lat=47.349952&lon=8.490838&distance=1000
+        - name: q
+          schema:
+            type: string
+          in: query
+          required: false
+          description: |-
+            Returns maps for the search term (q).
+
+            Example: q=kyburg
+      responses:
+        '200':
+          description: Returns geodata as JSON
+          content:
+            application/json: {}
+        '400':
+          description: bad request
+        '500':
+          description: server error
+
+  /e-rara-maps/{id}:
+    get:
+      description: Returns e-rara map 
+      parameters:
+        - name: id
+          schema:
+            type: string
+          in: path
+          required: true
+          description: MMS ID 
+      responses:
+        '200':
+          description: Returns geodata as JSON
+          content:
+            application/json: {}
+        '400':
+          description: bad request
+        '500':
+          description: server error
+
+  /e-maps:
+    get:
+      description: |-
+        Returns maps from e-maps.
+      parameters:
+        - name: lat, lon
+          schema:
+            type: string
+          in: query
+          required: false
+          description: |-
+            Returns maps in which the point defined by lat (latitude) and lon (longitude) is located.
+
+            Example: lat=47.349952&lon=8.490838&distance=1000
+        - name: q
+          schema:
+            type: string
+          in: query
+          required: false
+          description: |-
+            Returns maps for the search term (q).
+
+            Example: q=kyburg
+      responses:
+        '200':
+          description: Returns geodata as JSON
+          content:
+            application/json: {}
+        '400':
+          description: bad request
+        '500':
+          description: server error
+
+  /e-maps/{id}:
+    get:
+      description: Returns an e-map 
+      parameters:
+        - name: id
+          schema:
+            type: string
+          in: path
+          required: true
+          description: MMS ID 
       responses:
         '200':
           description: Returns geodata as JSON
@@ -112,17 +270,46 @@ paths:
 
   /dossiers:
     get:
-      tags:
-        - Dossiers
       description: |-
         Returns dossiers defined in the ETHorama database.
+      parameters:
+        - name: q
+          schema:
+            type: string
+          in: query
+          required: false
+          description: |-
+            Returns dossiers for the search term (q).
+
+            Example: q=bahnen
       responses:
         '200':
-          description: Returns Dossiers as JSON
+          description: Returns dossiers as JSON
           content:
             application/json: {}
         '500':
           description: server error
+
+  /dossiers/{id}:
+    get:
+      description: Returns a dossier 
+      parameters:
+        - name: id
+          schema:
+            type: string
+          in: path
+          required: true
+          description: dossier ID 
+      responses:
+        '200':
+          description: Returns dossier as JSON
+          content:
+            application/json: {}
+        '400':
+          description: bad request
+        '500':
+          description: server error
+
 components:
   securitySchemes:
     ApiKeyAuth:
