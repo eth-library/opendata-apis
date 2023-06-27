@@ -22,13 +22,11 @@ servers:
 paths:
   /places:
     get:
-      tags:
-        - Places
       description: |-
         Returns all places defined in the ETHorama database.
       responses:
         '200':
-          description: Returns Places as JSON
+          description: Returns Places as GeoJSON
           content:
             application/json: {}
         '500':
@@ -38,7 +36,7 @@ paths:
       tags:
         - Places
       description: |-
-        Returns all or filtered places defined in the ETHorama database as geoJSON.
+        Returns all or filtered places defined in the ETHorama database as GeoJSON.
       parameters:
         - name: nearto
           schema:
@@ -80,15 +78,33 @@ paths:
       description: |-
         Returns geodata: pois (from ETHorama), e-rara maps, e-maps, places (Marc 651 from e-rara and e-maps).
       parameters:
-        - name: lat, lon, dist
+        - name: lat
           schema:
             type: string
           in: query
           required: false
           description: |-
-            Returns the pois or places (marc 651 - geo topics) that are near a point defined by lat (latitude) and long (longitude) and optionally dist (distance) in metres (default: 1000).And returns the maps from e-rara and e-maps on which the defined point is located.
+            Returns the pois or places (marc 651 - geo topics) that are near a point defined by lat (latitude) and lon (longitude) and optionally dist (distance) in metres (default: 1000).And returns the maps from e-rara and e-maps on which the defined point is located.
 
-            Example: lat=47.349952&lon=8.490838&distance=1000
+            Example: lat=47.349952
+        - name: lon
+          schema:
+            type: string
+          in: query
+          required: false
+          description: |-
+            Returns the pois or places (marc 651 - geo topics) that are near a point defined by lat (latitude) and lon (longitude) and optionally dist (distance) in metres (default: 1000).And returns the maps from e-rara and e-maps on which the defined point is located.
+
+            Example: lon=8.490838
+        - name: dist
+          schema:
+            type: string
+          in: query
+          required: false
+          description: |-
+            Returns the pois or places (marc 651 - geo topics) that are near a point defined by lat (latitude) and lon (longitude) and optionally dist (distance) in metres (default: 1000).And returns the maps from e-rara and e-maps on which the defined point is located.
+
+            Example: distance=1000
         - name: q
           schema:
             type: string
@@ -100,7 +116,7 @@ paths:
             Example: q=kyburg
       responses:
         '200':
-          description: Returns geodata as JSON
+          description: Returns geodata as GeoJSON
           content:
             application/json: {}
         '400':
@@ -113,7 +129,7 @@ paths:
         description: |-
           Returns pois from ETHorama database.
         parameters:
-          - name: lat, lon, dist
+          - name: lat
             schema:
               type: string
             in: query
@@ -121,7 +137,26 @@ paths:
             description: |-
               Returns the pois near a point defined by lat (latitude) and lon (longitude) and optionally dist (distance) in metres (default: 1000).
 
-              Example: lat=47.349952&lon=8.490838&distance=1000
+              Example: lat=47.349952
+          - name: lon
+            schema:
+              type: string
+            in: query
+            required: false
+            description: |-
+              Returns the pois near a point defined by lat (latitude) and lon (longitude) and optionally dist (distance) in metres (default: 1000).
+
+              Example: lon=8.490838
+          - name: dist
+            schema:
+              type: string
+            in: query
+            required: false
+            description: |-
+              Returns the pois near a point defined by lat (latitude) and lon (longitude) and optionally dist (distance) in metres (default: 1000).
+
+              Example: distance=1000
+
           - name: q
             schema:
               type: string
@@ -133,7 +168,7 @@ paths:
               Example: q=kyburg
         responses:
           '200':
-            description: Returns geodata as JSON
+            description: Returns geodata as GeoJSON
             content:
               application/json: {}
           '400':
@@ -153,7 +188,7 @@ paths:
           description: poi ID 
       responses:
         '200':
-          description: Returns geodata as JSON
+          description: Returns geodata as GeoJSON
           content:
             application/json: {}
         '400':
@@ -167,7 +202,7 @@ paths:
       description: |-
         Returns maps from e-rara (ETH).
       parameters:
-        - name: lat, lon
+        - name: lat
           schema:
             type: string
           in: query
@@ -175,7 +210,16 @@ paths:
           description: |-
             Returns maps in which the point defined by lat (latitude) and lon (longitude) is located.
 
-            Example: lat=47.349952&lon=8.490838&distance=1000
+            Example: lat=47.349952
+        - name: lon
+          schema:
+            type: string
+          in: query
+          required: false
+          description: |-
+            Returns maps in which the point defined by lat (latitude) and lon (longitude) is located.
+
+            Example: lon=8.490838
         - name: q
           schema:
             type: string
@@ -187,7 +231,7 @@ paths:
             Example: q=kyburg
       responses:
         '200':
-          description: Returns geodata as JSON
+          description: Returns geodata as GeoJSON
           content:
             application/json: {}
         '400':
@@ -207,7 +251,7 @@ paths:
           description: MMS ID 
       responses:
         '200':
-          description: Returns geodata as JSON
+          description: Returns geodata as GeoJSON
           content:
             application/json: {}
         '400':
@@ -220,7 +264,7 @@ paths:
       description: |-
         Returns maps from e-maps.
       parameters:
-        - name: lat, lon
+        - name: lat
           schema:
             type: string
           in: query
@@ -228,7 +272,16 @@ paths:
           description: |-
             Returns maps in which the point defined by lat (latitude) and lon (longitude) is located.
 
-            Example: lat=47.349952&lon=8.490838&distance=1000
+            Example: lat=47.349952
+        - name: lon
+          schema:
+            type: string
+          in: query
+          required: false
+          description: |-
+            Returns maps in which the point defined by lat (latitude) and lon (longitude) is located.
+
+            Example: lon=8.490838
         - name: q
           schema:
             type: string
@@ -240,7 +293,7 @@ paths:
             Example: q=kyburg
       responses:
         '200':
-          description: Returns geodata as JSON
+          description: Returns geodata as GeoJSON
           content:
             application/json: {}
         '400':
@@ -260,7 +313,7 @@ paths:
           description: MMS ID 
       responses:
         '200':
-          description: Returns geodata as JSON
+          description: Returns geodata as GeoJSON
           content:
             application/json: {}
         '400':
@@ -401,15 +454,33 @@ paths:
       description: |-
         Returns geo topics (from marc 651) and related maps.
       parameters:
-        - name: lat, lon
+        - name: lat
           schema:
             type: string
           in: query
           required: false
           description: |-
-              Returns the geo topics and related maps near a point defined by lat (latitude) and lon (longitude) and optionally dist (distance) in metres (default: 1000).
+            Returns the geo topics and related maps near a point defined by lat (latitude) and lon (longitude) and optionally dist (distance) in metres (default: 1000).
 
-              Example: lat=47.349952&lon=8.490838&distance=1000
+            Example: lat=47.349952
+        - name: lon
+          schema:
+            type: string
+          in: query
+          required: false
+          description: |-
+            Returns the geo topics and related maps near a point defined by lat (latitude) and lon (longitude) and optionally dist (distance) in metres (default: 1000).
+
+            Example: lon=8.490838
+        - name: dist
+          schema:
+            type: string
+          in: query
+          required: false
+          description: |-
+            Returns the geo topics and related maps near a point defined by lat (latitude) and lon (longitude) and optionally dist (distance) in metres (default: 1000).
+
+            Example: distance=1000
         - name: q
           schema:
             type: string
