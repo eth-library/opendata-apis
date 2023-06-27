@@ -2,7 +2,7 @@ openapi: 3.0.2
 info:
   title: Geo Information API
   description: |-
-    The Geo Information REST API provides information about points of interest (places) and dossiers from the ETHorama database. Place data is available as GeoJSON.
+    The Geo Information REST API provides information about points of interest (places), routes and dossiers from the ETHorama database as well as maps from e-rara and e-maps. Place data is available as GeoJSON.
         
     &#x279C; [OAS 3 Swagger Documentation](https://eth-library.github.io/apiplatform-swagger/geo/v1/)
 
@@ -127,7 +127,7 @@ paths:
   /pois:
       get:
         description: |-
-          Returns pois from ETHorama database.
+          Returns pois and related resources from ETHorama database.
         parameters:
           - name: lat
             schema:
@@ -178,7 +178,7 @@ paths:
 
   /pois/{id}:
     get:
-      description: Returns a poi 
+      description: Returns a poi and related resources 
       parameters:
         - name: id
           schema:
@@ -241,7 +241,7 @@ paths:
 
   /e-rara-maps/{id}:
     get:
-      description: Returns e-rara map 
+      description: Returns an e-rara map and related resources 
       parameters:
         - name: id
           schema:
@@ -303,7 +303,7 @@ paths:
 
   /e-maps/{id}:
     get:
-      description: Returns an e-map 
+      description: Returns an e-map and related resources 
       parameters:
         - name: id
           schema:
@@ -324,7 +324,7 @@ paths:
   /dossiers:
     get:
       description: |-
-        Returns dossiers defined in the ETHorama database.
+        Returns the dossiers and related resources defined in the ETHorama database.
       parameters:
         - name: q
           schema:
@@ -345,7 +345,7 @@ paths:
 
   /dossiers/{id}:
     get:
-      description: Returns a dossier 
+      description: Returns a dossier and related resources defined in the ETHorama database.
       parameters:
         - name: id
           schema:
@@ -366,7 +366,7 @@ paths:
   /routes:
     get:
       description: |-
-        Returns routes defined in the ETHorama database.
+        Returns routes and related resources defined in the ETHorama database.
       parameters:
         - name: q
           schema:
@@ -374,7 +374,7 @@ paths:
           in: query
           required: false
           description: |-
-            Returns routes for the search term (q).
+            Returns routes for the search term "q".
 
             Example: q=berg
       responses:
@@ -387,7 +387,7 @@ paths:
 
   /routes/{id}:
     get:
-      description: Returns a route 
+      description: Returns a route and related resources 
       parameters:
         - name: id
           schema:
@@ -408,7 +408,7 @@ paths:
   /contributors:
     get:
       description: |-
-        Returns contributors and related resources.
+        Returns contributors and related resources (e-maps, e-rara).
       parameters:
         - name: q
           schema:
