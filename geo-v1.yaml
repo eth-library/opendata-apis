@@ -130,8 +130,8 @@ paths:
 
   /pois:
       get:
-      tags:
-        - Pois
+        tags:
+          - Pois
         description: |-
           Returns pois and related resources defined in the ETHorama database.
         parameters:
@@ -480,7 +480,7 @@ paths:
   /geo-topics:
     get:
       tags:
-        - subject added entry-geographic names       
+        - geo-topics       
       description: |-
         Returns places (subject added entry-geographic names from marc 651 of e-rara and e-maps) and related resources.
       parameters:
