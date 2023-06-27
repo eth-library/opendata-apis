@@ -127,7 +127,7 @@ paths:
   /pois:
       get:
         description: |-
-          Returns pois and related resources from ETHorama database.
+          Returns pois and related resources defined in the ETHorama database.
         parameters:
           - name: lat
             schema:
@@ -178,7 +178,7 @@ paths:
 
   /pois/{id}:
     get:
-      description: Returns a poi and related resources 
+      description: Returns a poi and related resources defined in the ETHorama database.
       parameters:
         - name: id
           schema:
@@ -241,7 +241,7 @@ paths:
 
   /e-rara-maps/{id}:
     get:
-      description: Returns an e-rara map and related resources 
+      description: Returns an e-rara map and related resources.
       parameters:
         - name: id
           schema:
@@ -303,7 +303,7 @@ paths:
 
   /e-maps/{id}:
     get:
-      description: Returns an e-map and related resources 
+      description: Returns an e-map and related resources.
       parameters:
         - name: id
           schema:
@@ -387,7 +387,7 @@ paths:
 
   /routes/{id}:
     get:
-      description: Returns a route and related resources 
+      description: Returns a route and related resources defined in the ETHorama database.
       parameters:
         - name: id
           schema:
@@ -408,7 +408,7 @@ paths:
   /contributors:
     get:
       description: |-
-        Returns contributors and related resources (e-maps, e-rara).
+        Returns contributors (from e-rara and e-maps) and related resources.
       parameters:
         - name: q
           schema:
@@ -430,7 +430,7 @@ paths:
   /topics:
     get:
       description: |-
-        Returns topics and related resources.
+        Returns topics (from e-rara and e-maps) and related resources.
       parameters:
         - name: q
           schema:
@@ -452,7 +452,7 @@ paths:
   /geo-topics:
     get:
       description: |-
-        Returns places (subject added entry-geographic names from marc 651) and related resources.
+        Returns places (subject added entry-geographic names from marc 651 of e-rara and e-maps) and related resources.
       parameters:
         - name: lat
           schema:
