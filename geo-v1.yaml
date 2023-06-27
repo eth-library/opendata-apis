@@ -84,7 +84,7 @@ paths:
           in: query
           required: false
           description: |-
-            Returns the pois or places (marc 651 - geo topics) that are near a point defined by lat (latitude) and lon (longitude) and optionally dist (distance) in metres (default: 1000).And returns the maps from e-rara and e-maps on which the defined point is located.
+            Returns the pois or places (subject added entry-geographic names from marc 651) that are near a point defined by lat (latitude) and lon (longitude) and optionally dist (distance) in metres (default: 1000).And returns the maps from e-rara and e-maps on which the defined point is located.
 
             Example: lat=47.349952
         - name: lon
@@ -93,7 +93,7 @@ paths:
           in: query
           required: false
           description: |-
-            Returns the pois or places (marc 651 - geo topics) that are near a point defined by lat (latitude) and lon (longitude) and optionally dist (distance) in metres (default: 1000).And returns the maps from e-rara and e-maps on which the defined point is located.
+            Returns the pois or places (subject added entry-geographic names from marc 651) that are near a point defined by lat (latitude) and lon (longitude) and optionally dist (distance) in metres (default: 1000).And returns the maps from e-rara and e-maps on which the defined point is located.
 
             Example: lon=8.490838
         - name: dist
@@ -102,7 +102,7 @@ paths:
           in: query
           required: false
           description: |-
-            Returns the pois or places (marc 651 - geo topics) that are near a point defined by lat (latitude) and lon (longitude) and optionally dist (distance) in metres (default: 1000).And returns the maps from e-rara and e-maps on which the defined point is located.
+            Returns the pois or places (subject added entry-geographic names from marc 651) that are near a point defined by lat (latitude) and lon (longitude) and optionally dist (distance) in metres (default: 1000).And returns the maps from e-rara and e-maps on which the defined point is located.
 
             Example: distance=1000
         - name: q
@@ -452,7 +452,7 @@ paths:
   /geo-topics:
     get:
       description: |-
-        Returns geo topics (from marc 651) and related resources.
+        Returns places (subject added entry-geographic names from marc 651) and related resources.
       parameters:
         - name: lat
           schema:
@@ -460,7 +460,7 @@ paths:
           in: query
           required: false
           description: |-
-            Returns the geo topics and related resources near a point defined by lat (latitude) and lon (longitude) and optionally dist (distance) in metres (default: 1000).
+            Returns places (subject added entry-geographic names from marc 651) and related resources near a point defined by lat (latitude) and lon (longitude) and optionally dist (distance) in metres (default: 1000).
 
             Example: lat=47.378169444
         - name: lon
@@ -469,7 +469,7 @@ paths:
           in: query
           required: false
           description: |-
-            Returns the geo topics and related resources near a point defined by lat (latitude) and lon (longitude) and optionally dist (distance) in metres (default: 1000).
+            Returns places (subject added entry-geographic names from marc 651) and related resources near a point defined by lat (latitude) and lon (longitude) and optionally dist (distance) in metres (default: 1000).
 
             Example: lon=8.540177777
         - name: dist
@@ -478,7 +478,7 @@ paths:
           in: query
           required: false
           description: |-
-            Returns the geo topics and related resources near a point defined by lat (latitude) and lon (longitude) and optionally dist (distance) in metres (default: 1000).
+            Returns places (subject added entry-geographic names from marc 651) and related resources near a point defined by lat (latitude) and lon (longitude) and optionally dist (distance) in metres (default: 1000).
 
             Example: distance=1000
         - name: q
@@ -487,12 +487,12 @@ paths:
           in: query
           required: false
           description: |-
-            Returns geo topics and related resources for the search term (q).The parameter "q" is alternative to "lat"/"lon".
+            Returns places (subject added entry-geographic names from marc 651) and related resources for the search term (q).The parameter "q" is alternative to "lat"/"lon".
 
             Example: q=bern
       responses:
         '200':
-          description: Returns topics as GeoJSON
+          description: Returns places (subject added entry-geographic names from marc 651) and related resources as GeoJSON
           content:
             application/json: {}
         '500':
