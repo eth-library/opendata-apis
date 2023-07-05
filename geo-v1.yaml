@@ -78,7 +78,7 @@ paths:
   /geodata:
     get:
       tags:
-        - Resources
+        - Geodata
       description: |-
         Returns geodata: pois (from ETHorama), e-rara maps, e-maps, places (Marc 651 from e-rara and e-maps).
       parameters:
@@ -121,6 +121,59 @@ paths:
       responses:
         '200':
           description: Returns geodata as GeoJSON
+          content:
+            application/json: {}
+        '400':
+          description: bad request
+        '500':
+          description: server error
+
+  /locations:
+    get:
+      tags:
+        - Locations
+      description: |-
+        Returns locations: pois (from ETHorama) and places (Marc 651 from e-rara and e-maps).
+      parameters:
+        - name: lat
+          schema:
+            type: number
+          in: query
+          required: false
+          description: |-
+            Returns the pois or places (subject added entry-geographic names from marc 651) that are near a point defined by lat (latitude) and lon (longitude) and optionally dist (distance) in metres (default: 1000).And returns the maps from e-rara and e-maps on which the defined point is located.
+
+            Example: lat=47.349952
+        - name: lon
+          schema:
+            type: number
+          in: query
+          required: false
+          description: |-
+            Returns the pois or places (subject added entry-geographic names from marc 651) that are near a point defined by lat (latitude) and lon (longitude) and optionally dist (distance) in metres (default: 1000).And returns the maps from e-rara and e-maps on which the defined point is located.
+
+            Example: lon=8.490838
+        - name: dist
+          schema:
+            type: number
+          in: query
+          required: false
+          description: |-
+            Returns the pois or places (subject added entry-geographic names from marc 651) that are near a point defined by lat (latitude) and lon (longitude) and optionally dist (distance) in metres (default: 1000).And returns the maps from e-rara and e-maps on which the defined point is located.
+
+            Example: distance=1000
+        - name: q
+          schema:
+            type: string
+          in: query
+          required: false
+          description: |-
+            Returns the data for the search term (q).The parameter "q" is alternative to "lat"/"lon".
+
+            Example: q=kyburg
+      responses:
+        '200':
+          description: Returns locations as GeoJSON
           content:
             application/json: {}
         '400':
