@@ -75,7 +75,7 @@ paths:
             application/json: {}
         '404':
           description: there is no place available with this id
-  /resources:
+  /geodata:
     get:
       tags:
         - Resources
