@@ -108,7 +108,7 @@ paths:
           description: |-
             Returns the pois or places (subject added entry-geographic names from marc 651) that are near a point defined by lat (latitude) and lon (longitude) and optionally dist (distance) in metres (default: 1000).And returns the maps from e-rara and e-maps on which the defined point is located.
 
-            Example: distance=1000
+            Example: dist=1000
         - name: q
           schema:
             type: string
@@ -205,7 +205,7 @@ paths:
           description: |-
             Returns the pois or places (subject added entry-geographic names from marc 651) that are near a point defined by lat (latitude) and lon (longitude) and optionally dist (distance) in metres (default: 1000).
 
-            Example: distance=1000
+            Example: dist=1000
         - name: q
           schema:
             type: string
@@ -258,7 +258,7 @@ paths:
             description: |-
               Returns the pois near a point defined by lat (latitude) and lon (longitude) and optionally dist (distance) in metres (default: 1000).
 
-              Example: distance=1000
+              Example: dist=1000
 
           - name: q
             schema:
@@ -607,7 +607,7 @@ paths:
           description: |-
             Returns places (subject added entry-geographic names from marc 651) and related resources near a point defined by lat (latitude) and lon (longitude) and optionally dist (distance) in metres (default: 1000).
 
-            Example: distance=1000
+            Example: dist=1000
         - name: q
           schema:
             type: string
