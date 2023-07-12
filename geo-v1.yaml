@@ -230,7 +230,7 @@ paths:
         tags:
           - Pois
         description: |-
-          Returns pois and related resources from e-rara defined in the ETHorama database. References of POIs to e-pics and other data are not yet available here!
+          Returns pois and related resources from e-rara defined in the ETHorama database. References of POIs to e-pics and other data are not yet available here.
         parameters:
           - name: lat
             schema:
@@ -283,7 +283,7 @@ paths:
     get:
       tags:
         - Pois
-      description: Returns a poi and related resources defined in the ETHorama database. References of POIs to e-pics and other data are not yet available here!
+      description: Returns a poi and related resources defined in the ETHorama database. References of POIs to e-pics and other data are not yet available here.
       parameters:
         - name: id
           schema:
