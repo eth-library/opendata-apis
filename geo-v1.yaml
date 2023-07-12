@@ -128,6 +128,50 @@ paths:
         '500':
           description: server error
 
+  /maps:
+    get:
+      tags:
+        - Maps
+      description: |-
+        Returns maps from e-rara and e-maps.
+      parameters:
+        - name: lat
+          schema:
+            type: number
+          in: query
+          required: false
+          description: |-
+            Returns maps from e-rara and e-maps on which the defined point is located.
+
+            Example: lat=47.349952
+        - name: lon
+          schema:
+            type: number
+          in: query
+          required: false
+          description: |-
+            Returns maps from e-rara and e-maps on which the defined point is located.
+
+            Example: lon=8.490838
+        - name: q
+          schema:
+            type: string
+          in: query
+          required: false
+          description: |-
+            Returns the data for the search term (q).The parameter "q" is alternative to "lat"/"lon".
+
+            Example: q=kyburg
+      responses:
+        '200':
+          description: Returns maps as GeoJSON
+          content:
+            application/json: {}
+        '400':
+          description: bad request
+        '500':
+          description: server error
+
   /locations:
     get:
       tags:
@@ -141,7 +185,7 @@ paths:
           in: query
           required: false
           description: |-
-            Returns the pois or places (subject added entry-geographic names from marc 651) that are near a point defined by lat (latitude) and lon (longitude) and optionally dist (distance) in metres (default: 1000).And returns the maps from e-rara and e-maps on which the defined point is located.
+            Returns the pois or places (subject added entry-geographic names from marc 651) that are near a point defined by lat (latitude) and lon (longitude) and optionally dist (distance) in metres (default: 1000).
 
             Example: lat=47.349952
         - name: lon
@@ -150,7 +194,7 @@ paths:
           in: query
           required: false
           description: |-
-            Returns the pois or places (subject added entry-geographic names from marc 651) that are near a point defined by lat (latitude) and lon (longitude) and optionally dist (distance) in metres (default: 1000).And returns the maps from e-rara and e-maps on which the defined point is located.
+            Returns the pois or places (subject added entry-geographic names from marc 651) that are near a point defined by lat (latitude) and lon (longitude) and optionally dist (distance) in metres (default: 1000).
 
             Example: lon=8.490838
         - name: dist
@@ -159,7 +203,7 @@ paths:
           in: query
           required: false
           description: |-
-            Returns the pois or places (subject added entry-geographic names from marc 651) that are near a point defined by lat (latitude) and lon (longitude) and optionally dist (distance) in metres (default: 1000).And returns the maps from e-rara and e-maps on which the defined point is located.
+            Returns the pois or places (subject added entry-geographic names from marc 651) that are near a point defined by lat (latitude) and lon (longitude) and optionally dist (distance) in metres (default: 1000).
 
             Example: distance=1000
         - name: q
@@ -186,7 +230,7 @@ paths:
         tags:
           - Pois
         description: |-
-          Returns pois and related resources defined in the ETHorama database.
+          Returns pois and related resources from e-rara defined in the ETHorama database. Attention: References of POIs to e-pics and other data are not yet available here!
         parameters:
           - name: lat
             schema:
@@ -239,7 +283,7 @@ paths:
     get:
       tags:
         - Pois
-      description: Returns a poi and related resources defined in the ETHorama database.
+      description: Returns a poi and related resources defined in the ETHorama database. Attention: References of POIs to e-pics and other data are not yet available here!
       parameters:
         - name: id
           schema:
