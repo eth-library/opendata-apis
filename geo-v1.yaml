@@ -269,6 +269,17 @@ paths:
               Returns the data for the search term (q).The parameter "q" is alternative to "lat"/"lon".
 
               Example: q=kyburg
+
+          - name: edges
+            schema:
+              type: boolean
+            in: query
+            required: false
+            description: |-
+              Should the edges/relations to content items, dossiers and routes also be returned (default: true)?
+
+              Example: edges=false
+
         responses:
           '200':
             description: Returns geodata as GeoJSON
@@ -291,6 +302,16 @@ paths:
           in: path
           required: true
           description: poi ID 
+
+        - name: edges
+          schema:
+            type: boolean
+          in: query
+          required: false
+          description: |-
+            Should the edges/relations to content items, dossiers and routes also be returned (default: true)?
+
+            Example: edges=false
       responses:
         '200':
           description: Returns geodata as GeoJSON
