@@ -326,7 +326,7 @@ paths:
             description: bad request
           '500':
             description: server error
-  /pois/{id}:
+  /poi-items/{id}:
       get:
         tags:
           - items
