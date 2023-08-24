@@ -171,15 +171,6 @@ paths:
             Returns the data for the search term (q).The parameter "q" is alternative to "lat"/"lon".
 
             Example: q=kyburg
-        - name: edges
-          schema:
-            type: boolean
-          in: query
-          required: false
-          description: |-
-            Should the edges/relations to topics, contributors etc. also be returned (default: true)?
-
-            Example: edges=false
       responses:
         '200':
           description: Returns maps as GeoJSON
