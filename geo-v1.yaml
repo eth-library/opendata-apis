@@ -366,15 +366,15 @@ paths:
               Returns the content items for the search term (q).
 
               Example: q=Gotthardtunnel
-        - name: edges
-          schema:
-            type: boolean
-          in: query
-          required: false
-          description: |-
-            Should the edges/relations to dossiers, routes and pois also be returned (default: true)?
+          - name: edges
+            schema:
+              type: boolean
+            in: query
+            required: false
+            description: |-
+              Should the edges/relations to dossiers, routes and pois also be returned (default: true)?
 
-            Example: edges=false
+              Example: edges=false
         responses:
           '200':
             description: Returns content items
@@ -396,15 +396,15 @@ paths:
             in: path
             required: true
             description: content item ID 
-        - name: edges
-          schema:
-            type: boolean
-          in: query
-          required: false
-          description: |-
-            Should the edges/relations to dossiers, routes and pois also be returned (default: true)?
+          - name: edges
+            schema:
+              type: boolean
+            in: query
+            required: false
+            description: |-
+              Should the edges/relations to dossiers, routes and pois also be returned (default: true)?
 
-            Example: edges=false
+              Example: edges=false
         responses:
           '200':
             description: Returns content item
