@@ -301,6 +301,52 @@ paths:
         '500':
           description: server error
 
+  /poi-items:
+      get:
+        tags:
+          - Poi items
+        description: |-
+          Returns content items (e-rara, emaps, e-pics, e-periodica etc) of pois defined in the ETHorama database. The content items are resources of the eth library that are associated with the POI and describe it.
+        parameters:
+          - name: q
+            schema:
+              type: string
+            in: query
+            required: true
+            description: |-
+              Returns the content items for the search term (q).
+
+              Example: q=Gotthardtunnel
+        responses:
+          '200':
+            description: Returns content items
+            content:
+              application/json: {}
+          '400':
+            description: bad request
+          '500':
+            description: server error
+  /pois/{id}:
+      get:
+        tags:
+          - items
+        description: Returns a content item (e-rara, emaps, e-pics, e-periodica etc) of a poi defined in the ETHorama database.
+        parameters:
+          - name: id
+            schema:
+              type: string
+            in: path
+            required: true
+            description: content item ID 
+        responses:
+          '200':
+            description: Returns content item
+            content:
+              application/json: {}
+          '400':
+            description: bad request
+          '500':
+            description: server error
 
   /e-rara-maps:
     get:
