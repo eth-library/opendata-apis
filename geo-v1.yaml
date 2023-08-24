@@ -403,6 +403,16 @@ paths:
             Returns maps for the search term (q).The parameter "q" is alternative to "lat"/"lon".
 
             Example: q=kyburg
+
+        - name: edges
+          schema:
+            type: boolean
+          in: query
+          required: false
+          description: |-
+            Should the edges/relations to topics, poi-items, contributors etc. also be returned (default: true)?
+
+            Example: edges=false
       responses:
         '200':
           description: Returns geodata as GeoJSON
@@ -425,6 +435,16 @@ paths:
           in: path
           required: true
           description: MMS ID 
+
+        - name: edges
+          schema:
+            type: boolean
+          in: query
+          required: false
+          description: |-
+            Should the edges/relations to topics, poi-items, contributors etc. also be returned (default: true)?
+
+            Example: edges=false
       responses:
         '200':
           description: Returns geodata as GeoJSON
@@ -469,6 +489,16 @@ paths:
             Returns maps for the search term (q).The parameter "q" is alternative to "lat"/"lon".
 
             Example: q=kyburg
+
+        - name: edges
+          schema:
+            type: boolean
+          in: query
+          required: false
+          description: |-
+            Should the edges/relations to topics, contributors etc. also be returned (default: true)?
+
+            Example: edges=false
       responses:
         '200':
           description: Returns geodata as GeoJSON
@@ -491,6 +521,17 @@ paths:
           in: path
           required: true
           description: MMS ID 
+
+        - name: edges
+          schema:
+            type: boolean
+          in: query
+          required: false
+          description: |-
+            Should the edges/relations to topics, contributors etc. also be returned (default: true)?
+
+            Example: edges=false
+
       responses:
         '200':
           description: Returns geodata as GeoJSON
@@ -517,6 +558,17 @@ paths:
             Returns dossiers for the search term (q).
 
             Example: q=bahnen
+
+        - name: edges
+          schema:
+            type: boolean
+          in: query
+          required: false
+          description: |-
+            Should the edges/relations to pois, poi-items and e-rara-items also be returned (default: true)?
+
+            Example: edges=false
+
       responses:
         '200':
           description: Returns dossiers as JSON
@@ -537,6 +589,17 @@ paths:
           in: path
           required: true
           description: dossier ID 
+
+        - name: edges
+          schema:
+            type: boolean
+          in: query
+          required: false
+          description: |-
+            Should the edges/relations to pois, poi-items and e-rara-items also be returned (default: true)?
+
+            Example: edges=false
+
       responses:
         '200':
           description: Returns dossier as JSON
@@ -563,6 +626,17 @@ paths:
             Returns routes for the search term "q".
 
             Example: q=berg
+
+        - name: edges
+          schema:
+            type: boolean
+          in: query
+          required: false
+          description: |-
+            Should the edges/relations to pois, poi-items and e-rara-items also be returned (default: true)?
+
+            Example: edges=false
+
       responses:
         '200':
           description: Returns routes as JSON
@@ -583,6 +657,17 @@ paths:
           in: path
           required: true
           description: route ID 
+
+        - name: edges
+          schema:
+            type: boolean
+          in: query
+          required: false
+          description: |-
+            Should the edges/relations to pois, poi-items and e-rara-items also be returned (default: true)?
+
+            Example: edges=false
+
       responses:
         '200':
           description: Returns route as JSON
@@ -609,6 +694,17 @@ paths:
             Returns contributors and related resources for the search term (q).
 
             Example: q=Heim, Albert
+
+        - name: edges
+          schema:
+            type: boolean
+          in: query
+          required: false
+          description: |-
+            Should the edges/relations to e-maps and e-rara-items also be returned (default: true)?
+
+            Example: edges=false
+
       responses:
         '200':
           description: Returns contributors and related resources as JSON
@@ -633,6 +729,17 @@ paths:
             Returns topics and related resources for the search term (q).
 
             Example: q=eisenbahn
+
+        - name: edges
+          schema:
+            type: boolean
+          in: query
+          required: false
+          description: |-
+            Should the edges/relations to e-maps and e-rara-items also be returned (default: true)?
+
+            Example: edges=false
+
       responses:
         '200':
           description: Returns topics as JSON
