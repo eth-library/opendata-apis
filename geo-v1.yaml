@@ -242,6 +242,67 @@ paths:
           description: bad request
         '500':
           description: server error
+  /pubplaces:
+    get:
+      tags:
+        - Publication places
+      description: |-
+        Returns publication places
+      parameters:
+        - name: lat
+          schema:
+            type: number
+          in: query
+          required: false
+          description: |-
+            Returns the publication places (marc 751 or marc 264) that are near a point defined by lat (latitude) and lon (longitude) and optionally dist (distance) in metres (default: 1000).
+
+            Example: lat=47.349952
+        - name: lon
+          schema:
+            type: number
+          in: query
+          required: false
+          description: |-
+            Returns the publication places (marc 751 or marc 264) that are near a point defined by lat (latitude) and lon (longitude) and optionally dist (distance) in metres (default: 1000).
+
+            Example: lon=8.490838
+        - name: dist
+          schema:
+            type: number
+          in: query
+          required: false
+          description: |-
+            Returns the publication places (marc 751 or marc 264) that are near a point defined by lat (latitude) and lon (longitude) and optionally dist (distance) in metres (default: 1000).
+
+            Example: dist=1000
+        - name: q
+          schema:
+            type: string
+          in: query
+          required: false
+          description: |-
+            Returns publication places (marc 751 or marc 264) for the search term (q).The parameter "q" is alternative to "lat"/"lon".
+
+            Example: q=kyburg
+        - name: edges
+          schema:
+            type: boolean
+          in: query
+          required: false
+          description: |-
+            Should the edges/relations to e-rara, e-maps also be returned (default: true)?
+
+            Example: edges=false
+      responses:
+        '200':
+          description: Returns publication places as GeoJSON
+          content:
+            application/json: {}
+        '400':
+          description: bad request
+        '500':
+          description: server error
 
   /pois:
       get:
