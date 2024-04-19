@@ -75,7 +75,7 @@ paths:
             application/json: {}
         '404':
           description: there is no place available with this id
-  /geodata:
+  /geo-data:
     get:
       tags:
         - Geodata
@@ -242,7 +242,7 @@ paths:
           description: bad request
         '500':
           description: server error
-  /pubplaces:
+  /pub-places:
     get:
       tags:
         - Publication places
