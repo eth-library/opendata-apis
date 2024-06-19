@@ -1,0 +1,120 @@
+openapi: 3.0.2
+info:
+  title: Vector API
+  description: |-
+    The Vector API allows a semantic search in geodata and ETH UDK. It queries a vector database for this purpose.
+        
+    &#x279C; [OAS 3 Swagger Documentation](https://eth-library.github.io/apiplatform-swagger/vector/v1/)
+
+  version: '1.0.0'
+  termsOfService: https://developer.library.ethz.ch/terms
+  contact:
+    name: API Management ETH Library
+    email: api@library.ethz.ch
+    url: https://library.ethz.ch
+  license:
+    url: https://developer.library.ethz.ch/terms
+    name: Bibliographic metadata that are not specifically marked are free for general use (Public Domain). Documents, images or other digital objects linked in metadata may be subject to other copyright restrictions. Whenever possible, the licence of the referenced digital objects is indicated in the metadata. In case of doubt, the licence can be inquired at api@library.ethz.ch.
+servers:
+  - url: https://api.library.ethz.ch/vector/v1/
+    description: Production
+paths:
+  /places:
+    get:
+      description: |-
+        Returns similar places. The places are based on the ETHorama POIs and Marc 651.
+      parameters:
+        - name: q
+          schema:
+            type: string
+          in: query
+          required: true
+          description: |-
+            The string for which similar places are searched
+
+            q=Atomkraft
+      responses:
+        '200':
+          description: Returns places
+          content:
+            application/json: {}
+        '500':
+          description: server error
+
+  /maps:
+    get:
+      description: |-
+        Returns similar maps. The maps are from e-rara and e-maps.
+      parameters:
+        - name: q
+          schema:
+            type: string
+          in: query
+          required: true
+          description: |-
+            The string for which similar maps are searched
+
+            q=Gletscher
+      responses:
+        '200':
+          description: Returns maps
+          content:
+            application/json: {}
+        '500':
+          description: server error
+
+  /topics:
+    get:
+      description: |-
+        Returns similar topics. The topics are from the ETH UDK and the geodata graph.
+      parameters:
+        - name: q
+          schema:
+            type: string
+          in: query
+          required: true
+          description: |-
+            The string for which similar topics are searched
+
+            q=Gletscher
+      responses:
+        '200':
+          description: Returns topics
+          content:
+            application/json: {}
+        '500':
+          description: server error
+
+  /geo-container:
+    get:
+      description: |-
+        Returns similar ETHorama POIs, dossiers, routes and Marc places.
+      parameters:
+        - name: q
+          schema:
+            type: string
+          in: query
+          required: true
+          description: |-
+            The string for which similar container are searched
+
+            q=Gletscher
+      responses:
+        '200':
+          description: Returns topics
+          content:
+            application/json: {}
+        '500':
+          description: server error
+
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: query
+      name: apikey
+security:
+  - ApiKeyAuth: []
+externalDocs:
+  description: OAS 3 Swagger Documentation
+  url: https://apisdocs.library.ethz.ch/vector/v1/
