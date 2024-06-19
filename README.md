@@ -11,6 +11,7 @@ Accessible also via GitHub Pages: [https://eth-library.github.io/opendata-apis/]
 - [/geo/v1/](/geo-v1.yaml/)
 - [/persons/v1/](/persons-v1.yaml/)
 - [/research-collection/v1/](/research-collection-v1.yaml/)
+- [/vector/v1/](/vector-v1.yaml/)
 
 ## OpenAPI specifications - older versions
 

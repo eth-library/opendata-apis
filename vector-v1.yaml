@@ -97,7 +97,7 @@ paths:
           required: true
           description: |-
             The string for which similar entities are searched
-            
+
             q=Gewässerkorrekturen
       responses:
         '200':
