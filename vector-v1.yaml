@@ -22,7 +22,7 @@ paths:
   /places:
     get:
       description: |-
-        Returns similar places. The places are based on the ETHorama POIs and Marc 651.
+        Returns similar places. The places are based on the ETHorama POIs and places from the catalog.
       parameters:
         - name: q
           schema:
@@ -88,7 +88,7 @@ paths:
   /geo-container:
     get:
       description: |-
-        Returns similar ETHorama POIs, dossiers, routes and Marc places.
+        Provides similar POIs, dossiers, historical journeys from ETHorama and places from the catalog
       parameters:
         - name: q
           schema:
@@ -96,9 +96,9 @@ paths:
           in: query
           required: true
           description: |-
-            The string for which similar container are searched
-
-            q=Gletscher
+            The string for which similar entities are searched
+            
+            q=Gewässerkorrekturen
       responses:
         '200':
           description: Returns topics
