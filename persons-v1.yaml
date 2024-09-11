@@ -30,7 +30,11 @@ paths:
         
         | Data resource pool                            | Code        |
         | --------------------------------------------- | ------------|
-        | Hochschularchiv                               | hsa         |        
+        | Hochschularchiv                               | hsa         |     
+        | E-Pics Bildarchiv                             | ba          |     
+        | e-rara                                        | erara       |     
+        | Max Frisch-Archiv                             | mfa         |     
+               
 
       parameters:
         - name: code
