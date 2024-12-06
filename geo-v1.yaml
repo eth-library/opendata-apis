@@ -115,7 +115,7 @@ paths:
           in: query
           required: false
           description: |-
-            Returns the data for the search term (q).The parameter "q" is alternative to "lat"/"lon". This endpoint returns also images from e-pics.
+            Returns the data for the search term (q).The parameter "q" is alternative to "lat"/"lon".
 
             Example: q=kyburg
         - name: edges
