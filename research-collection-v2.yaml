@@ -1,21 +1,21 @@
 openapi: 3.0.1
 info:
-  title: Research Collection API
+  title: Research Collection API V2
   description: |-
     The Research Collection REST API provides access to the bibliographic metadata of the ETH Zurich Research Collection for scientific publications and research data.
 
-    &#x279C; [OAS 3 Swagger Documentation](https://eth-library.github.io/apiplatform-swagger/persons/v1/)
+    &#x279C; [OAS 3 Swagger Documentation](https://eth-library.github.io/apiplatform-swagger/research-collection/v2/)
 
     &#x279C; [Research Collection Application](https://www.research-collection.ethz.ch/)
     
-    &#x279C; [Research Collection Terms of use](https://www.research-collection.ethz.ch/terms-of-use)
+    &#x279C; [Research Collection Terms of use](https://www.research-collection.ethz.ch/info/terms-of-use)
   license:
     url: https://developer.library.ethz.ch/terms
     name: Bibliographic metadata from this API that are not specifically marked are available for reuse under a Public Domain Dedication (CC0) and may be used, modified and redistributed without prior consent. Documents, images or other digital objects linked in metadata may be subject to other copyright restrictions. Whenever possible, the licence of the referenced digital objects is indicated in the metadata. In case of doubt, the licence can be inquired at api@library.ethz.ch.
   version: '1.0.2'
 servers:
-  - url: https://api.library.ethz.ch/research-collection/v1/
-    description: Production
+  - url: https://api.library.ethz.ch/research-collection/v2/
+    description: Development
 tags:
 - name: items
 - name: communities
@@ -888,4 +888,4 @@ security:
   - ApiKeyAuth: []
 externalDocs:
   description: OAS 3 Swagger Documentation
-  url: https://apidocs.library.ethz.ch/research-collection/v1/
+  url: https://apidocs.library.ethz.ch/research-collection/v2/
