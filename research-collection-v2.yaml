@@ -1,0 +1,891 @@
+openapi: 3.0.1
+info:
+  title: Research Collection API
+  description: |-
+    The Research Collection REST API provides access to the bibliographic metadata of the ETH Zurich Research Collection for scientific publications and research data.
+
+    &#x279C; [OAS 3 Swagger Documentation](https://eth-library.github.io/apiplatform-swagger/persons/v1/)
+
+    &#x279C; [Research Collection Application](https://www.research-collection.ethz.ch/)
+    
+    &#x279C; [Research Collection Terms of use](https://www.research-collection.ethz.ch/terms-of-use)
+  license:
+    url: https://developer.library.ethz.ch/terms
+    name: Bibliographic metadata from this API that are not specifically marked are available for reuse under a Public Domain Dedication (CC0) and may be used, modified and redistributed without prior consent. Documents, images or other digital objects linked in metadata may be subject to other copyright restrictions. Whenever possible, the licence of the referenced digital objects is indicated in the metadata. In case of doubt, the licence can be inquired at api@library.ethz.ch.
+  version: '1.0.2'
+servers:
+  - url: https://api.library.ethz.ch/research-collection/v1/
+    description: Production
+tags:
+- name: items
+- name: communities
+- name: bitstreams
+- name: collections
+- name: search
+- name: handle
+paths:
+  /bitstreams:
+    get:
+      tags:
+      - bitstreams
+      summary: Retrieve a list of bitstreams.
+      description: Retrieve a list of bitstreams.
+      operationId: getBitstreams
+      parameters:
+      - name: expand
+        in: query
+        description: Show additional data for the bitstream.
+        schema:
+          type: string
+          enum:
+          - all
+          - parent
+      - name: limit
+        in: query
+        description: The maximum amount of bitstreams shown.
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: The amount of bitstreams to skip.
+        schema:
+          type: integer
+          format: int32
+      - name: userIP
+        in: query
+        schema:
+          type: string
+      - name: userAgent
+        in: query
+        schema:
+          type: string
+      - name: xforwardedfor
+        in: query
+        schema:
+          type: string
+      responses:
+        200:
+          description: successful operation
+  /bitstreams/{bitstream_id}:
+    get:
+      tags:
+      - bitstreams
+      summary: Retrieve a single bitstream by using the internal DSpace bitstream identifier.
+      description: Retrieve a single bitstream by using the internal DSpace bitstream identifier.
+      operationId: getBitstream
+      parameters:
+      - name: bitstream_id
+        in: path
+        description: The identifier of the bitstream.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: expand
+        in: query
+        description: Show additional data for the bitstream.
+        schema:
+          type: string
+          enum:
+          - all
+          - parent
+      - name: userIP
+        in: query
+        schema:
+          type: string
+      - name: userAgent
+        in: query
+        schema:
+          type: string
+      - name: xforwardedfor
+        in: query
+        schema:
+          type: string
+      responses:
+        200:
+          description: successful operation
+  /bitstreams/{bitstream_id}/policy:
+    get:
+      tags:
+      - bitstreams
+      summary: Retrieve all policies for all bundles in which the bitstream is present, by using the internal DSpace bitstream identifier.
+      description: Retrieve all policies for all bundles in which the bitstream is present, by using the internal DSpace bitstream identifier.
+      operationId: getBitstreamPolicies
+      parameters:
+      - name: bitstream_id
+        in: path
+        description: The identifier of the bitstream.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        200:
+          description: successful operation
+  /bitstreams/{bitstream_id}/retrieve:
+    get:
+      tags:
+      - bitstreams
+      summary: Retrieve a file by using the corresponding DSpace bitstream identifier.
+      description: Retrieve a file by using the corresponding DSpace bitstream identifier.
+      operationId: getBitstreamData
+      parameters:
+      - name: bitstream_id
+        in: path
+        description: The identifier of the bitstream.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: userIP
+        in: query
+        schema:
+          type: string
+      - name: userAgent
+        in: query
+        schema:
+          type: string
+      - name: xforwardedfor
+        in: query
+        schema:
+          type: string
+      responses:
+        default:
+          description: successful operation
+          content: {}
+  /collections:
+    get:
+      tags:
+      - collections
+      summary: Retrieve a list of collections.
+      description: Retrieve a list of collections.
+      operationId: getCollections
+      parameters:
+      - name: expand
+        in: query
+        description: Show additional data for the collection.
+        style: form
+        explode: true
+        schema:
+          type: string
+          items:
+            type: string
+          enum:
+          - all
+          - items
+          - parentCommunity
+          - parentCommunityList
+          - license
+          - logo
+      - name: limit
+        in: query
+        description: The maximum amount of collections shown.
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: The amount of collections to skip.
+        schema:
+          type: integer
+          format: int32
+      - name: userIP
+        in: query
+        schema:
+          type: string
+      - name: userAgent
+        in: query
+        schema:
+          type: string
+      - name: xforwardedfor
+        in: query
+        schema:
+          type: string
+      responses:
+        200:
+          description: successful operation
+  /collections/{collection_id}:
+    get:
+      tags:
+      - collections
+      summary: Retrieve a single collection by using the internal DSpace collection identifier.
+      description: Retrieve a single collection by using the internal DSpace collection identifier.
+      operationId: getCollection
+      parameters:
+      - name: collection_id
+        in: path
+        description: The identifier of the collection.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: expand
+        in: query
+        description: Show additional data for the collection.
+        style: form
+        explode: true
+        schema:
+          type: string
+          items:
+            type: string
+          enum:
+          - all
+          - items
+          - parentCommunity
+          - parentCommunityList
+          - license
+          - logo
+      - name: limit
+        in: query
+        description: The maximum amount of collections shown.
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: The amount of collections to skip.
+        schema:
+          type: integer
+          format: int32
+      - name: userIP
+        in: query
+        schema:
+          type: string
+      - name: userAgent
+        in: query
+        schema:
+          type: string
+      - name: xforwardedfor
+        in: query
+        schema:
+          type: string
+      responses:
+        200:
+          description: successful operation
+  /collections/{collection_id}/items:
+    get:
+      tags:
+      - collections
+      summary: Retrieve a list of items in a collection by using the internal DSpace collection identifier.
+      description: Retrieve a list of items in a collection by using the internal DSpace collection identifier.
+      operationId: getCollectionItems
+      parameters:
+      - name: collection_id
+        in: path
+        description: The identifier of the collection.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: expand
+        in: query
+        description: Show additional data for the items.
+        style: form
+        explode: true
+        schema:
+          type: string
+          items:
+            type: string
+          enum:
+          - all
+          - metadata
+          - parentCollection
+          - parentCollectionList
+          - parentCommunityList
+          - bitstreams
+      - name: limit
+        in: query
+        description: The maximum amount of items shown.
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: The amount of items to skip.
+        schema:
+          type: integer
+          format: int32
+      - name: userIP
+        in: query
+        schema:
+          type: string
+      - name: userAgent
+        in: query
+        schema:
+          type: string
+      - name: xforwardedfor
+        in: query
+        schema:
+          type: string
+      responses:
+        200:
+          description: successful operation
+  /communities:
+    get:
+      tags:
+      - communities
+      summary: Retrieve a list of communities.
+      description: Retrieve a list of communities.
+      operationId: getCommunities
+      parameters:
+      - name: expand
+        in: query
+        description: Show additional data for the community.
+        style: form
+        explode: true
+        schema:
+          type: string
+          items:
+            type: string
+          enum:
+          - all
+          - collections
+          - parentCommunity
+          - parentCommunityList
+          - subCommunities
+          - logo
+      - name: limit
+        in: query
+        description: The maximum amount of communities shown.
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: The amount of communities to skip.
+        schema:
+          type: integer
+          format: int32
+      - name: userIP
+        in: query
+        schema:
+          type: string
+      - name: userAgent
+        in: query
+        schema:
+          type: string
+      - name: xforwardedfor
+        in: query
+        schema:
+          type: string
+      responses:
+        200:
+          description: successful operation
+  /communities/top-communities:
+    get:
+      tags:
+      - communities
+      summary: Retrieve a list of top communities.
+      description: Retrieve a list of top communities.
+      operationId: getTopCommunities
+      parameters:
+      - name: expand
+        in: query
+        description: Show additional data for the community.
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+          enum:
+          - all
+          - collections
+          - parentCommunity
+          - parentCommunityList
+          - subCommunities
+          - logo
+      - name: limit
+        in: query
+        description: The maximum amount of communities shown.
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: The amount of communities to skip.
+        schema:
+          type: integer
+          format: int32
+      - name: userIP
+        in: query
+        schema:
+          type: string
+      - name: userAgent
+        in: query
+        schema:
+          type: string
+      - name: xforwardedfor
+        in: query
+        schema:
+          type: string
+      responses:
+        200:
+          description: successful operation
+  /communities/{community_id}:
+    get:
+      tags:
+      - communities
+      summary: Retrieve a single community by using the internal DSpace community identifier.
+      description: Retrieve a single community by using the internal DSpace community identifier.
+      operationId: getCommunity
+      parameters:
+      - name: community_id
+        in: path
+        description: The identifier of the community.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: expand
+        in: query
+        description: Show additional data for the community.
+        style: form
+        explode: true
+        schema:
+          type: string
+          items:
+            type: string
+          enum:
+          - all
+          - collections
+          - parentCommunity
+          - parentCommunityList
+          - subCommunities
+          - logo
+      - name: userIP
+        in: query
+        schema:
+          type: string
+      - name: userAgent
+        in: query
+        schema:
+          type: string
+      - name: xforwardedfor
+        in: query
+        schema:
+          type: string
+      responses:
+        200:
+          description: successful operation
+  /communities/{community_id}/collections:
+    get:
+      tags:
+      - communities
+      summary: Retrieve a list of collections in a community by using the internal DSpace community identifier.
+      description: Retrieve a list of collections in a community by using the internal DSpace community identifier.
+      operationId: getCommunityCollections
+      parameters:
+      - name: community_id
+        in: path
+        description: The identifier of the community.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: expand
+        in: query
+        description: Show additional data for the collection.
+        style: form
+        explode: true
+        schema:
+          type: string
+          items:
+            type: string
+          enum:
+          - all
+          - items
+          - parentCommunity
+          - parentCommunityList
+          - license
+          - logo
+      - name: limit
+        in: query
+        description: The maximum amount of collections shown.
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: The amount of collections to skip.
+        schema:
+          type: integer
+          format: int32
+      - name: userIP
+        in: query
+        schema:
+          type: string
+      - name: userAgent
+        in: query
+        schema:
+          type: string
+      - name: xforwardedfor
+        in: query
+        schema:
+          type: string
+      responses:
+        200:
+          description: successful operation
+  /communities/{community_id}/communities:
+    get:
+      tags:
+      - communities
+      summary: Retrieve a list of subcommunities in a community by using the internal DSpace community identifier.
+      description: Retrieve a list of subcommunities in a community by using the internal DSpace community identifier.
+      operationId: getCommunityCommunities
+      parameters:
+      - name: community_id
+        in: path
+        description: The identifier of the community.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: expand
+        in: query
+        description: Show additional data for the community.
+        style: form
+        explode: true
+        schema:
+          type: string
+          items:
+            type: string
+          enum:
+          - all
+          - collections
+          - parentCommunity
+          - parentCommunityList
+          - subCommunities
+          - logo
+      - name: limit
+        in: query
+        description: The maximum amount of communities shown.
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: The amount of communities to skip.
+        schema:
+          type: integer
+          format: int32
+      - name: userIP
+        in: query
+        schema:
+          type: string
+      - name: userAgent
+        in: query
+        schema:
+          type: string
+      - name: xforwardedfor
+        in: query
+        schema:
+          type: string
+      responses:
+        200:
+          description: successful operation
+  /handle/{prefix}/{suffix}:
+    get:
+      tags:
+      - handle
+      summary: Retrieve a single object by using object pre- and suffix.
+      description: Retrieve a single object by using object pre- and suffix.
+      operationId: getObject
+      parameters:
+      - name: prefix
+        in: path
+        description: The object prefix.
+        required: true
+        schema:
+          type: string
+      - name: suffix
+        in: path
+        description: The object suffix.
+        required: true
+        schema:
+          type: string
+      - name: expand
+        in: query
+        description: Show additional data for the object.
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        200:
+          description: successful operation
+  /items:
+    get:
+      tags:
+      - items
+      summary: Retrieve all items from the repository.
+      description: Retrieve all items from the repository.
+      operationId: getItems
+      parameters:
+      - name: expand
+        in: query
+        description: Show additional data for the item.
+        style: form
+        explode: true
+        schema:
+          type: string
+          items:
+            type: string
+          enum:
+          - all
+          - metadata
+          - parentCollection
+          - parentCollectionList
+          - parentCommunityList
+          - bitstreams
+      - name: limit
+        in: query
+        description: The maximum amount of items shown.
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: The amount of items to skip.
+        schema:
+          type: integer
+          format: int32
+      - name: userIP
+        in: query
+        schema:
+          type: string
+      - name: userAgent
+        in: query
+        schema:
+          type: string
+      - name: xforwardedfor
+        in: query
+        schema:
+          type: string
+      responses:
+        200:
+          description: successful operation
+  /items/{item_id}:
+    get:
+      tags:
+      - items
+      summary: Retrieve a single item by using the internal DSpace item identifier.
+      description: Retrieve a single item by using the internal DSpace item identifier.
+      operationId: getItem
+      parameters:
+      - name: item_id
+        in: path
+        description: The identifier of the item.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: expand
+        in: query
+        description: Show additional data for the item.
+        style: form
+        explode: true
+        schema:
+          type: string
+          items:
+            type: string
+          enum:
+          - all
+          - metadata
+          - parentCollection
+          - parentCollectionList
+          - parentCommunityList
+          - bitstreams
+      responses:
+        200:
+          description: successful operation
+  /items/{item_id}/bitstreams:
+    get:
+      tags:
+      - items
+      summary: Retrieve a list of bitstreams for an item by using the internal DSpace item identifier.
+      description: Retrieve a list of bitstreams for an item by using the internal DSpace item identifier.
+      operationId: getItemBitstreams
+      parameters:
+      - name: item_id
+        in: path
+        description: The identifier of the item.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: limit
+        in: query
+        description: The maximum amount of bitstreams shown.
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: The amount of bitstreams to skip.
+        schema:
+          type: integer
+          format: int32
+      - name: userIP
+        in: query
+        schema:
+          type: string
+      - name: userAgent
+        in: query
+        schema:
+          type: string
+      - name: xforwardedfor
+        in: query
+        schema:
+          type: string
+      responses:
+        200:
+          description: successful operation
+  /items/{item_id}/metadata:
+    get:
+      tags:
+      - items
+      summary: Retrieve a list of metadata for an item by using the internal DSpace item identifier.
+      description: Retrieve a list of metadata for an item by using the internal DSpace item identifier.
+      operationId: getItemMetadata
+      parameters:
+      - name: item_id
+        in: path
+        description: The identifier of the item.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: userIP
+        in: query
+        schema:
+          type: string
+      - name: userAgent
+        in: query
+        schema:
+          type: string
+      - name: xforwardedfor
+        in: query
+        schema:
+          type: string
+      responses:
+        200:
+          description: successful operation
+  /search:
+    get:
+      tags:
+      - search
+      summary: Search items.
+      description: Search items.
+      operationId: searchItems
+      parameters:
+      - name: expand
+        in: query
+        description: Show additional data for the item. Possible values are all, metadata, parentCollection, parentCollectionList, parentCommunityList, bitstreams.
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+          example: metadata
+      - name: limit
+        in: query
+        description: The maximum amount of items shown.
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: The amount of items to skip.
+        schema:
+          type: integer
+          format: int32
+      - name: query
+        in: query
+        description: The search query.
+        required: true
+        schema:
+          type: string
+        examples:
+          Search items which have a specific value in two or more fields:
+            value: dc.identifier.doi:"10.3929/ethz-a-005692772" OR dc.identifier.uri:"http://hdl.handle.net/20.500.11850/154656"       
+          Search item with specific language in dc.language.iso (Because 'it' is a stopword, the query is performed using a mapped search index key):
+            value: iso_keyword=it
+      - name: fq
+        in: query
+        description: Filter queries.
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: sort
+        in: query
+        description: 'Sort the item results by fieldname|desc; ie: author|desc.'
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        200:
+          description: successful operation
+  /search/authors/{query}:
+    get:
+      tags:
+      - search
+      summary: Retrieve a a list of authors that match the search query.
+      description: Retrieve a a list of authors that match the search query.
+      operationId: getAuthors
+      parameters:
+      - name: query
+        in: path
+        description: The query string of the author
+        required: true
+        schema:
+          type: string
+      - name: offset
+        in: query
+        description: The offset of the authors shown.
+        schema:
+          type: integer
+          format: int32
+      - name: limit
+        in: query
+        description: The maximum amount of authors shown.
+        schema:
+          type: integer
+          format: int32
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties: {}
+            application/xml:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties: {}
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: query
+      name: apikey
+security:
+  - ApiKeyAuth: []
+externalDocs:
+  description: OAS 3 Swagger Documentation
+  url: https://apidocs.library.ethz.ch/research-collection/v1/
