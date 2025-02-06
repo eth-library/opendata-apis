@@ -184,3 +184,73 @@ paths:
           description: Bad request (invalid parameters)
         "500":
           description: Internal server error
+  /discover/facets/author:
+    get:
+      summary: Retrieve author facets
+      description: Returns author facets based on the query parameter.
+      parameters:
+        - name: query
+          in: query
+          description: Search term for author facets.
+          required: false
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: Page number for pagination.
+          required: false
+          schema:
+            type: integer
+            default: 0
+        - name: size
+          in: query
+          description: Number of facet values to return per page.
+          required: false
+          schema:
+            type: integer
+            default: 5
+      responses:
+        "200":
+          description: Successful response with author facets
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  facetType:
+                    type: string
+                  facetLimit:
+                    type: integer
+                  page:
+                    type: object
+                    properties:
+                      number:
+                        type: integer
+                      size:
+                        type: integer
+                  _embedded:
+                    type: object
+                    properties:
+                      values:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            label:
+                              type: string
+                            count:
+                              type: integer
+                            _links:
+                              type: object
+                              properties:
+                                search:
+                                  type: object
+                                  properties:
+                                    href:
+                                      type: string
+        "400":
+          description: Bad request (invalid parameters)
+        "500":
+          description: Internal server error
