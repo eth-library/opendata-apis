@@ -1,1 +1,144 @@
+openapi: 3.0.3
+info:
+  title: ETH Research Collection API
+  description: API for searching objects in the ETH Research Collection.
+  version: 1.0.0
+servers:
+  - url: https://staging.research-collection.ethz.ch/server/api
+    description: Staging server
+paths:
+  /discover/search/objects:
+    get:
+      summary: Search objects in the research collection
+      description: Retrieves objects matching the search query with optional sorting and embedding options.
+      parameters:
+        - name: query
+          in: query
+          description: Search term to query objects.
+          required: true
+          schema:
+            type: string
+        - name: sort
+          in: query
+          description: Sorting order (e.g., "score,DESC").
+          required: false
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: Page number for pagination.
+          required: false
+          schema:
+            type: integer
+            default: 0
+        - name: size
+          in: query
+          description: Number of results per page.
+          required: false
+          schema:
+            type: integer
+            default: 10
+        - name: embed
+          in: query
+          description: Fields to embed in the response.
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response with search results
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  query:
+                    type: string
+                    description: The search query used.
+                  page:
+                    type: object
+                    properties:
+                      number:
+                        type: integer
+                      size:
+                        type: integer
+                      totalPages:
+                        type: integer
+                      totalElements:
+                        type: integer
+                  _embedded:
+                    type: object
+                    properties:
+                      searchResult:
+                        type: object
+                        properties:
+                          _embedded:
+                            type: object
+                            properties:
+                              objects:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    name:
+                                      type: string
+                                      description: Title of the object.
+                                    id:
+                                      type: string
+                                    handle:
+                                      type: string
+                                    metadata:
+                                      type: object
+                                      properties:
+                                        dc.title:
+                                          type: array
+                                          items:
+                                            type: object
+                                            properties:
+                                              value:
+                                                type: string
+                                        dc.contributor.author:
+                                          type: array
+                                          items:
+                                            type: object
+                                            properties:
+                                              value:
+                                                type: string
+                                        dc.date.issued:
+                                          type: array
+                                          items:
+                                            type: object
+                                            properties:
+                                              value:
+                                                type: string
+                                                format: date
+                                        dc.identifier.uri:
+                                          type: array
+                                          items:
+                                            type: object
+                                            properties:
+                                              value:
+                                                type: string
+                  _links:
+                    type: object
+                    properties:
+                      self:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                      next:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                      last:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+        "400":
+          description: Bad request (invalid parameters)
+        "500":
+          description: Internal server error
 
