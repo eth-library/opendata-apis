@@ -141,4 +141,46 @@ paths:
           description: Bad request (invalid parameters)
         "500":
           description: Internal server error
-
+  /discover/facets:
+    get:
+      summary: Retrieve available facets
+      description: Returns a list of available facets for filtering search results.
+      responses:
+        "200":
+          description: Successful response with available facets
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  type:
+                    type: string
+                  _embedded:
+                    type: object
+                    properties:
+                      facets:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                              description: Name of the facet (e.g., author, itemtype).
+                            facetType:
+                              type: string
+                              description: Type of the facet (text or date).
+                            facetLimit:
+                              type: integer
+                              description: Maximum number of facet values.
+                            _links:
+                              type: object
+                              properties:
+                                self:
+                                  type: object
+                                  properties:
+                                    href:
+                                      type: string
+        "400":
+          description: Bad request (invalid parameters)
+        "500":
+          description: Internal server error
