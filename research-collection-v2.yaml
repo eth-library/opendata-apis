@@ -1,8 +1,18 @@
 openapi: 3.0.3
 info:
-  title: ETH Research Collection API
-  description: API for searching objects in the ETH Research Collection.
-  version: 1.0.0
+  title: ETH Research Collection API V2
+  description: |-
+    The Research Collection REST API V2 provides access to the bibliographic metadata of the ETH Zurich Research Collection for scientific publications and research data.
+
+    &#x279C; [OAS 3 Swagger Documentation](https://eth-library.github.io/apiplatform-swagger/persons/v2/)
+
+    &#x279C; [Research Collection Application](https://staging.research-collection.ethz.ch/)
+    
+    &#x279C; [Research Collection Terms of use](https://staging.research-collection.ethz.ch/info/terms-of-use)
+  license:
+    url: https://developer.library.ethz.ch/terms
+    name: Bibliographic metadata from this API that are not specifically marked are available for reuse under a Public Domain Dedication (CC0) and may be used, modified and redistributed without prior consent. Documents, images or other digital objects linked in metadata may be subject to other copyright restrictions. Whenever possible, the licence of the referenced digital objects is indicated in the metadata. In case of doubt, the licence can be inquired at api@library.ethz.ch.
+  version: 0.1.0
 servers:
   - url: https://staging.research-collection.ethz.ch/server/api
     description: Staging server
@@ -1194,3 +1204,14 @@ paths:
           description: Bad request (invalid parameters)
         "500":
           description: Internal server error
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: query
+      name: apikey
+security:
+  - ApiKeyAuth: []
+externalDocs:
+  description: OAS 3 Swagger Documentation
+  url: https://apidocs.library.ethz.ch/research-collection/v2/
