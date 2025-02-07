@@ -7,6 +7,399 @@ servers:
   - url: https://staging.research-collection.ethz.ch/server/api
     description: Staging server
 paths:
+  /discover/facets:
+    get:
+      summary: Retrieve available facets
+      description: Returns a list of available facets for filtering search results.
+      responses:
+        "200":
+          description: Successful response with available facets
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  type:
+                    type: string
+                  _embedded:
+                    type: object
+                    properties:
+                      facets:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                              description: Name of the facet (e.g., author, itemtype).
+                            facetType:
+                              type: string
+                              description: Type of the facet (text or date).
+                            facetLimit:
+                              type: integer
+                              description: Maximum number of facet values.
+                            _links:
+                              type: object
+                              properties:
+                                self:
+                                  type: object
+                                  properties:
+                                    href:
+                                      type: string
+        "400":
+          description: Bad request (invalid parameters)
+        "500":
+          description: Internal server error
+  /discover/facets/author:
+    get:
+      summary: Retrieve author facets
+      description: Returns author facets based on the query parameter.
+      parameters:
+        - name: query
+          in: query
+          description: Search term for author facets.
+          required: false
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: Page number for pagination.
+          required: false
+          schema:
+            type: integer
+            default: 0
+        - name: size
+          in: query
+          description: Number of facet values to return per page.
+          required: false
+          schema:
+            type: integer
+            default: 5
+      responses:
+        "200":
+          description: Successful response with author facets
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  facetType:
+                    type: string
+                  facetLimit:
+                    type: integer
+                  page:
+                    type: object
+                    properties:
+                      number:
+                        type: integer
+                      size:
+                        type: integer
+                  _embedded:
+                    type: object
+                    properties:
+                      values:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            label:
+                              type: string
+                            count:
+                              type: integer
+                            _links:
+                              type: object
+                              properties:
+                                search:
+                                  type: object
+                                  properties:
+                                    href:
+                                      type: string
+        "400":
+          description: Bad request (invalid parameters)
+        "500":
+          description: Internal server error
+  /discover/facets/dateIssued:
+    get:
+      summary: Retrieve date issued facets
+      description: Returns date issued facets based on the query parameter.
+      parameters:
+        - name: query
+          in: query
+          description: Search term for date issued facets.
+          required: false
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: Page number for pagination.
+          required: false
+          schema:
+            type: integer
+            default: 0
+        - name: size
+          in: query
+          description: Number of facet values to return per page.
+          required: false
+          schema:
+            type: integer
+            default: 5
+      responses:
+        "200":
+          description: Successful response with date issued facets
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  facetType:
+                    type: string
+                  facetLimit:
+                    type: integer
+                  page:
+                    type: object
+                    properties:
+                      number:
+                        type: integer
+                      size:
+                        type: integer
+                  _embedded:
+                    type: object
+                    properties:
+                      values:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            label:
+                              type: string
+                            count:
+                              type: integer
+                            _links:
+                              type: object
+                              properties:
+                                search:
+                                  type: object
+                                  properties:
+                                    href:
+                                      type: string
+        "400":
+          description: Bad request (invalid parameters)
+        "500":
+          description: Internal server error
+  /discover/facets/ethzAvailability:
+    get:
+      summary: Retrieve ETH Zurich availability facets
+      description: Returns ETH Zurich availability facets based on the query parameter.
+      parameters:
+        - name: query
+          in: query
+          description: Search term for ETH Zurich availability facets.
+          required: false
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: Page number for pagination.
+          required: false
+          schema:
+            type: integer
+            default: 0
+        - name: size
+          in: query
+          description: Number of facet values to return per page.
+          required: false
+          schema:
+            type: integer
+            default: 10
+      responses:
+        "200":
+          description: Successful response with ETH Zurich availability facets
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  facetType:
+                    type: string
+                  facetLimit:
+                    type: integer
+                  page:
+                    type: object
+                    properties:
+                      number:
+                        type: integer
+                      size:
+                        type: integer
+                  _embedded:
+                    type: object
+                    properties:
+                      values:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            label:
+                              type: string
+                            count:
+                              type: integer
+                            _links:
+                              type: object
+                              properties:
+                                search:
+                                  type: object
+                                  properties:
+                                    href:
+                                      type: string
+        "400":
+          description: Bad request (invalid parameters)
+        "500":
+          description: Internal server error
+  /discover/facets/ethzETHPublication:
+    get:
+      summary: Retrieve ETH Zurich publication facets
+      description: Returns ETH Zurich publication facets based on the query parameter.
+      parameters:
+        - name: query
+          in: query
+          description: Search term for ETH Zurich publication facets.
+          required: false
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: Page number for pagination.
+          required: false
+          schema:
+            type: integer
+            default: 0
+        - name: size
+          in: query
+          description: Number of facet values to return per page.
+          required: false
+          schema:
+            type: integer
+            default: 10
+      responses:
+        "200":
+          description: Successful response with ETH Zurich publication facets
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  facetType:
+                    type: string
+                  facetLimit:
+                    type: integer
+                  page:
+                    type: object
+                    properties:
+                      number:
+                        type: integer
+                      size:
+                        type: integer
+                  _embedded:
+                    type: object
+                    properties:
+                      values:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            label:
+                              type: string
+                            count:
+                              type: integer
+                            _links:
+                              type: object
+                              properties:
+                                search:
+                                  type: object
+                                  properties:
+                                    href:
+                                      type: string
+        "400":
+          description: Bad request (invalid parameters)
+        "500":
+          description: Internal server error
+  /discover/facets/itemtype:
+    get:
+      summary: Retrieve item type facets
+      description: Returns item type facets based on the query parameter.
+      parameters:
+        - name: query
+          in: query
+          description: Search term for item type facets.
+          required: false
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: Page number for pagination.
+          required: false
+          schema:
+            type: integer
+            default: 0
+        - name: size
+          in: query
+          description: Number of facet values to return per page.
+          required: false
+          schema:
+            type: integer
+            default: 10
+      responses:
+        "200":
+          description: Successful response with item type facets
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  facetType:
+                    type: string
+                  facetLimit:
+                    type: integer
+                  page:
+                    type: object
+                    properties:
+                      number:
+                        type: integer
+                      size:
+                        type: integer
+                  _embedded:
+                    type: object
+                    properties:
+                      values:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            label:
+                              type: string
+                            count:
+                              type: integer
+                            _links:
+                              type: object
+                              properties:
+                                search:
+                                  type: object
+                                  properties:
+                                    href:
+                                      type: string
+        "400":
+          description: Bad request (invalid parameters)
+        "500":
+          description: Internal server error
   /discover/search/objects:
     get:
       summary: Search objects in the research collection
@@ -141,185 +534,89 @@ paths:
           description: Bad request (invalid parameters)
         "500":
           description: Internal server error
-  /discover/facets:
+  /suggestion/querySuggestions/search/byQuery:
     get:
-      summary: Retrieve available facets
-      description: Returns a list of available facets for filtering search results.
+      summary: Retrieve query suggestions
+      description: Returns query suggestions based on user input.
+      parameters:
+        - name: query
+          in: query
+          description: Search term for query suggestions.
+          required: true
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: Page number for pagination.
+          required: false
+          schema:
+            type: integer
+            default: 0
+        - name: size
+          in: query
+          description: Number of suggestions to return per page.
+          required: false
+          schema:
+            type: integer
+            default: 3
       responses:
         "200":
-          description: Successful response with available facets
+          description: Successful response with query suggestions
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  type:
+                  query:
                     type: string
                   _embedded:
                     type: object
                     properties:
-                      facets:
+                      queryCategories:
                         type: array
                         items:
                           type: object
                           properties:
                             name:
                               type: string
-                              description: Name of the facet (e.g., author, itemtype).
-                            facetType:
+                            type:
                               type: string
-                              description: Type of the facet (text or date).
-                            facetLimit:
-                              type: integer
-                              description: Maximum number of facet values.
-                            _links:
+                            suggestiontype:
+                              type: string
+                            _embedded:
                               type: object
                               properties:
-                                self:
+                                searchResult:
                                   type: object
                                   properties:
-                                    href:
-                                      type: string
-        "400":
-          description: Bad request (invalid parameters)
-        "500":
-          description: Internal server error
-  /discover/facets/author:
-    get:
-      summary: Retrieve author facets
-      description: Returns author facets based on the query parameter.
-      parameters:
-        - name: query
-          in: query
-          description: Search term for author facets.
-          required: false
-          schema:
-            type: string
-        - name: page
-          in: query
-          description: Page number for pagination.
-          required: false
-          schema:
-            type: integer
-            default: 0
-        - name: size
-          in: query
-          description: Number of facet values to return per page.
-          required: false
-          schema:
-            type: integer
-            default: 5
-      responses:
-        "200":
-          description: Successful response with author facets
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  name:
-                    type: string
-                  facetType:
-                    type: string
-                  facetLimit:
-                    type: integer
-                  page:
-                    type: object
-                    properties:
-                      number:
-                        type: integer
-                      size:
-                        type: integer
-                  _embedded:
-                    type: object
-                    properties:
-                      values:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            label:
-                              type: string
-                            count:
-                              type: integer
-                            _links:
-                              type: object
-                              properties:
-                                search:
-                                  type: object
-                                  properties:
-                                    href:
-                                      type: string
-        "400":
-          description: Bad request (invalid parameters)
-        "500":
-          description: Internal server error
-  /discover/facets/itemtype:
-    get:
-      summary: Retrieve item type facets
-      description: Returns item type facets based on the query parameter.
-      parameters:
-        - name: query
-          in: query
-          description: Search term for item type facets.
-          required: false
-          schema:
-            type: string
-        - name: page
-          in: query
-          description: Page number for pagination.
-          required: false
-          schema:
-            type: integer
-            default: 0
-        - name: size
-          in: query
-          description: Number of facet values to return per page.
-          required: false
-          schema:
-            type: integer
-            default: 10
-      responses:
-        "200":
-          description: Successful response with item type facets
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  name:
-                    type: string
-                  facetType:
-                    type: string
-                  facetLimit:
-                    type: integer
-                  page:
-                    type: object
-                    properties:
-                      number:
-                        type: integer
-                      size:
-                        type: integer
-                  _embedded:
-                    type: object
-                    properties:
-                      values:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            label:
-                              type: string
-                            count:
-                              type: integer
-                            _links:
-                              type: object
-                              properties:
-                                search:
-                                  type: object
-                                  properties:
-                                    href:
-                                      type: string
+                                    _embedded:
+                                      type: object
+                                      properties:
+                                        suggestions:
+                                          type: array
+                                          items:
+                                            type: object
+                                            properties:
+                                              label:
+                                                type: string
+                                              suggestionName:
+                                                type: string
+                                              queryParams:
+                                                type: array
+                                                items:
+                                                  type: string
+                                              count:
+                                                type: integer
+                                              type:
+                                                type: string
+                                              _links:
+                                                type: object
+                                                properties:
+                                                  searchResults:
+                                                    type: object
+                                                    properties:
+                                                      href:
+                                                        type: string
         "400":
           description: Bad request (invalid parameters)
         "500":
