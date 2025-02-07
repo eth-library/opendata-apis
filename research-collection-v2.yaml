@@ -7,6 +7,579 @@ servers:
   - url: https://staging.research-collection.ethz.ch/server/api
     description: Staging server
 paths:
+  /:
+    get:
+      summary: Retrieve API root information
+      description: Returns general information about the DSpace instance and available API endpoints.
+      responses:
+        "200":
+          description: Successful response with API root information
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  dspaceUI:
+                    type: string
+                  dspaceName:
+                    type: string
+                  dspaceServer:
+                    type: string
+                  dspaceVersion:
+                    type: string
+                  type:
+                    type: string
+                  _links:
+                    type: object
+                    additionalProperties:
+                      type: object
+                      properties:
+                        href:
+                          type: string
+  /core/bitstreams/{id}:
+    get:
+      summary: Retrieve metadata for a bitstream
+      description: Returns metadata details of a given bitstream.
+      parameters:
+        - name: id
+          in: path
+          description: The UUID of the bitstream to retrieve.
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response with bitstream metadata
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  uuid:
+                    type: string
+                  name:
+                    type: string
+                  sizeBytes:
+                    type: integer
+                  checkSum:
+                    type: object
+                    properties:
+                      checkSumAlgorithm:
+                        type: string
+                      value:
+                        type: string
+                  metadata:
+                    type: object
+                    additionalProperties:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          value:
+                            type: string
+                          language:
+                            type: string
+                          authority:
+                            type: string
+                          confidence:
+                            type: integer
+                          place:
+                            type: integer
+                  bundleName:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      content:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                      bundle:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                      format:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                      thumbnail:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                      self:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+        "400":
+          description: Bad request (invalid parameters)
+        "404":
+          description: Bitstream not found
+        "500":
+          description: Internal server error
+  /core/bitstreams/{id}/content:
+    get:
+      summary: Retrieve the content of a bitstream
+      description: Returns the actual file content of a given bitstream.
+      parameters:
+        - name: id
+          in: path
+          description: The UUID of the bitstream to retrieve.
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response with the bitstream content
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        "400":
+          description: Bad request (invalid parameters)
+        "404":
+          description: Bitstream content not found
+        "500":
+          description: Internal server error
+  /core/bitstreams/{id}/format:
+    get:
+      summary: Retrieve format details for a bitstream
+      description: Returns the format details (e.g., MIME type, description) of a given bitstream.
+      parameters:
+        - name: id
+          in: path
+          description: The UUID of the bitstream to retrieve format details for.
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response with bitstream format details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  shortDescription:
+                    type: string
+                  description:
+                    type: string
+                  mimetype:
+                    type: string
+                  supportLevel:
+                    type: string
+                  internal:
+                    type: boolean
+                  extensions:
+                    type: array
+                    items:
+                      type: string
+                  type:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      self:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+        "400":
+          description: Bad request (invalid parameters)
+        "404":
+          description: Bitstream format not found
+        "500":
+          description: Internal server error
+  /core/items/{id}:
+    get:
+      summary: Retrieve item details
+      description: Returns metadata and relationships of a specific item in the research collection.
+      parameters:
+        - name: id
+          in: path
+          description: The UUID of the item to retrieve.
+          required: true
+          schema:
+            type: string
+        - name: embed
+          in: query
+          description: Embedded relationships in the response.
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response with item details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  uuid:
+                    type: string
+                  name:
+                    type: string
+                  handle:
+                    type: string
+                  metadata:
+                    type: object
+                    additionalProperties:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          value:
+                            type: string
+                          language:
+                            type: string
+                          authority:
+                            type: string
+                          confidence:
+                            type: integer
+                          place:
+                            type: integer
+                  inArchive:
+                    type: boolean
+                  discoverable:
+                    type: boolean
+                  withdrawn:
+                    type: boolean
+                  lastModified:
+                    type: string
+                    format: date-time
+                  entityType:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      self:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                      relationships:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                      citations:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                      thumbnail:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+        "400":
+          description: Bad request (invalid parameters)
+        "404":
+          description: Item not found
+        "500":
+          description: Internal server error
+  /core/items/{id}/coins:
+    get:
+      summary: Retrieve COinS metadata for an item
+      description: Returns ContextObjects in Spans (COinS) metadata for a specific item.
+      parameters:
+        - name: id
+          in: path
+          description: The UUID of the item to retrieve COinS metadata for.
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response with COinS metadata
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  type:
+                    type: string
+                  ethz.COinS:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        value:
+                          type: string
+                        language:
+                          type: string
+                        authority:
+                          type: string
+                        confidence:
+                          type: integer
+                        place:
+                          type: integer
+                  _links:
+                    type: object
+                    properties:
+                      self:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+        "400":
+          description: Bad request (invalid parameters)
+        "404":
+          description: Item not found
+        "500":
+          description: Internal server error
+  /core/items/{id}/leitzahl:
+    get:
+      summary: Retrieve Leitzahl classification for an item
+      description: Returns the Leitzahl classification metadata for a specific item.
+      parameters:
+        - name: id
+          in: path
+          description: The UUID of the item to retrieve Leitzahl metadata for.
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response with Leitzahl classification metadata
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  leitzahl:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        leitzahlID:
+                          type: string
+                        label:
+                          type: string
+                        confirmed:
+                          type: boolean
+                        type:
+                          type: string
+                  authorizations:
+                    type: array
+                    items:
+                      type: object
+                  type:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      self:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+        "400":
+          description: Bad request (invalid parameters)
+        "404":
+          description: Item not found
+        "500":
+          description: Internal server error
+  /core/items/{id}/owningCollection:
+    get:
+      summary: Retrieve the owning collection of an item
+      description: Returns the collection to which a specific item belongs, including its parent community.
+      parameters:
+        - name: id
+          in: path
+          description: The UUID of the item to retrieve the owning collection for.
+          required: true
+          schema:
+            type: string
+        - name: embed
+          in: query
+          description: Embedded relationships in the response.
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response with owning collection details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  uuid:
+                    type: string
+                  name:
+                    type: string
+                  handle:
+                    type: string
+                  metadata:
+                    type: object
+                    additionalProperties:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          value:
+                            type: string
+                          language:
+                            type: string
+                          authority:
+                            type: string
+                          confidence:
+                            type: integer
+                          place:
+                            type: integer
+                  archivedItemsCount:
+                    type: integer
+                  type:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      self:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                      parentCommunity:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+        "400":
+          description: Bad request (invalid parameters)
+        "404":
+          description: Collection not found
+        "500":
+          description: Internal server error
+  /core/items/{id}/relationships:
+    get:
+      summary: Retrieve relationships for an item
+      description: Returns the relationships associated with a specific item.
+      parameters:
+        - name: id
+          in: path
+          description: The UUID of the item to retrieve relationships for.
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response with item relationships
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _embedded:
+                    type: object
+                    properties:
+                      relationships:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                            leftPlace:
+                              type: integer
+                            rightPlace:
+                              type: integer
+                            leftwardValue:
+                              type: string
+                              nullable: true
+                            rightwardValue:
+                              type: string
+                              nullable: true
+                            type:
+                              type: string
+                            _links:
+                              type: object
+                              properties:
+                                relationshipType:
+                                  type: object
+                                  properties:
+                                    href:
+                                      type: string
+                                self:
+                                  type: object
+                                  properties:
+                                    href:
+                                      type: string
+                                leftItem:
+                                  type: object
+                                  properties:
+                                    href:
+                                      type: string
+                                rightItem:
+                                  type: object
+                                  properties:
+                                    href:
+                                      type: string
+                  page:
+                    type: object
+                    properties:
+                      number:
+                        type: integer
+                      size:
+                        type: integer
+                      totalPages:
+                        type: integer
+                      totalElements:
+                        type: integer
+                  _links:
+                    type: object
+                    properties:
+                      self:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+        "400":
+          description: Bad request (invalid parameters)
+        "404":
+          description: Item not found
+        "500":
+          description: Internal server error
+  /core/items/{id}/thumbnail:
+    get:
+      summary: Retrieve thumbnail for an item
+      description: Returns the thumbnail image for a specific item.
+      parameters:
+        - name: id
+          in: path
+          description: The UUID of the item to retrieve the thumbnail for.
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response with the thumbnail image
+          content:
+            image/*:
+              schema:
+                type: string
+                format: binary
+        "400":
+          description: Bad request (invalid parameters)
+        "404":
+          description: Thumbnail not found
+        "500":
+          description: Internal server error
   /discover/facets:
     get:
       summary: Retrieve available facets
