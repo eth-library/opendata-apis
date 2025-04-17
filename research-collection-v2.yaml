@@ -1,14 +1,25 @@
 openapi: 3.0.3
 info:
   title: ETH Research Collection API V2
-  description: |-
-    The Research Collection REST API V2 provides access to the bibliographic metadata of the ETH Zurich Research Collection for scientific publications and research data.
+description: |-
+  The Research Collection REST API V2 provides access to the bibliographic metadata of the ETH Zurich Research Collection for scientific publications and research data.
 
-    &#x279C; [OAS 3 Swagger Documentation](https://eth-library.github.io/apiplatform-swagger/research-collection/v2/)
+  ➜ [OAS 3 Swagger Documentation](https://eth-library.github.io/apiplatform-swagger/research-collection/v2/)
 
-    &#x279C; [Research Collection Application](https://staging.research-collection.ethz.ch/)
-    
-    &#x279C; [Research Collection Terms of use](https://staging.research-collection.ethz.ch/info/terms-of-use)
+  ➜ [Research Collection Application](https://staging.research-collection.ethz.ch/)
+
+  ➜ [Research Collection Terms of Use](https://staging.research-collection.ethz.ch/info/terms-of-use)
+
+  ---
+  
+  ⚠️ **Browser-based access notice (CORS policy)**
+
+  The ETH Research Collection API V2 is open for server-side applications (e.g. Flask, Node.js, PHP, Java), which can access the API without restriction (using an apikey).
+
+  However, if you plan to use this API **directly in a web browser** (e.g. via JavaScript, fetch, or Axios), your website domain must be explicitly listed in our allowed origins configuration due to browser-enforced CORS (Cross-Origin Resource Sharing) restrictions.
+
+  If your application is blocked with a 403 Invalid CORS request error, please contact us on api@library.ethz.ch to request access for your domain.
+
   license:
     url: https://developer.library.ethz.ch/terms
     name: Bibliographic metadata from this API that are not specifically marked are available for reuse under a Public Domain Dedication (CC0) and may be used, modified and redistributed without prior consent. Documents, images or other digital objects linked in metadata may be subject to other copyright restrictions. Whenever possible, the licence of the referenced digital objects is indicated in the metadata. In case of doubt, the licence can be inquired at api@library.ethz.ch.
