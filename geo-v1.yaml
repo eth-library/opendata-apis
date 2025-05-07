@@ -309,7 +309,7 @@ paths:
         tags:
           - Pois
         description: |-
-          Returns pois and related resources from e-rara defined in the ETHorama database. References of POIs to e-pics and other data are not yet available here.
+          Returns pois and related resources from e-rara defined in the ETHorama database. References of POIs to E-Pics and other data are not yet available here.
         parameters:
           - name: lat
             schema:
@@ -371,7 +371,7 @@ paths:
     get:
       tags:
         - Pois
-      description: Returns a poi and related resources defined in the ETHorama database. References of POIs to e-pics and other data are not yet available here.
+      description: Returns a poi and related resources defined in the ETHorama database. References of POIs to E-Pics and other data are not yet available here.
       parameters:
         - name: id
           schema:
@@ -403,7 +403,7 @@ paths:
         tags:
           - Poi items
         description: |-
-          Returns content items (e-rara, emaps, e-pics, e-periodica etc) of pois defined in the ETHorama database. The content items are resources of the eth library that are associated with the POI and describe it.
+          Returns content items (e-rara, emaps, E-Pics, e-periodica etc) of pois defined in the ETHorama database. The content items are resources of the eth library that are associated with the POI and describe it.
         parameters:
           - name: q
             schema:
@@ -436,7 +436,7 @@ paths:
       get:
         tags:
           - items
-        description: Returns a content item (e-rara, emaps, e-pics, e-periodica etc) of a poi defined in the ETHorama database.
+        description: Returns a content item (e-rara, emaps, E-Pics, e-periodica etc) of a poi defined in the ETHorama database.
         parameters:
           - name: id
             schema:
@@ -465,9 +465,9 @@ paths:
   /epics-items:
       get:
         tags:
-          - e-pics items
+          - E-Pics items
         description: |-
-          Returns images from e-pics.
+          Returns images from E-Pics.
         parameters:
           - name: q
             schema:
@@ -478,6 +478,24 @@ paths:
               Returns the images for the search term (q).
 
               Example: q=uetliberg
+          - name: lat
+            schema:
+              type: number
+            in: query
+            required: false
+            description: |-
+              Returns the images that are near a point defined by lat (latitude) and lon (longitude) and optionally dist (distance) in metres (default: 1000).
+
+              Example: lat=47.349952
+          - name: lon
+            schema:
+              type: number
+            in: query
+            required: false
+            description: |-
+              Returns the images that are near a point defined by lat (latitude) and lon (longitude) and optionally dist (distance) in metres (default: 1000).
+
+            Example: lon=8.490838
           - name: edges
             schema:
               type: boolean
@@ -489,7 +507,59 @@ paths:
               Example: edges=false
         responses:
           '200':
-            description: Returns content items
+            description: Returns images
+            content:
+              application/json: {}
+          '400':
+            description: bad request
+          '500':
+            description: server error
+  /provenance-items:
+      get:
+        tags:
+          - provenance items
+        description: |-
+          Returns images (provenances) from E-Pics catalogue "Ex meis libris".
+        parameters:
+          - name: q
+            schema:
+              type: string
+            in: query
+            required: false
+            description: |-
+              Returns the images for the search term (q).
+
+              Example: q=bern
+          - name: lat
+            schema:
+              type: number
+            in: query
+            required: false
+            description: |-
+              Returns the images that are near a point defined by lat (latitude) and lon (longitude) and optionally dist (distance) in metres (default: 1000).
+
+              Example: lat=47.349952
+          - name: lon
+            schema:
+              type: number
+            in: query
+            required: false
+            description: |-
+              Returns the images that are near a point defined by lat (latitude) and lon (longitude) and optionally dist (distance) in metres (default: 1000).
+
+            Example: lon=8.490838
+          - name: edges
+            schema:
+              type: boolean
+            in: query
+            required: false
+            description: |-
+              Should the edges/relations to contributors also be returned (default: true)?
+
+              Example: edges=false
+        responses:
+          '200':
+            description: Returns images (provenances) from E-Pics catalogue "Ex meis libris"
             content:
               application/json: {}
           '400':
