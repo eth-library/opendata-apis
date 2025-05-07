@@ -80,7 +80,7 @@ paths:
       tags:
         - Geodata
       description: |-
-        Returns geodata: pois (from ETHorama), e-rara maps, e-maps, places (Marc 651 from e-rara and e-maps), publication places and provenanes from E-Pics.
+        Returns geodata: pois (from ETHorama), e-rara maps, e-maps, places (Marc 651 from e-rara and e-maps), publication places and provenances from E-Pics.
       parameters:
         - name: lat
           schema:
