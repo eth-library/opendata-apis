@@ -484,7 +484,7 @@ paths:
             in: query
             required: false
             description: |-
-              Returns the images that are near a point defined by lat (latitude) and lon (longitude) and optionally dist (distance) in metres (default: 1000).
+              Returns the photos from the “Image Archive Online” catalog whose camera location is near a defined point. Or the point is defined for a provenance in the catalog “Ex meis libris”. The point is defined by lat (latitude) and long (longitude) and optionally dist (radius) in meters (default: 1000).
 
               Example: lat=47.349952
           - name: lon
@@ -493,9 +493,18 @@ paths:
             in: query
             required: false
             description: |-
-              Returns the images that are near a point defined by lat (latitude) and lon (longitude) and optionally dist (distance) in metres (default: 1000).
+              Returns the photos from the “Image Archive Online” catalog whose camera location is near a defined point. Or the point is defined for a provenance in the catalog “Ex meis libris”. The point is defined by lat (latitude) and long (longitude) and optionally dist (radius) in meters (default: 1000).
 
             Example: lon=8.490838
+          - name: dist
+            schema:
+              type: number
+            in: query
+            required: false
+            description: |-
+              Returns the photos from the “Image Archive Online” catalog whose camera location is near a defined point. Or the point is defined for a provenance in the catalog “Ex meis libris”. The point is defined by lat (latitude) and long (longitude) and optionally dist (radius) in meters (default: 1000).
+
+              Example: dist=1000
           - name: edges
             schema:
               type: boolean
@@ -536,7 +545,7 @@ paths:
             in: query
             required: false
             description: |-
-              Returns the images that are near a point defined by lat (latitude) and lon (longitude) and optionally dist (distance) in metres (default: 1000).
+              Returns images (provenances) for a point from the E-Pics catalog “Ex meis libris”. The point is defined by lat (latitude) and long (longitude) and optionally dist (radius) in meters (default: 1000).
 
               Example: lat=47.349952
           - name: lon
@@ -545,9 +554,18 @@ paths:
             in: query
             required: false
             description: |-
-              Returns the images that are near a point defined by lat (latitude) and lon (longitude) and optionally dist (distance) in metres (default: 1000).
+              Returns images (provenances) for a point from the E-Pics catalog “Ex meis libris”. The point is defined by lat (latitude) and long (longitude) and optionally dist (radius) in meters (default: 1000).
 
             Example: lon=8.490838
+          - name: dist
+            schema:
+              type: number
+            in: query
+            required: false
+            description: |-
+              Returns images (provenances) for a point from the E-Pics catalog “Ex meis libris”. The point is defined by lat (latitude) and long (longitude) and optionally dist (radius) in meters (default: 1000).
+
+              Example: dist=1000
           - name: edges
             schema:
               type: boolean
