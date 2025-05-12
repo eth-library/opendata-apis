@@ -572,7 +572,7 @@ paths:
             in: query
             required: false
             description: |-
-              Should the edges/relations to contributors also be returned (default: true)?
+              Should the edges/relations to e-rara also be returned (default: true)?
 
               Example: edges=false
         responses:
