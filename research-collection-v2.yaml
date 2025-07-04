@@ -4,7 +4,7 @@ info:
   description: |-
     The Research Collection REST API provides access to the bibliographic metadata of the ETH Zurich Research Collection for scientific publications and research data.
 
-    &#x279C; [OAS 3 Swagger Documentation](https://eth-library.github.io/apiplatform-swagger/persons/v1/)
+    &#x279C; [OAS 3 Swagger Documentation](https://eth-library.github.io/apiplatform-swagger/research-collections/v2/)
 
     &#x279C; [Research Collection Application](https://www.research-collection.ethz.ch/)
     
